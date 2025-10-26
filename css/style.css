@@ -90,3 +90,9 @@ h3 {
   margin-bottom: 8px;
   font-size: 1rem;
 }
+/* --- ABOUT HERO SECTION --- */
+.about-hero {
+  height: 350px;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("images/about-banner.jpg") center/cover no-repeat;
+}

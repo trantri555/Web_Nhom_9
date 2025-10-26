@@ -2,7 +2,7 @@
 :root {
   --bs-primary-color: #5cb85c; /* Xanh lá tươi - Màu chủ đạo */
   --bs-secondary-color: #f0ad4e; /* Vàng cam - Màu phụ/nổi bật */
-  --bs-hero-bg: url('images/hero-banner-fruit.jpg'); /* Đổi đường dẫn hình ảnh nền tại đây */
+  --bs-hero-bg: url("images/hero-banner-fruit.jpg"); /* Đổi đường dẫn hình ảnh nền tại đây */
 }
 
 /* Tùy chỉnh màu chủ đạo của nút */
@@ -12,15 +12,16 @@
   color: white;
 }
 .btn-primary-custom:hover {
-  background-color: #4CAF50; /* Màu xanh đậm hơn khi hover */
-  border-color: #4CAF50;
+  background-color: #4caf50; /* Màu xanh đậm hơn khi hover */
+  border-color: #4caf50;
   color: white;
 }
 
 /* Định nghĩa Section Hero (Banner chính) */
 .hero-section {
   /* Đảm bảo bạn có thư mục 'images' và hình ảnh 'hero-banner-fruit.jpg' */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bs-hero-bg) center center no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    var(--bs-hero-bg) center center no-repeat;
   background-size: cover;
   height: 450px; /* Tăng chiều cao một chút */
   color: white;
@@ -55,6 +56,37 @@ footer a:hover {
 }
 
 /* Tùy chỉnh font cho tiêu đề */
-h1, h2, h3 {
-  font-family: 'Arial', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Arial", sans-serif;
+}
+/* --- GIỚI THIỆU (ABOUT SECTION) --- */
+.about-section {
+  background-color: #f9f9f9;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  color: #555;
+  line-height: 1.7;
+}
+
+.about-section img {
+  border-radius: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-section img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.about-section ul li {
+  margin-bottom: 8px;
+  font-size: 1rem;
 }

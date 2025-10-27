@@ -1,38 +1,117 @@
-/* Định nghĩa các biến CSS tùy chỉnh (giúp dễ dàng thay đổi màu sắc) */
+/* ==========================
+   🌿 JUICY - STYLE.CSS
+   ========================== */
+
+/* Định nghĩa biến màu */
 :root {
-  --bs-primary-color: #5cb85c; /* Xanh lá tươi - Màu chủ đạo */
-  --bs-secondary-color: #f0ad4e; /* Vàng cam - Màu phụ/nổi bật */
-  --bs-hero-bg: url("images/hero-banner-fruit.jpg"); /* Đổi đường dẫn hình ảnh nền tại đây */
+  --bs-primary-color: #5cb85c;     /* Xanh lá tươi - màu chủ đạo */
+  --bs-secondary-color: #f0ad4e;   /* Vàng cam - màu phụ */
+  --bs-hero-bg: url("images/hero-banner-fruit.jpg");
 }
 
-/* Tùy chỉnh màu chủ đạo của nút */
+/* Nút chính */
 .btn-primary-custom {
-  background-color: var(--bs-primary-color);
-  border-color: var(--bs-primary-color);
+  background: linear-gradient(45deg, var(--bs-primary-color), var(--bs-secondary-color));
+  border: none;
   color: white;
+  transition: all 0.3s ease;
 }
 .btn-primary-custom:hover {
-  background-color: #4caf50; /* Màu xanh đậm hơn khi hover */
-  border-color: #4caf50;
-  color: white;
+  background: linear-gradient(45deg, #4CAF50, #e1a32a);
+  transform: translateY(-3px);
 }
 
-/* Định nghĩa Section Hero (Banner chính) */
+/* ==========================
+   🛒 HEADER
+   ========================== */
+.navbar-brand img {
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+}
+
+.navbar-light .nav-link {
+  color: #333 !important;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s;
+}
+.navbar-light .nav-link:hover {
+  color: var(--bs-primary-color) !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   🏠 HERO SECTION (Trang chủ)
+   ========================== */
 .hero-section {
-  /* Đảm bảo bạn có thư mục 'images' và hình ảnh 'hero-banner-fruit.jpg' */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    var(--bs-hero-bg) center center no-repeat;
-  background-size: cover;
-  height: 450px; /* Tăng chiều cao một chút */
-  color: white;
+  position: relative;
+  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+  var(--bs-hero-bg) center/cover no-repeat;
+  min-height: 500px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 0 15px;
 }
 
-/* Hiệu ứng cho Card Sản phẩm */
+.hero-title {
+  color: #1b5e20; /* Xanh lá đậm */
+  text-shadow: 1px 2px 4px rgba(255,255,255,0.6);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+
+.hero-subtitle {
+  color: #3e2723; /* Nâu sậm */
+  font-size: 1.2rem;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: white;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+
+/* ==========================
+   🍎 ABOUT PAGE
+   ========================== */
+
+/* === ABOUT PAGE (Đồng bộ với hero của index) === */
+.about-hero,
+.hero-section {
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+  url("images/about-banner.jpg") center/cover no-repeat;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-title {
+  color: #1b5e20; /* xanh lá đậm */
+  text-shadow: 1px 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+.hero-subtitle {
+  color: #3e2723; /* nâu đậm */
+  font-size: 1.2rem;
+}
+
+.about-section img {
+  transition: transform 0.3s ease;
+}
+.about-section img:hover {
+  transform: scale(1.03);
+}
+
+/* ==========================
+   🧃 PRODUCT CARDS
+   ========================== */
 .product-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -43,56 +122,21 @@
   transform: translateY(-8px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
-
-/* Hình ảnh trong Card */
 .product-card .card-img-top {
   height: 200px;
   object-fit: cover;
 }
 
-/* Thiết lập màu sắc và kiểu dáng cho Footer */
+/* ==========================
+   ⚙️ FOOTER
+   ========================== */
 footer a:hover {
   color: var(--bs-secondary-color) !important;
 }
 
-/* Tùy chỉnh font cho tiêu đề */
-h1,
-h2,
-h3 {
-  font-family: "Arial", sans-serif;
-}
-/* --- GIỚI THIỆU (ABOUT SECTION) --- */
-.about-section {
-  background-color: #f9f9f9;
-}
-
-.about-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.about-section p {
-  color: #555;
-  line-height: 1.7;
-}
-
-.about-section img {
-  border-radius: 20px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.about-section img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
-}
-
-.about-section ul li {
-  margin-bottom: 8px;
-  font-size: 1rem;
-}
-/* --- ABOUT HERO SECTION --- */
-.about-hero {
-  height: 350px;
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url("images/about-banner.jpg") center/cover no-repeat;
+/* ==========================
+   🔤 FONT CHUNG
+   ========================== */
+h1, h2, h3 {
+  font-family: 'Arial', sans-serif;
 }

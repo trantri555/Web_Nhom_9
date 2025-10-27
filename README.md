@@ -3,6 +3,7 @@
 **Juicy** là một website giới thiệu và bán các sản phẩm trái cây tươi, nước ép cold-press, và sinh tố dinh dưỡng.  
 Trang web hướng đến việc mang lại trải nghiệm mua hàng trực tuyến thân thiện, hiện đại, và gợi cảm hứng sống lành mạnh.
 
+Link trang web: https://trantri555.github.io/Web_Nhom_9/#
 ---
 
 ## 🌿 Giới Thiệu Dự Án

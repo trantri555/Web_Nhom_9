@@ -113,18 +113,62 @@
    🧃 PRODUCT CARDS
    ========================== */
 .product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
 }
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
+
+/* Ảnh cố định chiều cao */
 .product-card .card-img-top {
-  height: 200px;
+  height: 220px;
   object-fit: cover;
+  width: 100%;
+}
+
+/* Card body luôn đẩy nút xuống cuối */
+.product-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+/* Tiêu đề sản phẩm (tự động cắt dòng) */
+.product-card .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.3;
+  min-height: 2.6rem;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Hiển thị 2 dòng */
+  -webkit-box-orient: vertical;
+}
+
+/* Giá */
+.product-card .card-text {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+}
+
+/* Nút */
+.product-card .card-body a {
+  margin: 0 4px;
+  white-space: nowrap;
 }
 
 /* ==========================

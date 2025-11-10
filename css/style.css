@@ -34,6 +34,12 @@
   font-weight: 500;
   transition: color 0.3s ease, transform 0.2s;
 }
+
+.navbar-light .nav-link.active {
+  color: var(--bs-primary-color) !important;
+  font-weight: 700; /* Làm đậm hơn để nổi bật */
+}
+
 .navbar-light .nav-link:hover {
   color: var(--bs-primary-color) !important;
   transform: translateY(-2px);
@@ -209,6 +215,66 @@
 .product-card .card-body a {
   margin: 0 4px;
   white-space: nowrap;
+}
+
+/* ==========================
+   ⚙️ LOGIN
+   ========================== */
+.auth-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.form-control:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 0.25rem rgba(92, 184, 92, 0.25);
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  background-color: #5cb85c; /* Màu xanh lá chủ đạo */
+  border-color: #5cb85c;
+  font-weight: bold;
+}
+
+.nav-tabs .nav-link {
+  color: #333;
+}
+
+/* ==========================
+   ⚙️ PRODUCTS
+   ========================== */.filter-sidebar {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.filter-header {
+  border-bottom: 2px solid #5cb85c;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.product-list-container {
+  min-height: 1000px; /* Chiều cao tối thiểu để xem cuộn */
+}
+
+/* Fix lỗi dãn nở nút Tài khoản theo yêu cầu trước */
+.nav-btn-account-wrapper {
+  min-width: 140px;
+  max-width: 140px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.nav-btn-account-wrapper .btn {
+  width: 100%;
 }
 
 /* ==========================

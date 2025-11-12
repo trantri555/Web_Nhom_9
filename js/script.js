@@ -1,118 +1,133 @@
 /* ==========================
-   NAVBAR TOGGLE LOGIC
-   Chức năng: Thay thế data-bs-toggle="collapse" cho Navbar
+   NAVBAR TOGGLE LOGIC (Đơn giản)
    ========================== */
-document.addEventListener('DOMContentLoaded', () => {
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const navCollapse = document.querySelector('#navbarNav');
+function initNavbarToggle() {
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    var navCollapse = document.querySelector('#navbarNav');
 
+    // Kiểm tra nếu cả nút toggle và menu đều tồn tại
     if (navbarToggler && navCollapse) {
-        navbarToggler.addEventListener('click', () => {
-            // Toggle Bootstrap's 'collapse' class for animation
+        navbarToggler.onclick = function() {
+            // Dùng classList.toggle() để chuyển đổi class 'show' (ẩn/hiện)
+            navCollapse.classList.toggle('show');
+            // Dùng classList.toggle() để chuyển đổi class 'collapse' (cho hiệu ứng)
             navCollapse.classList.toggle('collapse');
-            navCollapse.classList.toggle('show'); // 'show' makes the content visible
-        });
+        };
     }
-});
+}
+
 
 /* ==========================
-   TABS LOGIC (Cho login.html, products.html)
-   Chức năng: Thay thế data-bs-toggle="tab"
+   TABS LOGIC (Đơn giản)
    ========================== */
-document.addEventListener('DOMContentLoaded', () => {
-    const tabContainers = document.querySelectorAll('[role="tablist"]');
+function initTabs() {
+    var tabContainers = document.querySelectorAll('[role="tablist"]');
 
-    tabContainers.forEach(container => {
-        container.addEventListener('click', (e) => {
-            const button = e.target.closest('[role="tab"]');
-            if (!button) return;
+    // Lặp qua tất cả các container chứa tab (có thể có ở login, products)
+    for (var i = 0; i < tabContainers.length; i++) {
+        var container = tabContainers[i];
 
-            e.preventDefault();
+        container.onclick = function(event) {
+            var button = event.target.closest('[role="tab"]');
+            if (!button) {
+                return; // Không phải là nút tab, thoát
+            }
 
-            // 1. Deactivate current active tab and panel
-            container.querySelectorAll('.nav-link.active').forEach(activeTab => {
-                activeTab.classList.remove('active');
-            });
-            // Find and deactivate the active tab panel (must be within the same parent or document)
-            document.querySelectorAll('.tab-pane.show.active').forEach(activePanel => {
-                activePanel.classList.remove('show', 'active');
-            });
+            event.preventDefault();
 
-            // 2. Activate new tab
+            // 1. Tắt tab và panel đang hoạt động (active)
+            var activeTabs = container.querySelectorAll('.nav-link.active');
+            for (var j = 0; j < activeTabs.length; j++) {
+                activeTabs[j].classList.remove('active');
+            }
+
+            var activePanels = document.querySelectorAll('.tab-pane.show.active');
+            for (var k = 0; k < activePanels.length; k++) {
+                activePanels[k].classList.remove('show', 'active');
+            }
+
+            // 2. Kích hoạt tab mới
             button.classList.add('active');
 
-            // 3. Activate new panel
-            const targetId = button.getAttribute('data-bs-target');
+            // 3. Kích hoạt panel mới
+            var targetId = button.getAttribute('data-bs-target');
             if (targetId) {
-                const targetPanel = document.querySelector(targetId);
+                var targetPanel = document.querySelector(targetId);
                 if (targetPanel) {
                     targetPanel.classList.add('show', 'active');
                 }
             }
-        });
-    });
-});
+        };
+    }
+}
 
 
 /* ==========================
-   CAROUSEL LOGIC (Cho index.html)
-   Chức năng: Thay thế data-bs-ride="carousel" và controls
+   CAROUSEL LOGIC (Đơn giản)
    ========================== */
-const initCarousel = (id, interval = 3000) => {
-    const carousel = document.getElementById(id);
+function initCarousel(id, interval) {
+    var carousel = document.getElementById(id);
     if (!carousel) return;
 
-    const items = carousel.querySelectorAll('.carousel-item');
+    var items = carousel.querySelectorAll('.carousel-item');
     if (items.length === 0) return;
-    let currentIndex = 0;
+    var currentIndex = 0;
+    var slideInterval;
 
-    const showItem = (index) => {
-        items.forEach((item, i) => {
-            item.classList.remove('active');
-            if (i === index) {
-                item.classList.add('active');
-            }
-        });
-    };
+    function showItem(index) {
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('active');
+        }
+        items[index].classList.add('active');
+    }
 
-    const nextSlide = () => {
+    function nextSlide() {
         currentIndex = (currentIndex + 1) % items.length;
         showItem(currentIndex);
-    };
+    }
 
-    const prevSlide = () => {
+    function prevSlide() {
         currentIndex = (currentIndex - 1 + items.length) % items.length;
         showItem(currentIndex);
-    };
+    }
 
-    // Auto slide
-    let slideInterval = setInterval(nextSlide, interval);
+    // 1. Tự động chuyển slide
+    function startAutoSlide() {
+        // Xóa interval cũ trước khi tạo mới (phòng trường hợp đã có)
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, interval);
+    }
 
-    // Controls
-    const nextButton = carousel.querySelector('.carousel-control-next');
-    const prevButton = carousel.querySelector('.carousel-control-prev');
+    // 2. Thiết lập nút điều khiển
+    var nextButton = carousel.querySelector('.carousel-control-next');
+    var prevButton = carousel.querySelector('.carousel-control-prev');
 
     if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            clearInterval(slideInterval);
+        nextButton.onclick = function() {
+            startAutoSlide(); // Khởi động lại timer sau khi ấn
             nextSlide();
-            slideInterval = setInterval(nextSlide, interval);
-        });
+        };
     }
 
     if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            clearInterval(slideInterval);
+        prevButton.onclick = function() {
+            startAutoSlide(); // Khởi động lại timer sau khi ấn
             prevSlide();
-            slideInterval = setInterval(nextSlide, interval);
-        });
+        };
     }
 
+    // Bắt đầu
     showItem(currentIndex);
-};
+    startAutoSlide();
+}
 
-// Khởi tạo Carousel khi DOM đã load
-document.addEventListener('DOMContentLoaded', () => {
+
+// Chạy tất cả các chức năng sau khi DOM đã tải
+document.addEventListener('DOMContentLoaded', function() {
+    initNavbarToggle();
+    initTabs();
+
+    // Chỉ khởi tạo carousel nếu phần tử tồn tại trên trang
     if (document.getElementById('hero-carousel')) {
         initCarousel('hero-carousel', 3000);
     }

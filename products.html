@@ -14,13 +14,13 @@
 <header class="sticky-top shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <a class="navbar-brand fw-bold text-success fs-3" href="index.html">
                 <img src="images/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
                 JUICY <span class="text-warning"></span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
@@ -37,13 +37,13 @@
                         <a class="nav-link fw-semibold" href="contact.html">Liên Hệ</a>
                     </li>
                 </ul>
-                <a href="login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3">
+                <a href="login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 mb-2">
                     <i class="bi bi-person-circle me-1"></i> Đăng Nhập
                 </a>
-                <a href="profile.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3">
+                <a href="profile.html" class="btn btn-outline-success rounded-pill fw-semibold me-2 mb-2">
                     <i class="bi bi-person-circle me-1"></i> Thông Tin
                 </a>
-                <a href="products.html" class="btn btn-warning rounded-pill ms-lg-4 fw-semibold shadow-sm">
+                <a href="products.html" class="btn btn-warning rounded-pill ms-lg-3 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -125,27 +125,27 @@
 
         <div class="col-lg-9 product-list-container">
 
-            <ul class="nav nav-tabs nav-fill border-0 mb-4" id="productTabs" role="tablist">
+            <ul class="nav nav-tabs nav-fill border mb-4" id="productTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active fw-bold text-success border-bottom-0" id="tab1-tab"
+                    <button class="nav-link active fw-bold" id="tab1-tab"
                             data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1"
                             aria-selected="true">Nước Ép (50)
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link fw-bold text-success border-bottom-0" id="tab2-tab" data-bs-toggle="tab"
+                    <button class="nav-link fw-bold" id="tab2-tab" data-bs-toggle="tab"
                             data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">
                         Trái Cây (50)
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link fw-bold text-success border-bottom-0" id="tab3-tab" data-bs-toggle="tab"
+                    <button class="nav-link fw-bold" id="tab3-tab" data-bs-toggle="tab"
                             data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">
                         Combo (50)
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link fw-bold text-success border-bottom-0" id="tab4-tab" data-bs-toggle="tab"
+                    <button class="nav-link fw-bold" id="tab4-tab" data-bs-toggle="tab"
                             data-bs-target="#tab4" type="button" role="tab" aria-controls="tab4" aria-selected="false">
                         Đặc Biệt (50)
                     </button>
@@ -247,22 +247,19 @@
 
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="products-tab2">
-                        <p class="text-muted text-center w-100 mt-5">Vui lòng sao chép và dán cấu trúc thẻ sản phẩm
-                            (HTML Card) vào đây để hiển thị 50 sản phẩm Trái Cây.</p>
+                        <p>50 sản phẩm Trái Cây.</p>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
                     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="products-tab3">
-                        <p class="text-muted text-center w-100 mt-5">Vui lòng sao chép và dán cấu trúc thẻ sản phẩm
-                            (HTML Card) vào đây để hiển thị 50 sản phẩm Combo.</p>
+                        <p>50 sản phẩm Combo.</p>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
                     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="products-tab4">
-                        <p class="text-muted text-center w-100 mt-5">Vui lòng sao chép và dán cấu trúc thẻ sản phẩm
-                            (HTML Card) vào đây để hiển thị 50 sản phẩm Đặc Biệt.</p>
+                        <p>50 sản phẩm Đặc Biệt.</p>
                     </div>
                 </div>
 

@@ -2,46 +2,63 @@
    🌿 JUICY - STYLE.CSS
    ========================== */
 
-/* Định nghĩa biến màu */
+/* Định nghĩa biến màu (6 màu chính + Trắng và Helpers) */
 :root {
-  --bs-primary-color: #5cb85c;     /* Xanh lá tươi - màu chủ đạo */
-  --bs-secondary-color: #f0ad4e;   /* Vàng cam - màu phụ */
+  /* 6 Màu chính (Không tính trắng) */
+  --color-primary: #5cb85c;             /* 1. Xanh lá tươi (Chủ đạo: #5cb85c) */
+  --color-primary-dark: #4CAF50;        /* 2. Xanh lá đậm (Hover: #4CAF50) */
+  --color-secondary: #f0ad4e;           /* 3. Vàng cam (Phụ: #f0ad4e) */
+  --color-secondary-dark: #e1a32a;      /* 4. Vàng cam đậm (Hover: #e1a32a) */
+  --color-dark-text: #333;              /* 5. Màu chữ/nền tối chung (#333, #222) */
+  --color-price-red: #d32f2f;           /* 6. Màu giá đỏ */
+
+  /* Helpers */
+  --color-white: white;                 /* Trắng */
+  --color-light-bg: #f8f9fa;            /* Nền/Viền nhẹ (#f8f9fa, #ddd) */
+  --color-primary-rgb: 92, 184, 92;     /* RGB của Primary (cho focus shadow) */
+  --color-black-rgb: 0, 0, 0;           /* RGB của Black (cho các shadow) */
+
+  /* Image */
   --bs-hero-bg: url("images/hero-banner-fruit.jpg");
 }
 
 /* Nút chính */
 .btn-primary-custom {
-  background: linear-gradient(45deg, var(--bs-primary-color), var(--bs-secondary-color));
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
   border: none;
-  color: white;
+  color: var(--color-white);
   transition: all 0.3s ease;
 }
 .btn-primary-custom:hover {
-  background: linear-gradient(45deg, #4CAF50, #e1a32a);
+  background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary-dark));
   transform: translateY(-3px);
 }
 
 /* ==========================
    🛒 HEADER
    ========================== */
+header.sticky-top {
+  z-index: 1050;
+}
+
 .navbar-brand img {
   vertical-align: middle;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 2px 2px rgba(var(--color-black-rgb), 0.2));
 }
 
 .navbar-light .nav-link {
-  color: #333 !important;
+  color: var(--color-dark-text) !important;
   font-weight: 500;
   transition: color 0.3s ease, transform 0.2s;
 }
 
 .navbar-light .nav-link.active {
-  color: var(--bs-primary-color) !important;
-  font-weight: 700; /* Làm đậm hơn để nổi bật */
+  color: var(--color-primary) !important;
+  font-weight: 700;
 }
 
 .navbar-light .nav-link:hover {
-  color: var(--bs-primary-color) !important;
+  color: var(--color-primary) !important;
   transform: translateY(-2px);
 }
 
@@ -58,19 +75,19 @@
 
 .carousel-caption {
   bottom: 18%;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(var(--color-black-rgb), 0.45);
   border-radius: 15px;
   padding: 20px 30px;
 }
 
 .carousel-caption h2 {
-  color: #fff;
+  color: var(--color-white);
   font-size: 2rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(var(--color-black-rgb), 0.5);
 }
 
 .carousel-caption p {
-  color: #f8f9fa;
+  color: var(--color-light-bg);
   font-size: 1.1rem;
   margin-bottom: 15px;
 }
@@ -87,7 +104,7 @@
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  background: linear-gradient(45deg, #5cb85c, #f0ad4e);
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
   opacity: 0.9;
   transition: all 0.3s ease;
   position: relative;
@@ -105,7 +122,7 @@
   left: 50%;
   width: 10px;
   height: 10px;
-  border: solid white;
+  border: solid var(--color-white);
   border-width: 0 3px 3px 0;
   transform: translate(-50%, -50%) rotate(135deg);
 }
@@ -118,7 +135,7 @@
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(92, 184, 92, 0.5);
+  box-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.5);
   opacity: 1;
 }
 
@@ -130,7 +147,7 @@
 /* === ABOUT PAGE === */
 .about-hero,
 .hero-section {
-  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+  background: linear-gradient(rgba(var(--color-white), 0.7), rgba(var(--color-white), 0.7)),
   url("images/about-banner.jpg") center/cover no-repeat;
   min-height: 400px;
   display: flex;
@@ -139,12 +156,12 @@
 }
 
 .hero-title {
-  color: #1b5e20;
-  text-shadow: 1px 2px 4px rgba(255, 255, 255, 0.6);
+  color: var(--color-dark-text); /* Thay #1b5e20 bằng Dark Text */
+  text-shadow: 1px 2px 4px rgba(var(--color-white), 0.6);
 }
 
 .hero-subtitle {
-  color: #3e2723;
+  color: var(--color-dark-text); /* Thay #3e2723 bằng Dark Text */
   font-size: 1.2rem;
 }
 
@@ -162,15 +179,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-light-bg); /* Thay #ddd */
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fff;
+  background-color: var(--color-white);
 }
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 18px rgba(var(--color-black-rgb), 0.15);
 }
 
 /* Ảnh cố định chiều cao */
@@ -193,7 +210,7 @@
 .product-card .card-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #222;
+  color: var(--color-dark-text); /* Thay #222 */
   line-height: 1.3;
   min-height: 2.6rem;
   margin-bottom: 0.75rem;
@@ -206,7 +223,7 @@
 
 /* Giá */
 .product-card .card-text {
-  color: #d32f2f;
+  color: var(--color-price-red);
   font-weight: bold;
   margin-bottom: 1.25rem;
 }
@@ -225,37 +242,38 @@
   margin: 50px auto;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(var(--color-black-rgb), 0.1);
+  background-color: var(--color-white);
 }
 
 .form-control:focus {
-  border-color: #5cb85c;
-  box-shadow: 0 0 0 0.25rem rgba(92, 184, 92, 0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--color-primary-rgb), 0.25);
 }
 
 .nav-tabs .nav-link.active {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #5cb85c;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
   font-weight: bold;
 }
 
 .nav-tabs .nav-link {
-  color: #333;
+  color: var(--color-dark-text);
 }
 
 /* ==========================
    ⚙️ PRODUCTS
-   ========================== */.filter-sidebar {
-  background-color: #f8f9fa;
+   ========================== */
+.filter-sidebar {
+  background-color: var(--color-light-bg);
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px rgba(var(--color-black-rgb), 0.05);
 }
 
 .filter-header {
-  border-bottom: 2px solid #5cb85c;
+  border-bottom: 2px solid var(--color-primary);
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
@@ -264,7 +282,6 @@
   min-height: 1000px;
 }
 
-/* Fix lỗi dãn nở nút Tài khoản theo yêu cầu trước */
 .nav-btn-account-wrapper {
   min-width: 140px;
   max-width: 140px;
@@ -281,7 +298,7 @@
    ⚙️ FOOTER
    ========================== */
 footer a:hover {
-  color: var(--bs-secondary-color) !important;
+  color: var(--color-secondary) !important;
 }
 
 /* ==========================
@@ -290,4 +307,3 @@ footer a:hover {
 h1, h2, h3 {
   font-family: 'Arial', sans-serif;
 }
-<!-- profile cua khach hang -->

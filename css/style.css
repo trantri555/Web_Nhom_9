@@ -139,11 +139,6 @@ header.sticky-top {
   opacity: 1;
 }
 
-
-/* ==========================
-   🍎 ABOUT PAGE
-   ========================== */
-
 /* === ABOUT PAGE === */
 .about-hero,
 .hero-section {
@@ -153,16 +148,6 @@ header.sticky-top {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.hero-title {
-  color: var(--color-dark-text); /* Thay #1b5e20 bằng Dark Text */
-  text-shadow: 1px 2px 4px rgba(var(--color-white), 0.6);
-}
-
-.hero-subtitle {
-  color: var(--color-dark-text); /* Thay #3e2723 bằng Dark Text */
-  font-size: 1.2rem;
 }
 
 .about-section img {

@@ -193,7 +193,7 @@ header.sticky-top {
 /* Ảnh cố định chiều cao */
 .product-card .card-img-top {
   height: 220px;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
 }
 

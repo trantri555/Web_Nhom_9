@@ -331,7 +331,7 @@ h1, h2, h3 {
     border-radius: 6px;
     margin: 0 10px;
 }
-<!--bỏ cam ket vào cái box, thêm màu -->
+<!--bỏ cam ket vào cái box, thêm màu-->
 .product-commit-box {
     background: #f2fff5;
     border-left: 6px solid #28a745;
@@ -350,6 +350,6 @@ h1, h2, h3 {
 }
 <!--tăng khoảng cách của phần mô tả với cái ảnh -->
 .product-description-section {
-    margin-top: 60px;
+    margin-top: 80px;
 }
 

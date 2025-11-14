@@ -307,3 +307,17 @@ footer a:hover {
 h1, h2, h3 {
   font-family: 'Arial', sans-serif;
 }
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    margin: 0 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    height: 38px;
+    font-weight: bold;
+}
+<!--thumbnail của trang sản phẩm cụ thể -->
+.product-card:hover {
+    transform: translateY(-4px);
+    transition: 0.3s;
+}

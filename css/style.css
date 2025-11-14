@@ -19,7 +19,7 @@
   --color-black-rgb: 0, 0, 0;           /* RGB của Black (cho các shadow) */
 
   /* Image */
-  --bs-hero-bg: url("images/hero-banner-fruit.jpg");
+  --bs-hero-bg: url("images/banner/hero-banner-fruit.jpg");
 }
 
 /* Nút chính */
@@ -148,7 +148,7 @@ header.sticky-top {
 .about-hero,
 .hero-section {
   background: linear-gradient(rgba(var(--color-white), 0.7), rgba(var(--color-white), 0.7)),
-  url("images/about-banner.jpg") center/cover no-repeat;
+  url("images/banner/about-banner.jpg") center/cover no-repeat;
   min-height: 400px;
   display: flex;
   justify-content: center;
@@ -331,3 +331,25 @@ h1, h2, h3 {
     border-radius: 6px;
     margin: 0 10px;
 }
+<!--bỏ cam ket vào cái box, thêm màu -->
+.product-commit-box {
+    background: #f2fff5;
+    border-left: 6px solid #28a745;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.product-commit-box h5 {
+    color: #1e8c41;
+}
+
+.product-commit-box ul li {
+    padding: 6px 0;
+    font-size: 15px;
+}
+<!--tăng khoảng cách của phần mô tả với cái ảnh -->
+.product-description-section {
+    margin-top: 60px;
+}
+

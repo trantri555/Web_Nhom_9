@@ -330,16 +330,10 @@ h1, h2, h3 {
     transform: translateY(-4px);
     transition: 0.3s;
 }
-<!--căn chỉnh trang product-detail -->
-.quantity-input {
-    width: 50px;
-    text-align: center;
-    border: none;
-    background: #f6f6f6;
-    padding: 6px 0;
-    border-radius: 6px;
-    margin: 0 10px;
-}
+/* ==========================
+   🔤 FONT CHUNG
+   ========================== */
+
 <!--bỏ cam ket vào cái box, thêm màu-->
 .product-commit-box {
     background: #f2fff5;
@@ -357,8 +351,40 @@ h1, h2, h3 {
     padding: 6px 0;
     font-size: 15px;
 }
-<!--tăng khoảng cách của phần mô tả với cái ảnh -->
+
+
+/* ==========================
+   <!--tăng khoảng cách của phần mô tả với cái ảnh -->
 .product-description-section {
     margin-top: 80px;
+}
+   ========================== */
+<!--tăng khoảng cách của phần mô tả với cái ảnh -->
+.product-description-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+/* ảnh lớn trong mô tả sản phẩm */
+.product-description-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* văn bản mô tả */
+.product-description-section p {
+    line-height: 1.8;
+    font-size: 16px;
+    text-align: justify;
+}
+
+/* box mô tả */
+.product-description-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
 }
 

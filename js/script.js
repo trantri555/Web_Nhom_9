@@ -132,3 +132,23 @@ document.addEventListener('DOMContentLoaded', function() {
         initCarousel('hero-carousel', 3000);
     }
 });
+//Đăng nhập với tên là admin và mật khẩu là 123
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.querySelector('form[action="/login"]');
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            if (username === "admin" && password === "123") {
+                alert("Đăng nhập thành công!");
+                window.location.href = "ad_index.html"; // Chuyển hướng đến trang chính 
+            } else {
+                alert("Sai thông tin đăng nhập!");
+            }
+        });
+    }
+});

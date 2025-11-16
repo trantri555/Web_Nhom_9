@@ -161,7 +161,7 @@ header.sticky-top {
 }
 
 .hero-subtitle {
-  color: var(--color-dark-text); /* Thay #3e2723 bằng Dark Text */
+  color: var(--color-dark-text);
   font-size: 1.2rem;
 }
 
@@ -170,6 +170,18 @@ header.sticky-top {
 }
 .about-section img:hover {
   transform: scale(1.03);
+}
+/* Thay đổi margin và padding cho banner */
+.hero-banner {
+    background: url('images/banner/bannerabout.jpg') center/cover no-repeat;
+    height: 280px;
+    padding: 15px 0;
+}
+
+.hero-content {
+    max-width: calc(100% - 200px); /* trừ 100px mỗi bên */
+    margin: 0 auto;
+    padding: 15px;
 }
 
 /* ==========================

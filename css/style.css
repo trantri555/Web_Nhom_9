@@ -295,6 +295,15 @@ header.sticky-top {
 }
 
 /* ==========================
+   ⚙️ PRODUCTS DETAILS
+   ========================== */
+.product-detail-img {
+  height: 530px;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* ==========================
    ⚙️ FOOTER
    ========================== */
 footer a:hover {

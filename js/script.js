@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('isLoggedIn', 'true');
                 updateAuthUI(true); // Cập nhật UI ngay trên trang login
                 alert("Đăng nhập thành công!");
-                window.location.href = "ad_index.html";
+                window.location.href = "admin-dashboard.html"; // Chuyển hướng sau khi đăng nhập
             } else {
                 alert("Sai thông tin đăng nhập!");
             }

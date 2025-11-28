@@ -151,4 +151,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+//Tạo biểu đồ doanh thu
+document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('revenueChart');
 
+    if (!ctx) {
+        console.error("Không tìm thấy canvas revenueChart");
+        return;
+    }
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1','5','10','15','20','25','30'],
+            datasets: [{
+                label: 'Doanh thu (VNĐ)',
+                data: [200, 350, 500, 420, 680, 900, 1200],
+                borderWidth: 3
+            }]
+        }
+    });
+});
+
+   

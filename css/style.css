@@ -2,9 +2,8 @@
    🌿 JUICY - STYLE.CSS
    ========================== */
 
-/* Định nghĩa biến màu (6 màu chính + Trắng và Helpers) */
+/* Định nghĩa biến màu */
 :root {
-  /* 6 Màu chính (Không tính trắng) */
   --color-primary: #5cb85c;             /* 1. Xanh lá tươi (Chủ đạo: #5cb85c) */
   --color-primary-dark: #4CAF50;        /* 2. Xanh lá đậm (Hover: #4CAF50) */
   --color-secondary: #f0ad4e;           /* 3. Vàng cam (Phụ: #f0ad4e) */
@@ -113,7 +112,7 @@ header.sticky-top {
   justify-content: center;
 }
 
-/* Mũi tên trắng chính giữa hình tròn */
+/* Mũi tên */
 .carousel-control-prev-icon::before,
 .carousel-control-next-icon::before {
   content: "";
@@ -161,7 +160,7 @@ header.sticky-top {
 }
 
 .hero-subtitle {
-  color: var(--color-dark-text); /* Thay #3e2723 bằng Dark Text */
+  color: var(--color-dark-text);
   font-size: 1.2rem;
 }
 
@@ -170,6 +169,18 @@ header.sticky-top {
 }
 .about-section img:hover {
   transform: scale(1.03);
+}
+
+.hero-banner {
+    background: url('images/banner/bannerabout.jpg') center/cover no-repeat;
+    height: 280px;
+    padding: 15px 0;
+}
+
+.hero-content {
+    max-width: calc(100% - 200px); /* trừ 100px mỗi bên */
+    margin: 0 auto;
+    padding: 15px;
 }
 
 /* ==========================
@@ -190,14 +201,12 @@ header.sticky-top {
   box-shadow: 0 8px 18px rgba(var(--color-black-rgb), 0.15);
 }
 
-/* Ảnh cố định chiều cao */
 .product-card .card-img-top {
   height: 220px;
   object-fit: contain;
   width: 100%;
 }
 
-/* Card body luôn đẩy nút xuống cuối */
 .product-card .card-body {
   display: flex;
   flex-direction: column;
@@ -206,11 +215,11 @@ header.sticky-top {
   padding: 1rem;
 }
 
-/* Tiêu đề sản phẩm (tự động cắt dòng) */
+/* Tiêu đề sản phẩm */
 .product-card .card-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-dark-text); /* Thay #222 */
+  color: var(--color-dark-text);
   line-height: 1.3;
   min-height: 2.6rem;
   margin-bottom: 0.75rem;
@@ -330,17 +339,10 @@ h1, h2, h3 {
     transform: translateY(-4px);
     transition: 0.3s;
 }
-<!--căn chỉnh trang product-detail -->
-.quantity-input {
-    width: 50px;
-    text-align: center;
-    border: none;
-    background: #f6f6f6;
-    padding: 6px 0;
-    border-radius: 6px;
-    margin: 0 10px;
-}
-<!--bỏ cam ket vào cái box, thêm màu-->
+/* ==========================
+   🔤 FONT CHUNG
+   ========================== */
+
 .product-commit-box {
     background: #f2fff5;
     border-left: 6px solid #28a745;
@@ -357,9 +359,33 @@ h1, h2, h3 {
     padding: 6px 0;
     font-size: 15px;
 }
-<!--tăng khoảng cách của phần mô tả với cái ảnh -->
+
+.product-description-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+/* ảnh lớn trong mô tả sản phẩm */
+.product-description-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* văn bản mô tả */
+.product-description-section p {
+    line-height: 1.8;
+    font-size: 16px;
+    text-align: justify;
+}
+
+/* box mô tả */
 .product-description-section {
-    margin-top: 80px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
 }
 <style>
 /* Submenu CSS */

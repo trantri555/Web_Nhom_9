@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32"/>
-    <link rel="shortcut icon" href="images/logo/logo-juicy.png" type="image/png"/>
-    <title>Juicy - Trái Cây Tươi Ngon & Nước Ép</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/logo/logo-juicy.png" type="image/png">
+    <title>Juicy - Nước Ép Tươi Ngon &amp; Healthy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -39,12 +37,16 @@
                         <a class="nav-link fw-semibold" href="contact.html">Liên Hệ</a>
                     </li>
                 </ul>
-                <a href="login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Đăng Nhập
-                </a>
-                <a href="profile.html" class="btn btn-outline-success rounded-pill fw-semibold my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Thông Tin
-                </a>
+                <div id="loginButtonContainer">
+                    <a href="login.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Đăng Nhập</a>
+                </div>
+
+                <div id="userInfoContainer" class="d-none">
+                    <a href="profile.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Thông Tin</a>
+                </div>
+
                 <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
@@ -52,14 +54,29 @@
         </div>
     </nav>
 </header>
+<!--Thêm thanh tìm kiếm vào dưới phần header của website-->
+<section class="bg-light py-4 border-bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form class="d-flex" role="search">
+                    <input class="form-control form-control-lg me-2 border-success" type="search" placeholder="Tìm kiếm tên sản phẩm, loại trái cây..." aria-label="Search">
+                    <button class="btn btn-primary-custom btn-lg fw-bold" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- HERO SECTION -->
 <section class="hero-section d-flex align-items-center">
     <div class="container text-center">
         <section id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/banner/orangejuice.jpg" class="d-block w-100" alt="Nước Ép Cam"/>
+                <div class="carousel-item">
+                    <img src="images/banner/orangejuice.jpg" class="d-block w-100" alt="Nước Ép Cam">
                     <div class="carousel-caption  d-md-block">
                         <h2 class="fw-bold">Nước Ép Cam Tươi Mát</h2>
                         <p>Giảm ngay <span class="text-warning fw-bold">20%</span> cho đơn hàng đầu tiên!</p>
@@ -67,8 +84,8 @@
                     </div>
                 </div>
 
-                <div class="carousel-item">
-                    <img src="images/banner/service.jpg" class="d-block w-100" alt="dịch vụ"/>
+                <div class="carousel-item active">
+                    <img src="images/banner/service.jpg" class="d-block w-100" alt="dịch vụ">
                     <div class="carousel-caption  d-md-block">
                         <h2 class="fw-bold">Tiện Lợi – Nhanh Chóng – Hiệu Quả</h2>
                         <p>Mang đến trải nghiệm tốt nhất từng phút giây</p>
@@ -77,7 +94,7 @@
                 </div>
 
                 <div class="carousel-item">
-                    <img src="images/banner/delivery.jpg" class="d-block w-100" alt="Giao hàng miễn phí"/>
+                    <img src="images/banner/delivery.jpg" class="d-block w-100" alt="Giao hàng miễn phí">
                     <div class="carousel-caption  d-md-block">
                         <h2 class="fw-bold">Gọi Là Có – Giao Ngay Tận Cửa</h2>
                         <p>Miễn phí giao hàng toàn TP.HCM trong hôm nay!</p>
@@ -95,8 +112,7 @@
             </button>
         </section>
 
-        <a href="products.html"
-           class="btn btn-lg btn-primary-custom px-4 py-2 rounded-pill shadow animate__animated animate__fadeInUp">
+        <a href="products.html" class="btn btn-lg btn-primary-custom px-4 py-2 rounded-pill shadow animate__animated animate__fadeInUp">
             ĐẶT HÀNG NGAY
         </a>
     </div>
@@ -109,15 +125,15 @@
         <!-- Card 1 -->
         <div class="col">
             <div class="card product-card h-100 text-center">
-                <img src="images/product/camtuoi.jpg" class="card-img-top" alt="Nước Ép Cam"/>
+                <img src="images/product/camtuoi.jpg" class="card-img-top" alt="Nước Ép Cam">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <h5 class="card-title">Nước Ép Cam</h5>
                         <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
                     </div>
                     <div>
-                        <a href="product/product-detail1.html" class="btn btn-sm btn-outline-success">Chi tiết</a>
-                        <a href="product/product-detail1.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
+                        <a href="product/product-detail01.html" class="btn btn-sm btn-outline-success">Chi tiết</a>
+                        <a href="product/product-detail01.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>
@@ -126,16 +142,16 @@
         <!-- Card 2 -->
         <div class="col">
             <div class="card product-card h-100 text-center">
-                <img src="images/product/duacarotcam.jpg" class="card-img-top" alt="Nước ép Dứa - cà rốt - cam"/>
+                <img src="images/product/duacarotcam.jpg" class="card-img-top" alt="Nước ép Dứa - cà rốt - cam">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <h5 class="card-title">Nước ép Dứa - cà rốt - cam</h5>
                         <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
                     </div>
                     <div>
-                        <a href="product/product-detail3.html" class="btn btn-sm btn-outline-success" style="margin-bottom: 5px">Chi
+                        <a href="product/product-detail03.html" class="btn btn-sm btn-outline-success" style="margin-bottom: 5px">Chi
                             tiết</a>
-                        <a href="product/product-detail3.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
+                        <a href="product/product-detail03.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>
@@ -144,16 +160,16 @@
         <!-- Card 3 -->
         <div class="col">
             <div class="card product-card h-100 text-center">
-                <img src="images/product/oi.jpg" class="card-img-top" alt="Nước ổi"/>
+                <img src="images/product/oi.jpg" class="card-img-top" alt="Nước ổi">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <h5 class="card-title">Nước ổi</h5>
                         <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
                     </div>
                     <div>
-                        <a href="product/product-detail5.html" class="btn btn-sm btn-outline-success" style="margin-bottom: 5px">Chi
+                        <a href="product/product-detail05.html" class="btn btn-sm btn-outline-success" style="margin-bottom: 5px">Chi
                             tiết</a>
-                        <a href="product/product-detail5.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
+                        <a href="product/product-detail05.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>
@@ -162,16 +178,16 @@
         <!-- Card 4 -->
         <div class="col">
             <div class="card product-card h-100 text-center">
-                <img src="images/product/xoai.jpg" class="card-img-top" alt="Nước Xoài"/>
+                <img src="images/product/xoai.jpg" class="card-img-top" alt="Nước Xoài">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <h5 class="card-title">Nước Xoài</h5>
                         <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
                     </div>
                     <div>
-                        <a href="product/product-detail4.html" class="btn btn-sm btn-outline-success" style="margin-bottom: 5px">Chi
+                        <a href="product/product-detail04.html" class="btn btn-sm btn-outline-success" style="margin-bottom: 5px">Chi
                             tiết</a>
-                        <a href=product/product-detail4.html class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
+                        <a href="product/product-detail04.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>
@@ -223,11 +239,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 mb-4 mb-md-0">
-                <img
-                        src="images/banner/about-fruit.jpg"
-                        class="img-fluid rounded-4 shadow"
-                        alt="Giới thiệu Juicy"
-                />
+                <img src="images/banner/about-fruit.jpg" class="img-fluid rounded-4 shadow" alt="Giới thiệu Juicy">
             </div>
             <div class="col-md-6">
                 <h2 class="fw-bold text-success mb-3">Giới Thiệu Về Juicy 🍊</h2>
@@ -277,9 +289,7 @@
                     <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
                 </p>
                 <p>
-                    <a href="products.html" class="text-white text-decoration-none"
-                    >Trái Cây Văn Phòng</a
-                    >
+                    <a href="products.html" class="text-white text-decoration-none">Trái Cây Văn Phòng</a>
                 </p>
                 <p>
                     <a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a>
@@ -304,11 +314,9 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-12 text-center pt-3 border-top border-secondary">
-                <p>&copy; 2024 Juicy. All Rights Reserved.</p>
+                <p>© 2024 Juicy. All Rights Reserved.</p>
             </div>
         </div>
     </div>
 </footer>
 <script src="js/script.js"></script>
-</body>
-</html>

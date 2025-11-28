@@ -121,6 +121,50 @@ function initCarousel(id, interval) {
     startAutoSlide();
 }
 
+/* ==========================
+   TOGGLE LOGIN/USER INFO BUTTONS
+   ========================== */
+
+// Hàm ẩn/hiện nút Đăng Nhập và Thông Tin
+function updateAuthUI(isLoggedIn) {
+    const loginBtnContainer = document.getElementById('loginButtonContainer');
+    const userBtnContainer = document.getElementById('userInfoContainer');
+
+    if (loginBtnContainer && userBtnContainer) {
+        if (isLoggedIn) {
+            loginBtnContainer.classList.add('d-none');   // Ẩn Đăng Nhập
+            userBtnContainer.classList.remove('d-none'); // Hiện Thông Tin
+        } else {
+            loginBtnContainer.classList.remove('d-none'); // Hiện Đăng Nhập
+            userBtnContainer.classList.add('d-none');    // Ẩn Thông Tin
+        }
+    }
+}
+
+// Hàm kiểm tra trạng thái khi tải trang
+function checkLoginStatus() {
+    // Sử dụng localStorage để giữ trạng thái qua các lần tải trang
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    updateAuthUI(isLoggedIn);
+}
+
+/* ==========================
+   LOGOUT LOGIC (Đơn giản)
+   ========================== */
+function handleLogout() {
+    if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
+        // 1. Xóa trạng thái đăng nhập (đặt thành false)
+        localStorage.setItem('isLoggedIn', 'false');
+
+        // 2. Cập nhật giao diện (từ Thông Tin -> Đăng Nhập)
+        updateAuthUI(false);
+
+        // 3. Thông báo và chuyển hướng
+        alert("Đăng xuất thành công! Bạn sẽ được chuyển về Trang Chủ.");
+        window.location.href = "index.html";
+    }
+}
+
 
 // Chạy tất cả các chức năng sau khi DOM đã tải
 document.addEventListener('DOMContentLoaded', function() {
@@ -131,10 +175,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('hero-carousel')) {
         initCarousel('hero-carousel', 3000);
     }
-});
-//Đăng nhập với tên là admin và mật khẩu là 123
-document.addEventListener("DOMContentLoaded", function () {
+
+    // BƯỚC QUAN TRỌNG: Kiểm tra và thiết lập trạng thái nút ngay khi tải trang
+    checkLoginStatus();
+
+    // ĐĂNG NHẬP / ĐĂNG KÝ LOGIC
     const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
 
     if (loginForm) {
         loginForm.addEventListener("submit", function (e) {
@@ -143,8 +190,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const password = document.getElementById("loginPassword").value.trim();
 
             if (username === "admin" && password === "123") {
+                // LƯU TRẠNG THÁI ĐÃ ĐĂNG NHẬP thành công
+                localStorage.setItem('isLoggedIn', 'true');
+                updateAuthUI(true); // Cập nhật UI ngay trên trang login
                 alert("Đăng nhập thành công!");
-                window.location.href = "ad_index.html"; 
+                window.location.href = "ad_index.html";
             } else {
                 alert("Sai thông tin đăng nhập!");
             }

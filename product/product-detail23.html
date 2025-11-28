@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi"><head>
+<html lang="vi">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/png" href="../images/logo/logo-juicy.png" sizes="32x32">
@@ -38,12 +39,18 @@
                         <a class="nav-link fw-semibold" href="../contact.html">Liên Hệ</a>
                     </li>
                 </ul>
-                <a href="../login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Đăng Nhập
-                </a>
-                <a href="../profile.html" class="btn btn-outline-success rounded-pill fw-semibold my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Thông Tin
-                </a>
+                <div id="loginButtonContainer">
+                    <a href="../login.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Đăng Nhập</a>
+                </div>
+
+                <div id="userInfoContainer" class="d-none">
+                    <a href="../profile.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Thông Tin</a>
+                </div>
+
                 <a href="../order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
@@ -94,31 +101,76 @@
             </div>
         </div>
     </div>
-<div class="col-12 col-md-9">
-					<div class="title_module_main heading-bar d-flex justify-content-between align-items-center">
-						<h2 class="heading-bar__title ">
-							Mô tả sản phẩm
-						</h2>
+    <div class="col-12 col-md-9 product-description-section mx-auto">
+        <div class="title_module_main heading-bar d-flex justify-content-between align-items-center">
+            <h2 class="heading-bar__title ">
+                Mô tả sản phẩm
+            </h2>
 
-					</div>
-					<div class="rte product_getcontent py-3 pos-relative">
-						
-						<div id="content" style="height: auto;">
-							<p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🔥</span> <strong>"Nâng tầm" cuộc chơi của bạn ngay hôm nay cùng LE FRUIT SPORT 130ML! </strong><span style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🔥</span></span></span></span></p><p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif">#LEFRUITSPORT - Phiên bản mới, bứt phá mọi giới hạn!</span></span></span></p><p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif">Bạn đã sẵn sàng "nạp đầy bình" cho những cuộc chinh phục mới chưa? LE FRUIT SPORT chính thức "chào sân" phiên bản <strong>TÚI 130ML - NĂNG LƯỢNG LÍ TƯỞNG, THIẾT KẾ TIỆN LỢI!</strong></span></span></span></p><p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">💪</span> <strong>"Nhỏ mà có võ" – Những điểm NỔI BẬT của thiết kế mới:</strong></span></span></span></p><p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif">Quên đi những bất tiện của túi lớn 220ml! Phiên bản 130ml mới chính là "trợ thủ đắc lực" giúp bạn:</span></span></span></p><ul><li style="margin-left:8px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><strong><span style="text-transform:uppercase">Nạp nhanh, chiến tiếp:</span></strong> Thiết kế nhỏ gọn, bỏ túi cái "rẹt", tiếp năng lượng tức thì, không một giây gián đoạn cuộc chơi!</span></span></span></span></li><li style="margin-left:8px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><strong><span style="text-transform:uppercase">Mất nước không phải là nỗi lo</span></strong>: <a>Bảng thành phần cải tiến bổ sung MUỐI</a>, chính là "lá chắn" vững chắc, giúp bạn duy trì điện giải, chống lại tình trạng mất nước do mồ hôi, bảo toàn phong độ đỉnh cao.</span></span></span></span></li><li style="margin-bottom:11px; margin-left:8px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><strong><span style="text-transform:uppercase">Liều lượng tối ưu</span></strong>: <a>Định lượng chỉ 130ml hoàn hảo cho mỗi lần "tiếp sức", cơ thể hấp thụ trọn vẹn, sảng khoái bùng nổ không gây ngán</a></span></span></span></span></li><li style="margin-bottom:11px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><strong>NĂNG LƯỢNG LÍ TƯỞNG – HIỆU SUẤT TỐI ĐA: </strong><a>Mỗi gói cung cấp 90 calories thiết yếu từ carbohydrate dễ tiêu hóa (fructose). Đây là mức năng lượng lí tưởng tránh tình trạng quá tải khiến máu khó lưu thông đến hệ tiêu hóa, từ đó ngăn ngừa chuột rút và duy trì hiệu suất tập luyện.</a></span></span></span></span></li></ul><div><p style="text-align: center"><img src="//file.hstatic.net/200000411483/file/p3310097_grande.png"></p></div><p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><a>LE FRUIT SPORT 130ML không chỉ là nước ép, mà còn là nguồn năng lượng tự nhiên, người bạn đồng hành không thể thiếu của những người yêu thể thao, giúp bạn luôn sẵn sàng chinh phục mọi mục tiêu.</a></span></span></span></p><p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🎁</span> <strong>Đừng bỏ lỡ!</strong> <a>Trải nghiệm phiên bản mới cùng Le Fruit Sport với ưu đãi <strong>Pre-order giảm ngay 10%</strong> tại: lefruitstore.com</a></span></span></span></p>
-						</div>
-						
-						<div class="ega-pro__seemore text-center pos-relative show">
-							<a href="javascript:void(0)" title="Xem thêm" class="btn btn-main px-4 rounded-pill">Thu gọn</a>
-						</div>
+        </div>
+        <div class="rte product_getcontent py-3 pos-relative">
 
-					</div>
-				</div>
+            <div id="content" style="height: auto;">
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif"><span
+                        style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🔥</span> <strong>"Nâng tầm" cuộc chơi của bạn ngay hôm nay cùng LE FRUIT SPORT 130ML! </strong><span
+                        style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🔥</span></span></span></span></p>
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif">#LEFRUITSPORT - Phiên bản mới, bứt phá mọi giới hạn!</span></span></span>
+                </p>
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif">Bạn đã sẵn sàng "nạp đầy bình" cho những cuộc chinh phục mới chưa? LE FRUIT SPORT chính thức "chào sân" phiên bản <strong>TÚI 130ML - NĂNG LƯỢNG LÍ TƯỞNG, THIẾT KẾ TIỆN LỢI!</strong></span></span></span>
+                </p>
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif"><span
+                        style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">💪</span> <strong>"Nhỏ mà có võ" – Những điểm NỔI BẬT của thiết kế mới:</strong></span></span></span>
+                </p>
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif">Quên đi những bất tiện của túi lớn 220ml! Phiên bản 130ml mới chính là "trợ thủ đắc lực" giúp bạn:</span></span></span>
+                </p>
+                <ul>
+                    <li style="margin-left:8px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span
+                            style="line-height:107%"><span
+                            style="font-family:&quot;Times New Roman&quot;,serif"><strong><span
+                            style="text-transform:uppercase">Nạp nhanh, chiến tiếp:</span></strong> Thiết kế nhỏ gọn, bỏ túi cái "rẹt", tiếp năng lượng tức thì, không một giây gián đoạn cuộc chơi!</span></span></span></span>
+                    </li>
+                    <li style="margin-left:8px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span
+                            style="line-height:107%"><span
+                            style="font-family:&quot;Times New Roman&quot;,serif"><strong><span
+                            style="text-transform:uppercase">Mất nước không phải là nỗi lo</span></strong>: <a>Bảng thành phần cải tiến bổ sung MUỐI</a>, chính là "lá chắn" vững chắc, giúp bạn duy trì điện giải, chống lại tình trạng mất nước do mồ hôi, bảo toàn phong độ đỉnh cao.</span></span></span></span>
+                    </li>
+                    <li style="margin-bottom:11px; margin-left:8px"><span style="font-size:11pt"><span
+                            style="tab-stops:list .5in"><span style="line-height:107%"><span
+                            style="font-family:&quot;Times New Roman&quot;,serif"><strong><span
+                            style="text-transform:uppercase">Liều lượng tối ưu</span></strong>: <a>Định lượng chỉ 130ml hoàn hảo cho mỗi lần "tiếp sức", cơ thể hấp thụ trọn vẹn, sảng khoái bùng nổ không gây ngán</a></span></span></span></span>
+                    </li>
+                    <li style="margin-bottom:11px"><span style="font-size:11pt"><span style="tab-stops:list .5in"><span
+                            style="line-height:107%"><span
+                            style="font-family:&quot;Times New Roman&quot;,serif"><strong>NĂNG LƯỢNG LÍ TƯỞNG – HIỆU SUẤT TỐI ĐA: </strong><a>Mỗi gói cung cấp 90 calories thiết yếu từ carbohydrate dễ tiêu hóa (fructose). Đây là mức năng lượng lí tưởng tránh tình trạng quá tải khiến máu khó lưu thông đến hệ tiêu hóa, từ đó ngăn ngừa chuột rút và duy trì hiệu suất tập luyện.</a></span></span></span></span>
+                    </li>
+                </ul>
+
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif"><a>LE FRUIT SPORT 130ML không chỉ là nước ép, mà còn là nguồn năng lượng tự nhiên, người bạn đồng hành không thể thiếu của những người yêu thể thao, giúp bạn luôn sẵn sàng chinh phục mọi mục tiêu.</a></span></span></span>
+                </p>
+                <p style="margin-bottom:11px"><span style="font-size:11pt"><span style="line-height:107%"><span
+                        style="font-family:&quot;Times New Roman&quot;,serif"><span
+                        style="font-family:&quot;Segoe UI Emoji&quot;,sans-serif">🎁</span> <strong>Đừng bỏ lỡ!</strong> <a>Trải nghiệm phiên bản mới cùng Le Fruit Sport với ưu đãi <strong>Pre-order giảm ngay 10%</strong> tại: lefruitstore.com</a></span></span></span>
+                </p>
+            </div>
+
+            <div class="ega-pro__seemore text-center pos-relative show">
+                <a href="javascript:void(0)" title="Xem thêm" class="btn btn-main px-4 rounded-pill">Thu gọn</a>
+            </div>
+
+        </div>
+    </div>
     <!--recommend sản phẩm cụng loại & sản phẩm bán chạy -->
     <h3 class="fw-bold text-success mb-4">Sản Phẩm Cùng Loại</h3>
     <div class="row g-4">
         <div class="col-md-3">
             <div class="card shadow-sm product-card">
-                <img src="images/nuoc-mang-cau.jpg" class="card-img-top">
+                <img src="https://trantri555.github.io/Web_Nhom_9/images/product/mangcauxiem1L.png" class="card-img-top" alt="">
                 <div class="card-body text-center">
                     <h6 class="card-title">Nước Mãng Cầu Nectar 1L</h6>
                     <p class="fw-bold text-danger">79.000₫</p>
@@ -128,7 +180,7 @@
 
         <div class="col-md-3">
             <div class="card shadow-sm product-card">
-                <img src="images/nuoc-mang-cau-5l.jpg" class="card-img-top">
+                <img src="https://trantri555.github.io/Web_Nhom_9/images/product/mangcauxiem5L.jpg" class="card-img-top" alt="">
                 <div class="card-body text-center">
                     <h6 class="card-title">Nước Mãng Cầu Nectar 5L</h6>
                     <p class="fw-bold text-danger">369.000₫</p>

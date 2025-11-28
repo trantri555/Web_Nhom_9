@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="vi"><head>
+<html lang="vi">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/png" href="../images/logo/logo-juicy.png" sizes="32x32">
@@ -38,12 +39,18 @@
                         <a class="nav-link fw-semibold" href="../contact.html">Liên Hệ</a>
                     </li>
                 </ul>
-                <a href="../login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Đăng Nhập
-                </a>
-                <a href="../profile.html" class="btn btn-outline-success rounded-pill fw-semibold my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Thông Tin
-                </a>
+                <div id="loginButtonContainer">
+                    <a href="../login.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Đăng Nhập</a>
+                </div>
+
+                <div id="userInfoContainer" class="d-none">
+                    <a href="../profile.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Thông Tin</a>
+                </div>
+
                 <a href="../order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
@@ -56,7 +63,8 @@
     <div class="row g-5 align-items-start">
         <!-- IMAGE -->
         <div class="col-md-5">
-            <img src="../images/product/duasorichanhday5L.jpg" class="img-fluid rounded shadow" alt="Nước Dứa - Sơ ri - Chanh dây - 5L">
+            <img src="../images/product/duasorichanhday5L.jpg" class="img-fluid rounded shadow"
+                 alt="Nước Dứa - Sơ ri - Chanh dây - 5L">
         </div>
 
         <!-- Thông tin -->
@@ -66,7 +74,8 @@
                 <a href="../products.html" class="text-muted text-decoration-none">Sản Phẩm</a> /
                 <span class="text-success fw-bold">Nước Dứa - Sơ ri - Chanh dây - 5L</span>
             </nav>
-            <h2 class="fw-bold text-success mb-2">Nước Dứa - Sơ ri - Chanh dây (Pineapple - Soursop - Passion Fruit) - 5L</h2>
+            <h2 class="fw-bold text-success mb-2">Nước Dứa - Sơ ri - Chanh dây (Pineapple - Soursop - Passion Fruit) -
+                5L</h2>
             <p class="text-muted mb-1">Thương hiệu: <strong>Juicy</strong></p>
             <p class="text-muted">Tình trạng: <span class="text-success fw-bold">Còn hàng</span></p>
 
@@ -94,33 +103,59 @@
             </div>
         </div>
     </div>
-<div class="col-12 col-md-9">
-					<div class="title_module_main heading-bar d-flex justify-content-between align-items-center">
-						<h2 class="heading-bar__title ">
-							Mô tả sản phẩm
-						</h2>
+    <div class="col-12 col-md-9 product-description-section mx-auto">
+        <div class="title_module_main heading-bar d-flex justify-content-between align-items-center">
+            <h2 class="heading-bar__title ">
+                Mô tả sản phẩm
+            </h2>
 
-					</div>
-					<div class="rte product_getcontent py-3 pos-relative">
-						
-						<div id="content" style="height: auto;">
-							<p style="text-align: justify;">Tại trung tâm đồng bằng sông Cửu Long, chúng tôi chọn những loại trái cây tươi và ngon nhất của các nông trại gia đình địa phương. Trái cây sau khi thu hoạch ngay lập tức được đưa đến nhà máy để xử lý tạo ra những chai nước ép vô cùng tươi ngon. Với ưu điểm nước ép 100% không đường hóa học, nước ép Le Fruit được rất nhiều người lựa chọn làm thực đơn bổ sung cho sức khỏe hằng ngày.<br><br><strong>Thành phần:</strong> Nước dứa tươi (60%), sơri (15%), chanh dây (8%), nước. Từ 187g trái cây tươi trong 100ml nectar. 100% nguyên chất &amp; vắt từ trái tươi.</p><p style="text-align: center"><img src="//file.hstatic.net/200000411483/file/acerola_d4b1f4f07fb04e9abea137bb306dbabf_grande.png"></p><p><strong>Lý do mọi người nên sử dụng Nước Chanh dây-Sơ ri-Dứa Le Fruit thường xuyên</strong><br>- 100% hoàn toàn từ trái cây tươi nguyên chất<br>- Không thêm đường<br>- Bao bì dễ dàng tái chế, thân thiện và an toàn với môi trường<br>- Không chứa chất bảo quản, chất hóa học và chất oxy hóa<br>- Không từ cô đặc và dư lượng thuốc trừ sâu<br>- Không phải từ biến đổi gen (GMO - free)<br><br><strong>Công dụng nước ép Dứa - Sơ ri - Chanh dây</strong><br>Nước ép Dứa - Sơ ri - Chanh dây&nbsp;LE FRUIT là sự kết hợp của nhiều lớp hương vị. Bên cạnh hương vị độc đáo, nước ép này còn mang lại nhiều&nbsp;chất dinh dưỡng có lợi cho người tiêu dùng.<br>- Là nguồn cung cấp vitamin C tự nhiên, không chỉ giúp tăng cường hệ miễn dịch, mà còn có vai trò quan trọng trong việc bảo vệ cơ thể khỏi các tác nhân gây hại từ môi trường.<br>- Nước chanh dây Le Fruit có tính chất kiềm, giúp cân bằng pH trong dạ dày và tăng cường quá trình tiêu hóa. Nó có thể giúp giảm cảm giác khó chịu sau khi ăn và hỗ trợ quá trình tiêu hóa thức ăn.<br>- Hương thơm tự nhiên của nước chanh dây có tác dụng thư giãn và làm dịu căng thẳng.<br>- Việc uống nước chanh dây có thể giúp cải thiện tâm trạng, làm tăng sự tập trung và giảm căng thẳng.<br>- Với lượng calo thấp và chất xơ cao, nước chanh dây Le Fruit có thể là một lựa chọn tốt cho những người đang muốn giảm cân. Chất xơ trong nước chanh dây giúp tạo cảm giác no lâu hơn và hỗ trợ quá trình tiêu hóa.<br><br><strong>Thông tin chung về sản phẩm:</strong><br>Tên sản phẩm: Nước Dứa - Sơ ri - Chanh dây (Pineapple Acerola Passion Nectar) - 5L<br>Thương hiệu: Le Fruit<br>Xuất xứ: Việt Nam<br>Thể tích: Thùng Catton (5L)<br>Hạn sử dụng: 12 tháng kể từ ngày sản xuất<br>Hướng dẫn sử dụng: Lắc đều, ngon hơn khi uống lạnh, uống hết ngay khi mở nắp<br>Hướng dẫn bảo quản: Nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời. Giữ lạnh sau khi khui nắp và sử dụng trong vòng 5 ngày.<br>Lưu ý: Không sử dụng sản phẩm khi bao bì bị có dấu hiệu bất thường.</p>
-						</div>
-						
-						<div class="ega-pro__seemore text-center pos-relative">
-							<a href="javascript:void(0)" title="Xem thêm" class="btn btn-main px-4 rounded-pill">
-								Thu gọn
-							</a>
-						</div>
+        </div>
+        <div class="rte product_getcontent py-3 pos-relative">
 
-					</div>
-				</div>
+            <div id="content" style="height: auto;">
+                <p style="text-align: justify;">Tại trung tâm đồng bằng sông Cửu Long, chúng tôi chọn những loại trái
+                    cây tươi và ngon nhất của các nông trại gia đình địa phương. Trái cây sau khi thu hoạch ngay lập tức
+                    được đưa đến nhà máy để xử lý tạo ra những chai nước ép vô cùng tươi ngon. Với ưu điểm nước ép 100%
+                    không đường hóa học, nước ép Le Fruit được rất nhiều người lựa chọn làm thực đơn bổ sung cho sức
+                    khỏe hằng ngày.<br><br><strong>Thành phần:</strong> Nước dứa tươi (60%), sơri (15%), chanh dây (8%),
+                    nước. Từ 187g trái cây tươi trong 100ml nectar. 100% nguyên chất &amp; vắt từ trái tươi.</p>
+
+                <p><strong>Lý do mọi người nên sử dụng Nước Chanh dây-Sơ ri-Dứa Le Fruit thường xuyên</strong><br>- 100%
+                    hoàn toàn từ trái cây tươi nguyên chất<br>- Không thêm đường<br>- Bao bì dễ dàng tái chế, thân thiện
+                    và an toàn với môi trường<br>- Không chứa chất bảo quản, chất hóa học và chất oxy hóa<br>- Không từ
+                    cô đặc và dư lượng thuốc trừ sâu<br>- Không phải từ biến đổi gen (GMO - free)<br><br><strong>Công
+                        dụng nước ép Dứa - Sơ ri - Chanh dây</strong><br>Nước ép Dứa - Sơ ri - Chanh dây&nbsp;LE FRUIT
+                    là sự kết hợp của nhiều lớp hương vị. Bên cạnh hương vị độc đáo, nước ép này còn mang lại nhiều&nbsp;chất
+                    dinh dưỡng có lợi cho người tiêu dùng.<br>- Là nguồn cung cấp vitamin C tự nhiên, không chỉ giúp
+                    tăng cường hệ miễn dịch, mà còn có vai trò quan trọng trong việc bảo vệ cơ thể khỏi các tác nhân gây
+                    hại từ môi trường.<br>- Nước chanh dây Le Fruit có tính chất kiềm, giúp cân bằng pH trong dạ dày và
+                    tăng cường quá trình tiêu hóa. Nó có thể giúp giảm cảm giác khó chịu sau khi ăn và hỗ trợ quá trình
+                    tiêu hóa thức ăn.<br>- Hương thơm tự nhiên của nước chanh dây có tác dụng thư giãn và làm dịu căng
+                    thẳng.<br>- Việc uống nước chanh dây có thể giúp cải thiện tâm trạng, làm tăng sự tập trung và giảm
+                    căng thẳng.<br>- Với lượng calo thấp và chất xơ cao, nước chanh dây Le Fruit có thể là một lựa chọn
+                    tốt cho những người đang muốn giảm cân. Chất xơ trong nước chanh dây giúp tạo cảm giác no lâu hơn và
+                    hỗ trợ quá trình tiêu hóa.<br><br><strong>Thông tin chung về sản phẩm:</strong><br>Tên sản phẩm:
+                    Nước Dứa - Sơ ri - Chanh dây (Pineapple Acerola Passion Nectar) - 5L<br>Thương hiệu: Le Fruit<br>Xuất
+                    xứ: Việt Nam<br>Thể tích: Thùng Catton (5L)<br>Hạn sử dụng: 12 tháng kể từ ngày sản xuất<br>Hướng
+                    dẫn sử dụng: Lắc đều, ngon hơn khi uống lạnh, uống hết ngay khi mở nắp<br>Hướng dẫn bảo quản: Nơi
+                    khô ráo, thoáng mát, tránh ánh nắng mặt trời. Giữ lạnh sau khi khui nắp và sử dụng trong vòng 5
+                    ngày.<br>Lưu ý: Không sử dụng sản phẩm khi bao bì bị có dấu hiệu bất thường.</p>
+            </div>
+
+            <div class="ega-pro__seemore text-center pos-relative">
+                <a href="javascript:void(0)" title="Xem thêm" class="btn btn-main px-4 rounded-pill">
+                    Thu gọn
+                </a>
+            </div>
+
+        </div>
+    </div>
     <!--recommend sản phẩm cụng loại & sản phẩm bán chạy -->
     <h3 class="fw-bold text-success mb-4">Sản Phẩm Cùng Loại</h3>
     <div class="row g-4">
         <div class="col-md-3">
             <div class="card shadow-sm product-card">
-                <img src="images/nuoc-mang-cau.jpg" class="card-img-top">
+                <img src="https://trantri555.github.io/Web_Nhom_9/images/product/mangcauxiem1L.png" class="card-img-top" alt="">
                 <div class="card-body text-center">
                     <h6 class="card-title">Nước Mãng Cầu Nectar 1L</h6>
                     <p class="fw-bold text-danger">79.000₫</p>
@@ -130,7 +165,7 @@
 
         <div class="col-md-3">
             <div class="card shadow-sm product-card">
-                <img src="images/nuoc-mang-cau-5l.jpg" class="card-img-top">
+                <img src="https://trantri555.github.io/Web_Nhom_9/images/product/mangcauxiem5L.jpg" class="card-img-top" alt="">
                 <div class="card-body text-center">
                     <h6 class="card-title">Nước Mãng Cầu Nectar 5L</h6>
                     <p class="fw-bold text-danger">369.000₫</p>

@@ -1,21 +1,19 @@
-/* ==========================
-   🌿 JUICY - STYLE.CSS
-   ========================== */
+/*JUICY - STYLE.CSS */
 
 /* Định nghĩa biến màu */
 :root {
-  --color-primary: #5cb85c;             /* 1. Xanh lá tươi (Chủ đạo: #5cb85c) */
-  --color-primary-dark: #4CAF50;        /* 2. Xanh lá đậm (Hover: #4CAF50) */
-  --color-secondary: #f0ad4e;           /* 3. Vàng cam (Phụ: #f0ad4e) */
-  --color-secondary-dark: #e1a32a;      /* 4. Vàng cam đậm (Hover: #e1a32a) */
-  --color-dark-text: #333;              /* 5. Màu chữ/nền tối chung (#333, #222) */
-  --color-price-red: #d32f2f;           /* 6. Màu giá đỏ */
+  --color-primary: #5cb85c;             /*Xanh lá tươi*/
+  --color-primary-dark: #4CAF50;        /*Xanh lá đậm*/
+  --color-secondary: #f0ad4e;           /*Vàng cam*/
+  --color-secondary-dark: #e1a32a;      /*Vàng cam đậm*/
+  --color-dark-text: #333;              /*Màu chữ/nền tối chung*/
+  --color-price-red: #d32f2f;           /*Màu giá đỏ*/
 
   /* Helpers */
   --color-white: white;                 /* Trắng */
-  --color-light-bg: #f8f9fa;            /* Nền/Viền nhẹ (#f8f9fa, #ddd) */
-  --color-primary-rgb: 92, 184, 92;     /* RGB của Primary (cho focus shadow) */
-  --color-black-rgb: 0, 0, 0;           /* RGB của Black (cho các shadow) */
+  --color-light-bg: #f8f9fa;            /* Nền/Viền nhẹ*/
+  --color-primary-rgb: 92, 184, 92;     /* RGB của Primary cho focus shadow*/
+  --color-black-rgb: 0, 0, 0;           /* RGB của Black cho các shadow */
 
   /* Image */
   --bs-hero-bg: url("images/banner/hero-banner-fruit.jpg");
@@ -33,9 +31,7 @@
   transform: translateY(-3px);
 }
 
-/* ==========================
-   🛒 HEADER
-   ========================== */
+/*HEADER*/
 header.sticky-top {
   z-index: 1050;
 }
@@ -61,7 +57,7 @@ header.sticky-top {
   transform: translateY(-2px);
 }
 
-/* === HERO CAROUSEL (Juicy) === */
+/*HERO CAROUSEL*/
 #hero-carousel {
   margin-bottom: 5%;
 }
@@ -91,7 +87,7 @@ header.sticky-top {
   margin-bottom: 15px;
 }
 
-/* === Điều hướng trái/phải === */
+/*Điều hướng trái/phải*/
 .carousel-control-prev,
 .carousel-control-next {
   width: 6%;
@@ -130,7 +126,6 @@ header.sticky-top {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-/* Hover hiệu ứng nổi */
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
   transform: scale(1.1);
@@ -138,12 +133,7 @@ header.sticky-top {
   opacity: 1;
 }
 
-
-/* ==========================
-   🍎 ABOUT PAGE
-   ========================== */
-
-/* === ABOUT PAGE === */
+/*ABOUT PAGE*/
 .about-hero,
 .hero-section {
   background: linear-gradient(rgba(var(--color-white), 0.7), rgba(var(--color-white), 0.7)),
@@ -155,7 +145,7 @@ header.sticky-top {
 }
 
 .hero-title {
-  color: var(--color-dark-text); /* Thay #1b5e20 bằng Dark Text */
+  color: var(--color-dark-text);
   text-shadow: 1px 2px 4px rgba(var(--color-white), 0.6);
 }
 
@@ -183,9 +173,7 @@ header.sticky-top {
     padding: 15px;
 }
 
-/* ==========================
-   🧃 PRODUCT CARDS
-   ========================== */
+/* PRODUCT CARDS*/
 .product-card {
   display: flex;
   flex-direction: column;
@@ -243,9 +231,7 @@ header.sticky-top {
   white-space: nowrap;
 }
 
-/* ==========================
-   ⚙️ LOGIN
-   ========================== */
+/*LOGIN*/
 .auth-container {
   max-width: 500px;
   margin: 50px auto;
@@ -271,9 +257,7 @@ header.sticky-top {
   color: var(--color-dark-text);
 }
 
-/* ==========================
-   ⚙️ PRODUCTS
-   ========================== */
+/* PRODUCTS*/
 .filter-sidebar {
   background-color: var(--color-light-bg);
   border-radius: 8px;
@@ -303,25 +287,19 @@ header.sticky-top {
   width: 100%;
 }
 
-/* ==========================
-   ⚙️ PRODUCTS DETAILS
-   ========================== */
+/*PRODUCTS DETAILS*/
 .product-detail-img {
   height: 530px;
   width: 100%;
   object-fit: contain;
 }
 
-/* ==========================
-   ⚙️ FOOTER
-   ========================== */
+/* FOOTER*/
 footer a:hover {
   color: var(--color-secondary) !important;
 }
 
-/* ==========================
-   🔤 FONT CHUNG
-   ========================== */
+/* FONT CHUNG*/
 h1, h2, h3 {
   font-family: 'Arial', sans-serif;
 }
@@ -339,9 +317,7 @@ h1, h2, h3 {
     transform: translateY(-4px);
     transition: 0.3s;
 }
-/* ==========================
-   🔤 FONT CHUNG
-   ========================== */
+/* FONT CHUNG*/
 
 .product-commit-box {
     background: #f2fff5;

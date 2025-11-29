@@ -1,41 +1,36 @@
-/* ==========================
-   NAVBAR TOGGLE LOGIC (Đơn giản)
-   ========================== */
+// NAVBAR TOGGLE LOGIC
 function initNavbarToggle() {
     var navbarToggler = document.querySelector('.navbar-toggler');
     var navCollapse = document.querySelector('#navbarNav');
 
-    // Kiểm tra nếu cả nút toggle và menu đều tồn tại
     if (navbarToggler && navCollapse) {
         navbarToggler.onclick = function() {
-            // Dùng classList.toggle() để chuyển đổi class 'show' (ẩn/hiện)
+            //chuyển đổi class show (ẩn/hiện)
             navCollapse.classList.toggle('show');
-            // Dùng classList.toggle() để chuyển đổi class 'collapse' (cho hiệu ứng)
+            //chuyển đổi class collapse (cho hiệu ứng)
             navCollapse.classList.toggle('collapse');
         };
     }
 }
 
 
-/* ==========================
-   TABS LOGIC (Đơn giản)
-   ========================== */
+// TABS LOGIC
 function initTabs() {
     var tabContainers = document.querySelectorAll('[role="tablist"]');
 
-    // Lặp qua tất cả các container chứa tab (có thể có ở login, products)
+    // Lặp qua tất cả các container chứa tab
     for (var i = 0; i < tabContainers.length; i++) {
         var container = tabContainers[i];
 
         container.onclick = function(event) {
             var button = event.target.closest('[role="tab"]');
             if (!button) {
-                return; // Không phải là nút tab, thoát
+                return;
             }
 
             event.preventDefault();
 
-            // 1. Tắt tab và panel đang hoạt động (active)
+            // 1. Tắt tab và panel đang hoạt động
             var activeTabs = container.querySelectorAll('.nav-link.active');
             for (var j = 0; j < activeTabs.length; j++) {
                 activeTabs[j].classList.remove('active');
@@ -62,9 +57,7 @@ function initTabs() {
 }
 
 
-/* ==========================
-   CAROUSEL LOGIC (Đơn giản)
-   ========================== */
+//CAROUSEL LOGIC
 function initCarousel(id, interval) {
     var carousel = document.getElementById(id);
     if (!carousel) return;
@@ -93,7 +86,7 @@ function initCarousel(id, interval) {
 
     // 1. Tự động chuyển slide
     function startAutoSlide() {
-        // Xóa interval cũ trước khi tạo mới (phòng trường hợp đã có)
+        // Xóa interval cũ trước khi tạo mới
         clearInterval(slideInterval);
         slideInterval = setInterval(nextSlide, interval);
     }
@@ -104,26 +97,23 @@ function initCarousel(id, interval) {
 
     if (nextButton) {
         nextButton.onclick = function() {
-            startAutoSlide(); // Khởi động lại timer sau khi ấn
+            startAutoSlide();
             nextSlide();
         };
     }
 
     if (prevButton) {
         prevButton.onclick = function() {
-            startAutoSlide(); // Khởi động lại timer sau khi ấn
+            startAutoSlide();
             prevSlide();
         };
     }
 
-    // Bắt đầu
     showItem(currentIndex);
     startAutoSlide();
 }
 
-/* ==========================
-   TOGGLE LOGIN/USER INFO BUTTONS
-   ========================== */
+//TOGGLE LOGIN/USER INFO BUTTONS
 
 // Hàm ẩn/hiện nút Đăng Nhập và Thông Tin
 function updateAuthUI(isLoggedIn) {
@@ -132,11 +122,11 @@ function updateAuthUI(isLoggedIn) {
 
     if (loginBtnContainer && userBtnContainer) {
         if (isLoggedIn) {
-            loginBtnContainer.classList.add('d-none');   // Ẩn Đăng Nhập
-            userBtnContainer.classList.remove('d-none'); // Hiện Thông Tin
+            loginBtnContainer.classList.add('d-none');
+            userBtnContainer.classList.remove('d-none');
         } else {
-            loginBtnContainer.classList.remove('d-none'); // Hiện Đăng Nhập
-            userBtnContainer.classList.add('d-none');    // Ẩn Thông Tin
+            loginBtnContainer.classList.remove('d-none');
+            userBtnContainer.classList.add('d-none');
         }
     }
 }
@@ -148,15 +138,13 @@ function checkLoginStatus() {
     updateAuthUI(isLoggedIn);
 }
 
-/* ==========================
-   LOGOUT LOGIC (Đơn giản)
-   ========================== */
+//LOGOUT LOGIC
 function handleLogout() {
     if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
-        // 1. Xóa trạng thái đăng nhập (đặt thành false)
+        // 1. Xóa trạng thái đăng nhập
         localStorage.setItem('isLoggedIn', 'false');
 
-        // 2. Cập nhật giao diện (từ Thông Tin -> Đăng Nhập)
+        // 2. Cập nhật giao diện tt -> đn
         updateAuthUI(false);
 
         // 3. Thông báo và chuyển hướng
@@ -176,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initCarousel('hero-carousel', 3000);
     }
 
-    // BƯỚC QUAN TRỌNG: Kiểm tra và thiết lập trạng thái nút ngay khi tải trang
+    // Kiểm tra và thiết lập trạng thái nút ngay khi tải trang
     checkLoginStatus();
 
     // ĐĂNG NHẬP / ĐĂNG KÝ LOGIC
@@ -192,9 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (username === "admin" && password === "123") {
                 // LƯU TRẠNG THÁI ĐÃ ĐĂNG NHẬP thành công
                 localStorage.setItem('isLoggedIn', 'true');
-                updateAuthUI(true); // Cập nhật UI ngay trên trang login
+                updateAuthUI(true);
                 alert("Đăng nhập thành công!");
-                window.location.href = "admin-dashboard.html"; // Chuyển hướng sau khi đăng nhập
+                window.location.href = "admin-dashboard.html";
             } else {
                 alert("Sai thông tin đăng nhập!");
             }

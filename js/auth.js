@@ -39,8 +39,7 @@ export function handleLogout() {
 // ĐĂNG NHẬP / ĐĂNG KÝ LOGIC
 export function initAuthForms() {
     const loginForm = document.getElementById("loginForm");
-    // const registerForm = document.getElementById("registerForm"); // Không có logic xử lý trong mã gốc
-
+    const registerForm = document.getElementById("registerForm");
     if (loginForm) {
         loginForm.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -52,11 +51,24 @@ export function initAuthForms() {
                 localStorage.setItem('isLoggedIn', 'true');
                 updateAuthUI(true);
                 alert("Đăng nhập thành công!");
-                // Giả sử admin-dashboard.html tồn tại
                 window.location.href = "admin-dashboard.html";
             } else {
                 alert("Sai thông tin đăng nhập!");
             }
+        });
+    }
+
+    if (registerForm) {
+        registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            localStorage.setItem('isLoggedIn', 'true');
+            updateAuthUI(true);
+
+            alert("Đăng ký thành công!");
+
+            // Chuyển hướng về trang chủ hoặc trang đăng nhập sau khi đăng ký thành công
+            window.location.href = "index.html";
+
         });
     }
 }

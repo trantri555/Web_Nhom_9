@@ -1,4 +1,5 @@
-<html lang="vi"><head>
+<html lang="vi">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32">
@@ -33,67 +34,63 @@
                     <li class="nav-item">
                         <a class="nav-link  fw-semibold" href="admin-orders.html">Đơn hàng</a>
                     </li>
-                <a href="login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Đăng Xuất
-                </a>
-                <a href="profile.html" class="btn btn-outline-success rounded-pill fw-semibold my-2 my-lg-0 me-lg-2">
-                    <i class="bi bi-person-circle me-1"></i> Thông Tin
-                </a>
+                    <a href="login.html"
+                       class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
+                        <i class="bi bi-person-circle me-1"></i> Đăng Xuất
+                    </a>
+                    <a href="profile.html"
+                       class="btn btn-outline-success rounded-pill fw-semibold my-2 my-lg-0 me-lg-2">
+                        <i class="bi bi-person-circle me-1"></i> Thông Tin
+                    </a>
             </div>
         </div>
     </nav>
 </header>
-
-    <!-- Tổng quan -->
-     <div class="container my-5"> 
+<!-- Tổng quan -->
+<div class="container my-5">
     <div class="row g-4">
-
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="p-4 shadow rounded bg-white">
-                <h5>Đơn hôm nay</h5>
-                <h2 class="text-success fw-bold">32</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-4 shadow rounded bg-white">
+                    <h5>Đơn hôm nay</h5>
+                    <h2 class="text-success fw-bold">32</h2>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-4 shadow rounded bg-white">
-                <h5>Đơn tuần này</h5>
-                <h2 class="text-primary fw-bold">180</h2>
+            <div class="col-md-4">
+                <div class="p-4 shadow rounded bg-white">
+                    <h5>Đơn tuần này</h5>
+                    <h2 class="text-primary fw-bold">180</h2>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-4 shadow rounded bg-white">
-                <h5>Đơn tháng này</h5>
-                <h2 class="text-warning fw-bold">980</h2>
-            </div>
-        </div>
-    </div>
-
-    <!-- Biểu đồ -->
-    <div class="row mt-5">
-        <div class="col-md-8">
-            <div class="shadow p-4 bg-white rounded">
-                <h5 class="mb-3">Biểu đồ doanh thu</h5>
-                <canvas id="revenueChart"></canvas>
+            <div class="col-md-4">
+                <div class="p-4 shadow rounded bg-white">
+                    <h5>Đơn tháng này</h5>
+                    <h2 class="text-warning fw-bold">980</h2>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="shadow p-4 bg-white rounded">
-                <h5 class="mb-3">Sản phẩm bán chạy</h5>
-                <ul class="list-group">
-                    <li class="list-group-item">Nước ép cam</li>
-                    <li class="list-group-item">Trái cây mix văn phòng</li>
-                    <li class="list-group-item">Nước ép dưa hấu</li>
-                </ul>
+        <!-- Biểu đồ -->
+        <div class="row mt-5">
+            <div class="col-md-8">
+                <div class="shadow p-4 bg-white rounded">
+                    <h5 class="mb-3">Biểu đồ doanh thu</h5>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="shadow p-4 bg-white rounded">
+                    <h5 class="mb-3">Sản phẩm bán chạy</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Nước ép cam</li>
+                        <li class="list-group-item">Trái cây mix văn phòng</li>
+                        <li class="list-group-item">Nước ép dưa hấu</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
- </div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/script.js"></script>
-</body>
 <!--footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
     <div class="container text-center text-md-start">
@@ -139,6 +136,7 @@
         </div>
     </div>
 </footer>
-
-<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="js/init.js"></script>
+</body>
 </html>

@@ -1,4 +1,5 @@
-<html lang="vi"><head>
+<html lang="vi">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32">
@@ -8,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 <!-- HEADER -->
@@ -32,10 +32,11 @@
                         <a class="nav-link active fw-semibold" href="admin-products.html">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link  fw-semibold" href="admin-orders.html">Đơn hàng</a>
+                        <a class="nav-link  fw-semibold" href="admin-orders.html">Đơn hàng</a>
                     </li>
                 </ul>
-                <a href="login.html" class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
+                <a href="login.html"
+                   class="btn btn-outline-success rounded-pill fw-semibold ms-lg-3 my-2 my-lg-0 me-lg-2">
                     <i class="bi bi-person-circle me-1"></i> Đăng Xuất
                 </a>
                 <a href="profile.html" class="btn btn-outline-success rounded-pill fw-semibold my-2 my-lg-0 me-lg-2">
@@ -46,60 +47,61 @@
     </nav>
 </header>
 
-
 <div class="container my-4">
     <div class="d-flex justify-content-between">
         <h3>Danh sách sản phẩm</h3>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="bi bi-plus"></i> Thêm sản phẩm</button>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal"><i
+                class="bi bi-plus"></i> Thêm sản phẩm
+        </button>
     </div>
 
     <table class="table table-bordered table-hover mt-3 bg-white">
         <thead>
-            <tr>
-                <th>Ảnh</th>
-                <th>Tên SP</th>
-                <th>Giá</th>
-                <th>Loại</th>
-                <th>Số lượng</th>
-                <th>Hành động</th>
-            </tr>
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên SP</th>
+            <th>Giá</th>
+            <th>Loại</th>
+            <th>Số lượng</th>
+            <th>Hành động</th>
+        </tr>
         </thead>
         <tbody id="productTable">
-            <tr>
-                <td><img src="images/product/camtuoi.jpg" width="60"></td>
-                <td>Nước ép cam</td>
-                <td>45.000₫</td>
-                <td>Nước ép</td>
-                <td>100</td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
-                    <button class="btn btn-warning btn-sm">Báo hết hàng</button>
-                    <button class="btn btn-danger btn-sm">Xóa</button>
-                </td>
-            </tr>
-              <tr>
-                <td><img src="images/product/miadautam.jpg" width="60"></td>
-                <td>Nước ép Mía Dâu Tằm</td>
-                <td>45.000₫</td>
-                <td>Nước ép</td>
-                <td>50</td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
-                    <button class="btn btn-warning btn-sm">Báo hết hàng</button>
-                    <button class="btn btn-danger btn-sm">Xóa</button>
-                </td>
-            </tr>
-              <tr>
-                <td><img src="images/product/duacarotcam.jpg" width="60"></td>
-                <td>Juicy - Nước ép Dứa - cà rốt - cam</td>
-                <td>45.000₫</td>
-                <td>Nước ép</td>
-                <td>0</td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
-                    <button class="btn btn-warning btn-sm">Báo hết hàng</button>
-                    <button class="btn btn-danger btn-sm">Xóa</button>
-                </td>
+        <tr>
+            <td><img src="images/product/camtuoi.jpg" width="60"></td>
+            <td>Nước ép cam</td>
+            <td>45.000₫</td>
+            <td>Nước ép</td>
+            <td>100</td>
+            <td>
+                <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
+                <button class="btn btn-warning btn-sm">Báo hết hàng</button>
+                <button class="btn btn-danger btn-sm">Xóa</button>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="images/product/miadautam.jpg" width="60"></td>
+            <td>Nước ép Mía Dâu Tằm</td>
+            <td>45.000₫</td>
+            <td>Nước ép</td>
+            <td>50</td>
+            <td>
+                <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
+                <button class="btn btn-warning btn-sm">Báo hết hàng</button>
+                <button class="btn btn-danger btn-sm">Xóa</button>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="images/product/duacarotcam.jpg" width="60"></td>
+            <td>Juicy - Nước ép Dứa - cà rốt - cam</td>
+            <td>45.000₫</td>
+            <td>Nước ép</td>
+            <td>0</td>
+            <td>
+                <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
+                <button class="btn btn-warning btn-sm">Báo hết hàng</button>
+                <button class="btn btn-danger btn-sm">Xóa</button>
+            </td>
         </tbody>
     </table>
 </div>
@@ -120,8 +122,6 @@
         </div>
     </div>
 </div>
-
-</body>
 <!--footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
     <div class="container text-center text-md-start">
@@ -166,9 +166,7 @@
             </div>
         </div>
     </div>
-</footer>  
-
-<script src="js/script.js"></script>
-</html>
-
+</footer>
+<script type="module" src="js/init.js"></script>
+</body>
 </html>

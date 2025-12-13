@@ -107,21 +107,69 @@
 </div>
 
 <!-- Modal thêm sản phẩm -->
-<div class="modal fade" id="addProductModal">
-    <div class="modal-dialog">
-        <div class="modal-content p-3">
-            <h4>Thêm sản phẩm</h4>
-            <input class="form-control my-2" placeholder="Tên sản phẩm">
-            <input class="form-control my-2" placeholder="Giá">
-            <select class="form-control my-2">
-                <option>Nước ép</option>
-                <option>Trái cây</option>
-            </select>
-            <input type="file" class="form-control my-2">
-            <button class="btn btn-success w-100">Lưu</button>
+<div class="modal fade" id="addProductModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">
+                    <i class="bi bi-box-seam me-2"></i>Thêm sản phẩm mới
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+                <form>
+
+                    <div class="row">
+                        <!-- Hình ảnh -->
+                        <div class="col-md-4 text-center">
+                            <img src="images/product/placeholder.png"
+                                 class="img-fluid rounded border mb-3"
+                                 alt="Preview"
+                                 style="max-height: 200px;">
+                            <input type="file" class="form-control">
+                        </div>
+
+                        <!-- Thông tin -->
+                        <div class="col-md-8">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Tên sản phẩm</label>
+                                <input type="text" class="form-control" placeholder="VD: Nước ép cam tươi">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Giá (VNĐ)</label>
+                                <input type="number" class="form-control" placeholder="45000">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Mô tả sản phẩm</label>
+                                <textarea class="form-control" rows="4"
+                                          placeholder="Mô tả chi tiết sản phẩm, nguyên liệu, lợi ích..."></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button class="btn btn-success">
+                    <i class="bi bi-check-circle me-1"></i>Lưu sản phẩm
+                </button>
+            </div>
+
         </div>
     </div>
 </div>
+
 <!--footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
     <div class="container text-center text-md-start">
@@ -167,6 +215,7 @@
         </div>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module" src="js/init.js"></script>
 </body>
 </html>

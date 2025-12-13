@@ -1,5 +1,5 @@
 /* ==========================
-   🌿 JUICY - STYLE.CSS
+   JUICY - STYLE.CSS
    ========================== */
 
 /* Định nghĩa biến màu */
@@ -34,7 +34,7 @@
 }
 
 /* ==========================
-   🛒 HEADER
+   HEADER
    ========================== */
 header.sticky-top {
   z-index: 1050;
@@ -140,7 +140,7 @@ header.sticky-top {
 
 
 /* ==========================
-   ⚙️ PRODUCTS DETAILS
+   PRODUCTS DETAILS
    ========================== */
 .product-detail-img {
   height: 530px;
@@ -149,14 +149,14 @@ header.sticky-top {
 }
 
 /* ==========================
-   ⚙️ FOOTER
+   FOOTER
    ========================== */
 footer a:hover {
   color: var(--color-secondary) !important;
 }
 
 /* ==========================
-   🔤 FONT CHUNG
+   FONT CHUNG
    ========================== */
 h1, h2, h3 {
   font-family: 'Arial', sans-serif;
@@ -166,7 +166,7 @@ h1, h2, h3 {
     text-align: center;
     margin: 0 10px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-light-bg);
     height: 38px;
     font-weight: bold;
 }
@@ -176,19 +176,15 @@ h1, h2, h3 {
     transition: 0.3s;
 }
 /* ==========================
-   🔤 FONT CHUNG
+   FONT CHUNG
    ========================== */
 
 .product-commit-box {
-    background: #f2fff5;
-    border-left: 6px solid #28a745;
+    background: var(--color-light-bg);
+    border-left: 6px solid var(--color-primary);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.product-commit-box h5 {
-    color: #1e8c41;
+    box-shadow: 0 5px rgba(var(--color-black-rgb), 0.1);
 }
 
 .product-commit-box ul li {
@@ -219,7 +215,7 @@ h1, h2, h3 {
 
 /* box mô tả */
 .product-description-section {
-    background: #fff;
+    background: var(--color-white);
     padding: 20px;
     border-radius: 8px;
 }

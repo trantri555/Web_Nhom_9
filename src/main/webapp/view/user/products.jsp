@@ -1019,3 +1019,24 @@
 <script type="module" src="js/init.js"></script>
 </body>
 </html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head><title>Danh sách sản phẩm</title></head>
+<body>
+    <h2>Danh sách sản phẩm từ Database</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Giá</th>
+        </tr>
+        <c:forEach items="${productList}" var="p">
+            <tr>
+                <td>${p.id}</td>
+                <td>${p.name}</td>
+                <td>${p.price}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</body>
+</html>

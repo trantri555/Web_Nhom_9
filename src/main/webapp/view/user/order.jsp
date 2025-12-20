@@ -78,22 +78,23 @@
                     </tr>
                     </thead>
                     <tbody id="cartItems">
+                        <c:forEach var="item" items="${sessionScope.cart.list}" var="p">
                     <!-- Mẫu sản phẩm -->
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
                                 <img src="images/product/camtuoi.jpg" width="60" class="rounded me-3" alt="Nước ép cam">
                                 <div>
-                                    <h6 class="fw-semibold mb-0">Nước Ép Cam Tươi</h6>
+                                    <h6 class="fw-semibold mb-0">${p.product.name}</h6>
                                     <small class="text-muted">Chai 350ml</small>
                                 </div>
                             </div>
                         </td>
                         <td class="text-center">
-                            <input type="number" class="form-control text-center" value="1" min="1" style="width:70px">
+                            <input type="number" class="form-control text-center" value="${p.quantity}" min="1" style="width:70px">
                         </td>
-                        <td class="text-end">35.000₫</td>
-                        <td class="text-end">35.000₫</td>
+                        <td class="text-end">${p.product.price}</td>
+                        <td class="text-end">${p.totalPrice}</td>
                         <td class="text-end">
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                         </td>
@@ -117,6 +118,7 @@
                             <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>

@@ -52,7 +52,7 @@
                 </div>
 
                 <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                    <i class="bi bi-cart me-1"></i> Giỏ Hàng
+                    <i class="bi bi-cart me-1"></i> Giỏ Hàng(${sessionScope.cart.totalQuantity})
                 </a>
             </div>
         </div>
@@ -157,7 +157,7 @@
                         <a href="product/product-detail03.html" class="btn btn-sm btn-outline-success"
                            style="margin-bottom: 5px">Chi
                             tiết</a>
-                        <a href="product/product-detail03.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
+                        <a href="add-cart?id=${p.id}&quantity=1" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>

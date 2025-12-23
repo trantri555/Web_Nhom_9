@@ -28,4 +28,13 @@ public class BaseDao {
         }
         jdbi = jdbi.create(dataSource);
     }
+
+    public static void main(String[] args) {
+        BaseDao bs = new BaseDao();
+        Jdbi jdbi1 = bs.get();
+        jdbi1.withHandle(h->{
+            return h.createQuery("select * from products").mapToBean(Product.class).list();
+                });
+        system.out.println(products);
+    }
 }

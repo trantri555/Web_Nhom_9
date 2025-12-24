@@ -13,15 +13,15 @@ public class Product implements Serializable {
     private enum Status {active, inactive};
     private String description;
 
-    public Product(double price, int id, String name, int volume, String supplier_name, int quantity, String description, String img) {
-        this.price = price;
+    public Product(int id, String name, double price, int volume, String supplier_name, int quantity, String img, String description) {
         this.id = id;
         this.name = name;
+        this.price = price;
         this.volume = volume;
         this.supplier_name = supplier_name;
         this.quantity = quantity;
-        this.description = description;
         this.img = img;
+        this.description = description;
     }
 
     @Override

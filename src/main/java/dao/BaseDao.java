@@ -1,11 +1,13 @@
 package dao;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import model.Product;
 import org.jdbi.v3.core.Jdbi;
 
 import java.sql.SQLException;
+import java.util.List;
 
-public class BaseDao {
+public abstract class BaseDao {
     private Jdbi jdbi;
 
     public Jdbi get() {
@@ -16,7 +18,7 @@ public class BaseDao {
     private void makeConnect() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.getURL("jdbi:mysql://" + DBproperties.getDbHost() + ":" + DBproperties.getDbPort() + "/"
-                + DBproperties.getDbName());
+        + DBproperties.getDbName());
         dataSource.setUser(DBproperties.getUsername());
         dataSource.setPassword(DBproperties.getPassword());
         try {
@@ -24,17 +26,17 @@ public class BaseDao {
             dataSource.setAutoReconnect(true);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            throw  new RuntimeException(throwables);
+            throw new RuntimeException(throwables);
         }
         jdbi = jdbi.create(dataSource);
     }
 
-    public static void main(String[] args) {
-        BaseDao bs = new BaseDao();
-        Jdbi jdbi1 = bs.get();
-        jdbi1.withHandle(h->{
-            return h.createQuery("select * from products").mapToBean(Product.class).list();
-                });
-        system.out.println(products);
-    }
+//    public static void main(String[] args) {
+//        BaseDao bs = new BaseDao();
+//        Jdbi jdbi = bs.get();
+//        List<Product> products = jdbi.withHandle(h -> {
+//            return h.createQuery("select * from products").mapToBean(Product.class).list();
+//        });
+//        System.out.println(products);
+//    }
 }

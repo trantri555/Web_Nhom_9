@@ -83,7 +83,7 @@
         <div class="tab-content" id="authTabsContent">
 
             <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                <form id="loginForm">
+                <form action="login" id="loginForm" method="post">
 
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label fw-semibold">Email hoặc Tên đăng nhập</label>

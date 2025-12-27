@@ -18,7 +18,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand fw-bold text-success fs-3" href="index.html">
+            <a class="navbar-brand fw-bold text-success fs-3" href="/">
                 <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
                 JUICY <span class="text-warning"></span>
             </a>
@@ -26,10 +26,10 @@
             <div class="navbar-collapse show" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="index.html">Trang Chủ</a>
+                        <a class="nav-link fw-semibold" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  fw-semibold" href="products.html">Sản Phẩm</a>
+                        <a class="nav-link  fw-semibold" href="products">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  fw-semibold" href="about.html">Giới Thiệu</a>

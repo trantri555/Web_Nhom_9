@@ -25,6 +25,12 @@
             <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.jdbi/jdbi3-core -->
         <dependency>
@@ -40,5 +46,6 @@
             <version>9.5.0</version>
         </dependency>
     </dependencies>
+
 
 </project>

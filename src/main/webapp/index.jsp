@@ -31,23 +31,23 @@
                         <a class="nav-link active fw-semibold" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a href="${pageContext.request.contextPath}/products">Sản phẩm</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a href="${pageContext.request.contextPath}/about">Giới thiệu</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/about">Giới thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a href="${pageContext.request.contextPath}/contact">Liên hệ</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
                 <div id="loginButtonContainer">
-                    <a href="login.html"
+                    <a href="login"
                        class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                         Đăng Nhập</a>
                 </div>
 
                 <div id="userInfoContainer" class="d-none">
-                    <a href="profile.html"
+                    <a href="profile"
                        class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                         Thông Tin</a>
                 </div>

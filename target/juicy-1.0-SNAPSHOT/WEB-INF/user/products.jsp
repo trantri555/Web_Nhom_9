@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32"/>
+    <link rel="shortcut icon" href="images/logo/logo-juicy.png" type="image/png"/>
+    <title>Juicy - Sản Phẩm</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+<header class="sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand fw-bold text-success fs-3" href="index.html">
+                <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
+                JUICY <span class="text-warning"></span>
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold active text-success" href="products.html">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="about.html">Giới Thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="contact.html">Liên Hệ</a>
+                    </li>
+                </ul>
+                <div id="loginButtonContainer">
+                    <a href="login.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Đăng Nhập</a>
+                </div>
+
+                <div id="userInfoContainer" class="d-none">
+                    <a href="profile.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Thông Tin</a>
+                </div>
+
+                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                    <i class="bi bi-cart me-1"></i> Giỏ Hàng
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="bg-light py-4 border-bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form class="d-flex" role="search">
+                    <input class="form-control form-control-lg me-2 border-success" type="search"
+                           placeholder="Tìm kiếm tên sản phẩm, loại trái cây..." aria-label="Search">
+                    <button class="btn btn-primary-custom btn-lg fw-bold" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-lg-3">
+            <div class="filter-sidebar sticky-top" style="top: 100px;">
+                <h4 class="filter-header fw-bold text-success"><i class="bi bi-funnel-fill me-2"></i> Bộ Lọc Sản Phẩm
+                </h4>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">Thể tích</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="130ml" id="check130ml">
+                        <label class="form-check-label" for="check130ml">130ml</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="250ml" id="check250ml">
+                        <label class="form-check-label" for="check250ml">250ml</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1L" id="check1L">
+                        <label class="form-check-label" for="check1L">1L</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="5L" id="check5L">
+                        <label class="form-check-label" for="check5L">5L</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">Thương Hiệu</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="JuicyVN" id="checkVN">
+                        <label class="form-check-label" for="checkVN">Juicy Việt Nam</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="NhapKhau" id="checkNK">
+                        <label class="form-check-label" for="checkNK">Nhập Khẩu</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">Khoảng Giá (VNĐ)</h6>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Từ</span>
+                        <input type="number" class="form-control" placeholder="10.000" min="0">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Đến</span>
+                        <input type="number" class="form-control" placeholder="500.000">
+                    </div>
+                    <button class="btn btn-success w-100 fw-semibold">Áp Dụng</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-9 product-list-container">
+
+            <ul class="nav nav-tabs nav-fill border mb-4" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active fw-bold" id="tab1-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1"
+                            aria-selected="true">Nước Ép
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-bold" id="tab2-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2"
+                            aria-selected="false">Đặc Biệt
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="productTabsContent">
+
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="products-tab1">
+                        <!--                        https://lefruitstore.com/products/nuoc-cam-tuoi-orange-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/camtuoi.jpg" class="card-img-top" alt="Nước Ép Cam"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Ép Cam</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail01.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail01.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--                        https://lefruitstore.com/products/nuoc-ep-mia-dau-tam-caneberry-juice-250ml-preorder-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miadautam.jpg" class="card-img-top" alt="Nước ép Mía Dâu Tằm"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép Mía Dâu Tằm</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail02.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail02.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        https://lefruitstore.com/products/nuoc-ep-dua-ca-rot-cam-pineapple-carrot-orange-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="https://product.hstatic.net/200000411483/product/nuoc_ep_dua_ca_rot_cam_95014e20846943adbfb27a800a71f694_1024x1024.png" class="card-img-top"
+                                     alt="Nước ép Dứa - cà rốt - cam"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép Dứa - cà rốt - cam</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail03.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail03.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        https://lefruitstore.com/products/nuoc-xoai-mango-nectar-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/xoai.jpg" class="card-img-top" alt="Nước Xoài"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Xoài</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail04.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail04.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        https://lefruitstore.com/products/nuoc-oi-guava-nectar-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/oi.jpg" class="card-img-top" alt="Nước ổi"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ổi</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail05.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail05.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 6 https://lefruitstore.com/products/nuoc-chanh-day-passion-fruit-nectar-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/chanhday.jpg" class="card-img-top" alt="Nước chanh dây"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước chanh dây</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail06.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail06.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 7 https://lefruitstore.com/products/nuoc-dua-so-ri-chanh-day-pineapple-acerola-passion-nectar-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miasorichanhday.jpg" class="card-img-top"
+                                     alt="Nước Dứa - Sơ ri - Chanh dây"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Dứa - Sơ ri - Chanh dây</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail07.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail07.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 8 https://lefruitstore.com/products/nuoc-dua-tuoi-pineapple-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/dua.jpg" class="card-img-top" alt="Nước dứa tươi"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước dứa tươi</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail08.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail08.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 9 https://lefruitstore.com/products/nuoc-ep-tao-apple-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/tao.jpg" class="card-img-top" alt="Nước ép táo"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép táo</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail09.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail09.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 10 https://lefruitstore.com/products/nuoc-ep-tropical-tropical-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/tropical.jpg" class="card-img-top" alt="Nước ép Tropical"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép Tropical</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail10.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail10.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 11 https://lefruitstore.com/products/nuoc-ep-ca-chua-tomato-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/cachua.jpg" class="card-img-top" alt="Nước ép cà chua"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép cà chua</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail11.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail11.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 12 https://lefruitstore.com/products/new-nectar-mang-cau-xiem-nectar-soursop-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/mangcauxiem.jpg" class="card-img-top"
+                                     alt="Nước Mãng cầu xiêm Nectar"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Mãng cầu xiêm Nectar</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail12.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail12.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 13 https://lefruitstore.com/products/nuoc-mia-sori-tac-sugarcane-acerola-calamansi-juice-250ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miasoritac.jpg" class="card-img-top"
+                                     alt="Nước Mía - Sơ ri - Tắc"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Mía - Sơ ri - Tắc</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail13.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail13.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 14 https://lefruitstore.com/products/nuoc-mang-cau-xiem-nectar-soursop-nectar-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/mangcauxiem1L.png" class="card-img-top"
+                                     alt="Nước Mãng cầu xiêm nectar - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Mãng cầu xiêm nectar - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">79.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail14.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail14.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 15 https://lefruitstore.com/products/nuoc-cam-tuoi-orange-juice-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/camtuoi1L.jpg" class="card-img-top" alt="Nước cam tươi - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước cam tươi - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">108.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail15.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail15.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 16 https://lefruitstore.com/products/nuoc-chanh-day-passion-nectar-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/chanhday1L.jpg" class="card-img-top"
+                                     alt="Nước chanh dây - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước chanh dây - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">73.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail16.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail16.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 17 https://lefruitstore.com/products/nuoc-cot-chanh-tuoi-pure-lime-juice-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/cotchanhtuoi1L.jpg" class="card-img-top"
+                                     alt="Nước cốt chanh tươi - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước cốt chanh tươi - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">131.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail17.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail17.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 18 https://lefruitstore.com/products/nuoc-dua-so-ri-chanh-day-pineapple-acerola-passion-nectar-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/duasorichanhday1L.jpg" class="card-img-top"
+                                     alt="Nước Dứa - Sơ ri - Chanh dây - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Dứa - Sơ ri - Chanh dây - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">73.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail18.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail18.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 19 https://lefruitstore.com/products/nuoc-dua-tuoi-pineapple-juice-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/dua1L.jpg" class="card-img-top" alt="Nước dứa tươi - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước dứa tươi - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">73.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail19.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail19.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 20 https://lefruitstore.com/products/nuoc-ep-dua-ca-rot-cam-pineapple-carrot-orange-juice-1l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/duacarotcam1L.jpg" class="card-img-top"
+                                     alt="Nước ép Dứa - cà rốt - cam - 1L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép Dứa - cà rốt - cam - 1L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">74.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail20.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail20.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3" id="products-tab2">
+                        <!--CARD 21 https://lefruitstore.com/products/nuoc-ep-mia-dau-tam-caneberry-juice-preorder-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miadautam130ml.jpg" class="card-img-top"
+                                     alt="Nước Mía Dâu Tằm - 130ml"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Mía Dâu Tằm - 130ml</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">35.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail21.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail21.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 22 https://lefruitstore.com/products/thung-nuoc-ep-detox-vitamin-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/thungdetox&vitamin.jpg" class="card-img-top"
+                                     alt="Thùng nước ép Detox & Vitamin"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Thùng nước ép Detox & Vitamin</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">232.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail22.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail22.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 23 https://lefruitstore.com/products/pre-order-le-fruit-sport-mia-tac-tui-130ml-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miatac130ml.jpg" class="card-img-top"
+                                     alt="LE FRUIT SPORT MÍA TẮC TÚI 130ML"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">LE FRUIT SPORT MÍA TẮC TÚI 130ML</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">35.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail18.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail18.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 24 https://lefruitstore.com/products/nuoc-mang-cau-xiem-nectar-soursop-nectar-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/mangcauxiem5L.jpg" class="card-img-top"
+                                     alt="Nước Mãng cầu xiêm nectar - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Mãng cầu xiêm nectar - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">369.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail24.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail24.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 25 https://lefruitstore.com/products/nuoc-cam-nectar-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/camnectar5L.jpg" class="card-img-top"
+                                     alt="Nước cam nectar - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước cam nectar - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">487.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail25.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail25.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 26 https://lefruitstore.com/products/nuoc-chanh-day-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/chanhday5L.jpg" class="card-img-top"
+                                     alt="Nước chanh dây - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước chanh dây - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">318.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail26.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail26.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 27 https://lefruitstore.com/products/nuoc-dua-so-ri-chanh-day-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/duasorichanhday5L.jpg" class="card-img-top"
+                                     alt="Nước Dứa - Sơ ri - Chanh dây - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Dứa - Sơ ri - Chanh dây - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">335.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail27.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail27.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 28 https://lefruitstore.com/products/nuoc-dua-nectar-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/dua5L.jpg" class="card-img-top" alt="Nước dứa nectar - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước dứa nectar - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">289.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail28.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail28.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 29 https://lefruitstore.com/products/nuoc-dua-tuoi-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/duatuoi5Ljpg" class="card-img-top" alt="Nước dứa tươi - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước dứa tươi - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">312.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail29.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail29.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 30 https://lefruitstore.com/products/nuoc-ep-dua-ca-rot-cam-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/duacarotcam5L.jpg" class="card-img-top"
+                                     alt="Nước Dứa - cà rốt - cam - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Dứa - cà rốt - cam - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">335.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail30.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail30.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 31 https://lefruitstore.com/products/nuoc-ep-mia-dau-tam-caneberry-juice-5l-preorder-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miadautam5L.jpg" class="card-img-top"
+                                     alt="Nước ép Mía Dâu Tằm - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép Mía Dâu Tằm - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">318.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail31.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail31.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 32 https://lefruitstore.com/products/nuoc-ep-tropical-tropical-juice-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/tropical5L.jpg" class="card-img-top"
+                                     alt="Nước ép Tropical - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ép Tropical - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">335.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail32.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail32.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 33 https://lefruitstore.com/products/nuoc-mia-so-ri-tac-sugarcane-acerola-calamansi-juice-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/miasoritac5L.jpg" class="card-img-top"
+                                     alt="Nước Mía - Sơ ri - Tắc - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Mía - Sơ ri - Tắc - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">340.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail33.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail33.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 34 https://lefruitstore.com/products/nuoc-oi-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/oi5L.jpg" class="card-img-top" alt="Nước ổi - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ổi - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">289.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail34.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail34.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 35 https://lefruitstore.com/products/nuoc-oi-le-fruit-kids-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/oi130ml.jpg" class="card-img-top"
+                                     alt="Nước ổi Le Fruit Kids - 130ml"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước ổi Le Fruit Kids - 130ml</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">35.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail35.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail35.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 36 https://lefruitstore.com/products/nuoc-tao-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/tao5L.jpg" class="card-img-top" alt="Nước táo - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước táo - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">369.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail36.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail36.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--CARD 37 https://lefruitstore.com/products/nuoc-xoai-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/xoai5L.jpg" class="card-img-top" alt="Nước xoài - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước xoài - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">289.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail37.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail37.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD 38 https://lefruitstore.com/products/nuoc-tao-le-fruit-kids-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/tao130ml.jpg" class="card-img-top"
+                                     alt="Nước táo Le Fruit Kids - 130ml"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước táo Le Fruit Kids - 130ml</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">35.000₫</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail38.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail38.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 39 https://lefruitstore.com/products/nuoc-cu-den-oi-thanh-long-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/cudenoithanglong5L.jpg" class="card-img-top"
+                                     alt="Nước Củ dền - Ổi - Thanh long - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước Củ dền - Ổi - Thanh long - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">335.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail39.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail39.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--CARD 40 https://lefruitstore.com/products/nuoc-cam-tuoi-5l-->
+                        <div class="col">
+                            <div class="card product-card h-100 text-center">
+                                <img src="images/product/camtuoi5L.jpg" class="card-img-top" alt="Nước cam tươi - 5L"/>
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">Nước cam tươi - 5L</h5>
+                                        <p class="card-text text-danger fw-bold mb-3">489.000đ</p>
+                                    </div>
+                                    <div>
+                                        <a href="product/product-detail40.html"
+                                           class="btn btn-sm btn-outline-success mb-2">Chi
+                                            tiết</a>
+                                        <a href="product/product-detail40.html" class="btn btn-sm btn-primary-custom">Thêm
+                                            vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <nav class="mt-5" aria-label="Product pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">Tiếp</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row text-center text-md-start">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
+                <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục</h5>
+                <p>
+                    <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
+                </p>
+                <p>
+                    <a href="products.html" class="text-white text-decoration-none"
+                    >Trái Cây Văn Phòng</a
+                    >
+                </p>
+                <p>
+                    <a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a>
+                </p>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
+                <p>
+                    <i class="bi bi-geo-alt-fill me-2"></i> Đường số 7, Đông Hoà, Thủ
+                    Đức, Thành phố Hồ Chí Minh, Việt Nam
+                </p>
+                <p><i class="bi bi-envelope-fill me-2"></i> order@juicy.vn</p>
+                <p><i class="bi bi-telephone-fill me-2"></i> 0347 270 120</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 class="text-uppercase fw-bold text-success">Theo Dõi Chúng Tôi</h5>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 text-center pt-3 border-top border-secondary">
+                <p>&copy; 2024 Juicy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="module" src="js/init.js"></script>
+</body>
+</html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head><title>Danh sách sản phẩm</title></head>
+<body>
+    <h2>Danh sách sản phẩm từ Database</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Giá</th>
+        </tr>
+        <c:forEach items="${productList}" var="p">
+            <tr>
+                <td>${p.id}</td>
+                <td>${p.name}</td>
+                <td>${p.price}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</body>
+</html>

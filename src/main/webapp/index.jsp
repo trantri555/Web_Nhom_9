@@ -30,7 +30,7 @@
                         <a class="nav-link active fw-semibold" href="index.html">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="products.html">Sản Phẩm</a>
+                        <a class="nav-link fw-semibold" href="product">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="about.html">Giới Thiệu</a>
@@ -103,7 +103,7 @@
                     <div class="carousel-caption  d-md-block">
                         <h2 class="fw-bold">Gọi Là Có – Giao Ngay Tận Cửa</h2>
                         <p>Miễn phí giao hàng toàn TP.HCM trong hôm nay!</p>
-                        <a href="products.html" class="btn btn-warning rounded-pill px-4">Đặt Ngay</a>
+                        <a href="product" class="btn btn-warning rounded-pill px-4">Đặt Ngay</a>
                     </div>
                 </div>
             </div>

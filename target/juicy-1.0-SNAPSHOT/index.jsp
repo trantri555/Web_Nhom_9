@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +20,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand fw-bold text-success fs-3" href="index.html">
+            <a class="navbar-brand fw-bold text-success fs-3" href="/">
                 <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
                 JUICY <span class="text-warning"></span>
             </a>
@@ -27,26 +28,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link active fw-semibold" href="index.html">Trang Chủ</a>
+                        <a class="nav-link active fw-semibold" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="products.html">Sản Phẩm</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="about.html">Giới Thiệu</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/about">Giới thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="contact.html">Liên Hệ</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
                 <div id="loginButtonContainer">
-                    <a href="login.html"
+                    <a href="login"
                        class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                         Đăng Nhập</a>
                 </div>
 
                 <div id="userInfoContainer" class="d-none">
-                    <a href="profile.html"
+                    <a href="profile"
                        class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                         Thông Tin</a>
                 </div>

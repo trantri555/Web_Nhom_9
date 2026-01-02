@@ -1,0 +1,176 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/logo/logo-juicy.png" type="image/png">
+    <title>Juicy - Liên Hệ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- HEADER-->
+<header class="sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand fw-bold text-success fs-3" href="index.html">
+                <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
+                JUICY <span class="text-warning"></span>
+            </a>
+
+            <div class="navbar-collapse show" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="index.html">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  fw-semibold" href="products.html">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  fw-semibold" href="about.html">Giới Thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active fw-semibold" href="contact.html">Liên Hệ</a>
+                    </li>
+                </ul>
+                <div id="loginButtonContainer">
+                    <a href="login.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Đăng Nhập</a>
+                </div>
+
+                <div id="userInfoContainer" class="d-none">
+                    <a href="profile.html"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Thông Tin</a>
+                </div>
+
+                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                    <i class="bi bi-cart me-1"></i> Giỏ Hàng
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<!--Thêm thanh tìm kiếm vào dưới phần header của website-->
+<section class="bg-light py-4 border-bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form class="d-flex" role="search">
+                    <input class="form-control form-control-lg me-2 border-success" type="search"
+                           placeholder="Tìm kiếm tên sản phẩm, loại trái cây..." aria-label="Search">
+                    <button class="btn btn-primary-custom btn-lg fw-bold" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- NỘI DUNG CHÍNH: Form liên hệ -->
+<section class="container my-5">
+    <h2 class="text-center mb-4 text-success fw-bold">Liên Hệ Với Chúng Tôi</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form id="contactForm" class="p-4 shadow rounded bg-white">
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-semibold">Họ và Tên</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label fw-semibold">Số điện thoại</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="0123456789">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label fw-semibold">Nội dung</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Nhập nội dung"
+                              required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success rounded-pill fw-semibold">Gửi Liên Hệ</button>
+                <p id="successMessage" class="text-success mt-3 fw-semibold" style="display:none;">
+                    ✅ Cảm ơn bạn! Chúng tôi sẽ phản hồi sớm nhất.
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- Thông tin liên hệ -->
+<section class="container my-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-3">
+            <i class="bi bi-geo-alt-fill text-success h2"></i>
+            <h5 class="mt-2 fw-bold">Địa chỉ</h5>
+            <p>Đường số 7, Đông Hoà, Thủ Đức, TP.HCM, Việt Nam</p>
+        </div>
+        <div class="col-md-4 mb-3">
+            <i class="bi bi-envelope-fill text-success h2"></i>
+            <h5 class="mt-2 fw-bold">Email</h5>
+            <p>order@juicy.vn</p>
+        </div>
+        <div class="col-md-4 mb-3">
+            <i class="bi bi-telephone-fill text-success h2"></i>
+            <h5 class="mt-2 fw-bold">Điện thoại</h5>
+            <p>0347 270 120</p>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row text-center text-md-start">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
+                <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục</h5>
+                <p><a href="products.html" class="text-white text-decoration-none">Nước Ép</a></p>
+                <p><a href="products.html" class="text-white text-decoration-none">Trái Cây Văn Phòng</a></p>
+                <p><a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a></p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
+                <p><i class="bi bi-geo-alt-fill me-2"></i>Đường số 7, Đông Hoà, Thủ Đức, TP.HCM</p>
+                <p><i class="bi bi-envelope-fill me-2"></i>order@juicy.vn</p>
+                <p><i class="bi bi-telephone-fill me-2"></i>0347 270 120</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 class="text-uppercase fw-bold text-success">Theo Dõi Chúng Tôi</h5>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 text-center pt-3 border-top border-secondary">
+                <p>&copy; 2024 Juicy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
+        localStorage.setItem("contact_" + Date.now(), JSON.stringify({name,email,phone,message}));
+        this.reset();
+        document.getElementById("successMessage").style.display = "block";
+    });
+</script>-->
+<script type="module" src="js/init.js"></script>
+</body>
+</html>

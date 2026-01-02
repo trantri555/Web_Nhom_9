@@ -166,6 +166,16 @@ public class ProductDAO {
                     .list();
         });
     }
+    // Trong file ProductDAO.java
+    public Product getProductById(int id) {
+        return get().withHandle(handle -> {
+            return handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product WHERE id_product = :id")
+                    .bind("id", id)
+                    .mapToBean(Product.class)
+                    .findOne()
+                    .orElse(null);
+        });
+    }
 
     public Product findById(int id) {
         return data.get(id); // Lấy trực tiếp từ Map nhanh hơn vòng lặp

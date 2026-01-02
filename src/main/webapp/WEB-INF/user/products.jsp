@@ -1041,4 +1041,18 @@
         </c:forEach>
     </table>
 </body>
+<form action="search" method="get" class="d-flex">
+    <input class="form-control me-2" type="search" name="query"
+           placeholder="Tìm sản phẩm..." value="${lastSearch}">
+    <button class="btn btn-outline-success" type="submit">Tìm</button>
+</form>
+
+<div class="mt-3">
+    <c:if test="${not empty lastSearch}">
+        <p>Kết quả tìm kiếm cho: <strong>${lastSearch}</strong></p>
+    </c:if>
+    <c:if test="${empty productList}">
+        <p class="alert alert-warning">Không tìm thấy sản phẩm nào phù hợp!</p>
+    </c:if>
+</div>
 </html>

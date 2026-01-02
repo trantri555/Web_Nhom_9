@@ -30,8 +30,13 @@ public class ProductController extends HttpServlet {
         List<Product> list = dao.getListProduct();
 
         request.setAttribute("productList", list);
+<<<<<<< HEAD:src/main/java/controller/ProductServlet.java
+        // Thay vì dùng "user/products.jsp"
+        request.getRequestDispatcher("/WEB-INF/user/products.jsp").forward(request, response);
+=======
         request.getRequestDispatcher("/view/user/products.jsp")
                 .forward(request, response);
+>>>>>>> main:src/main/java/controller/ProductController.java
     }
 }
 //    @Override

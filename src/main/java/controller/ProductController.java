@@ -24,19 +24,14 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         ProductDAO dao = new ProductDAO();
-        // Gọi đúng tên hàm getListProduct() đã sửa ở DAO
         List<Product> list = dao.getListProduct();
 
+        // Đẩy danh sách sản phẩm sang trang JSP
         request.setAttribute("productList", list);
-<<<<<<< HEAD:src/main/java/controller/ProductServlet.java
-        // Thay vì dùng "user/products.jsp"
-        request.getRequestDispatcher("/WEB-INF/user/products.jsp").forward(request, response);
-=======
-        request.getRequestDispatcher("/view/user/products.jsp")
-                .forward(request, response);
->>>>>>> main:src/main/java/controller/ProductController.java
+
+        // Chuyển hướng (Đảm bảo đường dẫn này đúng với vị trí file jsp của bạn)
+        request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 }
 //    @Override

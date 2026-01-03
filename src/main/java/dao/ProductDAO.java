@@ -103,11 +103,13 @@
 /// /        }
 /// /    }
 /// /}
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//import model.Product;
+package dao;
+//
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import model.Product;
+
 //
 //public class ProductDAO {
 //    // Sửa lỗi <~> thành <>
@@ -120,12 +122,12 @@
 //        // ... (Các dòng data.put khác giữ nguyên)
 //    }
 //
-//     Sửa hàm lấy danh sách
+//    // Sửa hàm lấy danh sách
 //    public List<Product> getListProduct() {
 //        return new ArrayList<>(data.values());
 //    }
 //
-//     Sửa hàm lấy theo ID
+//    // Sửa hàm lấy theo ID
 //    public Product findById(int id) {
 //        for (Product p : data.values()){
 //            if (p.getId()==id) return p;
@@ -134,15 +136,8 @@
 //
 //    }
 //}
-package dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import model.Product;
-
-public class ProductDAO extends BaseDao{
+public class ProductDAO extends BaseDao {
     static Map<Integer, Product> data = new HashMap<>();
 
     static {
@@ -152,23 +147,22 @@ public class ProductDAO extends BaseDao{
         // ... nạp tiếp các sản phẩm khác
     }
 
+    //    public List<Product> getListProduct() {
+//        return new ArrayList<>(data.values());
+//    }
     public List<Product> getListProduct() {
         // Sử dụng Jdbi từ BaseDao để truy vấn database thật
-        return get().withHandle(handle -> {
-            return handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product")
-                    .mapToBean(Product.class)
-                    .list();
-        });
+        return get().withHandle(handle -> handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product")
+                .mapToBean(Product.class)
+                .list());
     }
     // Trong file ProductDAO.java
     public Product getProductById(int id) {
-        return get().withHandle(handle -> {
-            return handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product WHERE id_product = :id")
-                    .bind("id", id)
-                    .mapToBean(Product.class)
-                    .findOne()
-                    .orElse(null);
-        });
+        return get().withHandle(handle -> handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product WHERE id_product = :id")
+                .bind("id", id)
+                .mapToBean(Product.class)
+                .findOne()
+                .orElse(null));
     }
 
     public Product findById(int id) {

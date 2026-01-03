@@ -9,7 +9,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductDAO pdao = new ProductDAO();
-
+    private final ProductDAO productDAO = new ProductDAO();
     //  Lấy danh sách sản phẩm
     public List<Product> getListProduct() {
         List<Product> list = pdao.getAll();
@@ -90,5 +90,8 @@ public class ProductService {
         if (p.getImg() == null || p.getImg().isEmpty() || p.getImg().equals("linkanh")) {
             p.setImgage("images/default-product.png");
         }
+    }
+    public List<Product> getTop3BestSeller() {
+        return productDAO.getTop3BestSeller();
     }
 }

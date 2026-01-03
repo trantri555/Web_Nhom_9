@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -8,11 +9,14 @@ import model.Product;
 import service.ProductService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/admin/products")
 public class ProductServlet extends HttpServlet {
 
     private final ProductService service = new ProductService();
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -46,4 +50,5 @@ public class ProductServlet extends HttpServlet {
 
         resp.sendRedirect(req.getContextPath() + "/admin/products");
     }
+
 }

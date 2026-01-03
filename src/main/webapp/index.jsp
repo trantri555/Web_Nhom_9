@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -33,11 +33,10 @@
                         <a class="nav-link active fw-semibold" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-<<<<<<< HEAD
+
                         <a class="nav-link fw-semibold" href="product">Sản Phẩm</a>
-=======
+
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
->>>>>>> main
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/about">Giới thiệu</a>

@@ -103,13 +103,13 @@
 /// /        }
 /// /    }
 /// /}
-//package dao;
+package dao;
 //
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//import model.Product;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import model.Product;
+
 //
 //public class ProductDAO {
 //    // Sửa lỗi <~> thành <>
@@ -136,16 +136,8 @@
 //
 //    }
 //}
-package dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import model.Product;
-
-public class ProductDAO {
+public class ProductDAO extends BaseDao {
     static Map<Integer, Product> data = new HashMap<>();
 
     static {
@@ -160,21 +152,17 @@ public class ProductDAO {
 //    }
     public List<Product> getListProduct() {
         // Sử dụng Jdbi từ BaseDao để truy vấn database thật
-        return get().withHandle(handle -> {
-            return handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product")
-                    .mapToBean(Product.class)
-                    .list();
-        });
+        return get().withHandle(handle -> handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product")
+                .mapToBean(Product.class)
+                .list());
     }
     // Trong file ProductDAO.java
     public Product getProductById(int id) {
-        return get().withHandle(handle -> {
-            return handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product WHERE id_product = :id")
-                    .bind("id", id)
-                    .mapToBean(Product.class)
-                    .findOne()
-                    .orElse(null);
-        });
+        return get().withHandle(handle -> handle.createQuery("SELECT id_product as id, product_name as name, price, volume, supplier_name, quantity, image as img, description FROM Product WHERE id_product = :id")
+                .bind("id", id)
+                .mapToBean(Product.class)
+                .findOne()
+                .orElse(null));
     }
 
     public Product findById(int id) {

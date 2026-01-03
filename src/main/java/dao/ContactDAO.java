@@ -1,11 +1,13 @@
 package dao;
 
+import model.Contact;
 import util.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class ContactDAO {
 
+    // Hàm gốc: Chèn dữ liệu bằng các tham số rời
     public void insert(String name, String email, String phone,
                        String subject, String message, Integer idUser)
             throws Exception {
@@ -32,5 +34,11 @@ public class ContactDAO {
 
             ps.executeUpdate();
         }
+    }
+
+    // Hàm mới: Chèn dữ liệu trực tiếp từ Object Contact (Sẽ dùng hàm này ở Controller)
+    public void insert(Contact c) throws Exception {
+        insert(c.getFullName(), c.getEmail(), c.getPhone(),
+                c.getSubject(), c.getMessage(), c.getIdUser());
     }
 }

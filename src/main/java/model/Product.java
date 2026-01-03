@@ -108,6 +108,10 @@ public class Product implements Serializable {
         this.description = description;
     }
 
+    public Product() {
+
+    }
+
     // --- GETTERS & SETTERS ---
     public int getId() { return id; }
     public String getName() { return name; }
@@ -116,7 +120,7 @@ public class Product implements Serializable {
     public String getSupplier_name() { return supplier_name; }
 
     public String getImg() { return img; }
-    public void setImg(String img) { this.img = img; } // Cần thiết cho Service xử lý ảnh mặc định
+    public void setImgage(String img) { this.img = img; } // Cần thiết cho Service xử lý ảnh mặc định
 
     public int getQuantity() { return quantity; }
     public String getDescription() { return description; }
@@ -125,4 +129,17 @@ public class Product implements Serializable {
     public String toString() {
         return "Product{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
+
+    public void setName(String name) { this.name = name;
+    }
+
+    public void setPrice(double price) {this.price = price;
+    }
+
+    public void setCategory(String category) {
+    }
+
+    public void setQuantity(int quantity) { this.quantity = quantity;
+    }
+
 }

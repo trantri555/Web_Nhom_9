@@ -1020,24 +1020,28 @@
 <script type="module" src="js/init.js"></script>
 </body>
 </html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
-<head><title>Danh sách sản phẩm</title></head>
+<head>
+    <title>Danh sách sản phẩm</title>
+</head>
 <body>
-    <h2>Danh sách sản phẩm từ Database</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Giá</th>
-        </tr>
-        <c:forEach items="${productList}" var="p">
-            <tr>
-                <td>${p.id}</td>
-                <td>${p.name}</td>
-                <td>${p.price}</td>
-            </tr>
-        </c:forEach>
-    </table>
+
+<h2>Danh sách sản phẩm</h2>
+
+<c:forEach var="p" items="${productList}">
+    <div style="margin-bottom:20px;">
+        <h3>${p.name}</h3>
+        <p>Giá: ${p.price}</p>
+
+        <a href="${pageContext.request.contextPath}/products?action=detail&id=${p.id}">
+            Xem chi tiết
+        </a>
+    </div>
+    <hr>
+</c:forEach>
+
 </body>
 </html>

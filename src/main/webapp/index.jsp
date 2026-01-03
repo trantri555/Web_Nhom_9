@@ -31,11 +31,8 @@
                         <a class="nav-link active fw-semibold" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-<<<<<<< HEAD
-                        <a class="nav-link fw-semibold" href="product">Sản Phẩm</a>
-=======
+
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
->>>>>>> main
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/about">Giới thiệu</a>

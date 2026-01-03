@@ -161,4 +161,9 @@ public class ProductDAO {
     public Product findById(int id) {
         return data.get(id); // Lấy trực tiếp từ Map nhanh hơn vòng lặp
     }
+
+    public Product getProductById(int id) {
+
+        return null;
+    }
 }

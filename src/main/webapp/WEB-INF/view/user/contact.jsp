@@ -26,16 +26,16 @@
             <div class="navbar-collapse show" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="index.html">Trang Chủ</a>
+                        <a class="nav-link fw-semibold" href="index.jsp">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  fw-semibold" href="products.html">Sản Phẩm</a>
+                        <a class="nav-link  fw-semibold" href="products.jsp">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  fw-semibold" href="about.html">Giới Thiệu</a>
+                        <a class="nav-link  fw-semibold" href="about.jsp">Giới Thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-semibold" href="contact.html">Liên Hệ</a>
+                        <a class="nav-link active fw-semibold" href="contact.jsp">Liên Hệ</a>
                     </li>
                 </ul>
                 <div id="loginButtonContainer">
@@ -173,4 +173,13 @@
 </script>-->
 <script type="module" src="js/init.js"></script>
 </body>
+<form action="contact" method="post">
+    <input type="text" name="full_name" placeholder="Họ tên" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="phone" placeholder="Số điện thoại">
+    <input type="text" name="subject" placeholder="Tiêu đề">
+    <textarea name="message" placeholder="Nội dung" required></textarea>
+
+    <button type="submit">Gửi liên hệ</button>
+</form>
 </html>

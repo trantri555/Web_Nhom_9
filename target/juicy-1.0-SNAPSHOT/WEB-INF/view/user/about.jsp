@@ -27,16 +27,16 @@
             <div class="navbar-collapse show" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="index.html">Trang Chủ</a>
+                        <a class="nav-link fw-semibold" href="index.jsp">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  fw-semibold" href="products.html">Sản Phẩm</a>
+                        <a class="nav-link  fw-semibold" href="products.jsp">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-semibold" href="about.html">Giới Thiệu</a>
+                        <a class="nav-link active fw-semibold" href="about.jsp">Giới Thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="contact.html">Liên Hệ</a>
+                        <a class="nav-link fw-semibold" href="contact.jsp">Liên Hệ</a>
                     </li>
                 </ul>
                 <div id="loginButtonContainer">

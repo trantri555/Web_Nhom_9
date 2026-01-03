@@ -101,4 +101,26 @@ public class ProductDAO extends BaseDao {
                         .execute()
         );
     }
+    public List<Product> getTop3BestSeller() {
+
+        String sql = """
+            SELECT 
+                p.id_product   AS id,
+                p.product_name AS name,
+                SUM(od.quantity) AS sold
+            FROM Order_Detail od
+            JOIN Product p ON od.id_product = p.id_product
+            JOIN Orders o ON od.id_order = o.id_order
+            WHERE o.status = 'COMPLETED'
+            GROUP BY p.id_product, p.product_name
+            ORDER BY sold DESC
+            LIMIT 3
+        """;
+
+        return get().withHandle(h ->
+                h.createQuery(sql)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 }

@@ -80,7 +80,19 @@ public class BaseDao { // Bỏ abstract để có thể test hoặc để nguyê
         jdbi = Jdbi.create(dataSource);
 
         // 4. Quan trọng: Cần install plugin để Jdbi hiểu cách map Bean (Product.class)
-        // jdbi.installPlugin(new org.jdbi.v3.core.kotlin.KotlinPlugin()); // Nếu dùng Kotlin
+        // jdbi.installPlugin(new org.jdbi.v3.core.kotlin.KotlinPlugin());  Nếu dùng Kotlin
         // jdbi.installPlugin(new org.jdbi.v3.sqlobject.SqlObjectPlugin());
+    }
+    public static void main(String[] args) {
+        try {
+            BaseDao dao = new BaseDao();
+            dao.get().withHandle(h -> {
+                System.out.println("Chúc mừng! Kết nối Navicat/Wamp thành công!");
+                return null;
+            });
+        } catch (Exception e) {
+            System.out.println("Lỗi kết nối: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

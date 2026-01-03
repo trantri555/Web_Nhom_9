@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -31,7 +33,11 @@
                         <a class="nav-link active fw-semibold" href="/">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< HEAD
+                        <a class="nav-link fw-semibold" href="product">Sản Phẩm</a>
+=======
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
+>>>>>>> main
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/about">Giới thiệu</a>
@@ -104,7 +110,7 @@
                     <div class="carousel-caption  d-md-block">
                         <h2 class="fw-bold">Gọi Là Có – Giao Ngay Tận Cửa</h2>
                         <p>Miễn phí giao hàng toàn TP.HCM trong hôm nay!</p>
-                        <a href="products.html" class="btn btn-warning rounded-pill px-4">Đặt Ngay</a>
+                        <a href="product" class="btn btn-warning rounded-pill px-4">Đặt Ngay</a>
                     </div>
                 </div>
             </div>
@@ -125,85 +131,115 @@
     </div>
 </section>
 
-<section class="container my-5">
-    <h2 class="text-center mb-5 text-success fw-bold">SẢN PHẨM NỔI BẬT</h2>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 align-items-stretch">
-        <!-- Card 1 -->
-        <div class="col">
-            <div class="card product-card h-100 text-center">
-                <img src="images/product/camtuoi.jpg" class="card-img-top" alt="Nước Ép Cam">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <h5 class="card-title">Nước Ép Cam</h5>
-                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
-                    </div>
-                    <div>
-                        <a href="product/product-detail01.html" class="btn btn-sm btn-outline-success">Chi tiết</a>
-                        <a href="product/product-detail01.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--<section class="container my-5">--%>
+<%--    <h2 class="text-center mb-5 text-success fw-bold">SẢN PHẨM NỔI BẬT</h2>--%>
+<%--    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 align-items-stretch">--%>
+<%--        <!-- Card 1 -->--%>
+<%--        <div class="col">--%>
+<%--            <div class="card product-card h-100 text-center">--%>
+<%--                <img src="images/product/camtuoi.jpg" class="card-img-top" alt="Nước Ép Cam">--%>
+<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
+<%--                    <div>--%>
+<%--                        <h5 class="card-title">Nước Ép Cam</h5>--%>
+<%--                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <a href="product/product-detail01.html" class="btn btn-sm btn-outline-success">Chi tiết</a>--%>
+<%--                        <a href="product/product-detail01.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
-        <!-- Card 2 -->
-        <div class="col">
-            <div class="card product-card h-100 text-center">
-                <img src="https://product.hstatic.net/200000411483/product/nuoc_ep_dua_ca_rot_cam_95014e20846943adbfb27a800a71f694_1024x1024.png" class="card-img-top" alt="Nước ép Dứa - cà rốt - cam">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <h5 class="card-title">Nước ép Dứa - cà rốt - cam</h5>
-                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>
-                    </div>
-                    <div>
-                        <a href="product/product-detail03.html" class="btn btn-sm btn-outline-success"
-                           style="margin-bottom: 5px">Chi
-                            tiết</a>
-                        <a href="product/product-detail03.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--        <!-- Card 2 -->--%>
+<%--        <div class="col">--%>
+<%--            <div class="card product-card h-100 text-center">--%>
+<%--                <img src="https://product.hstatic.net/200000411483/product/nuoc_ep_dua_ca_rot_cam_95014e20846943adbfb27a800a71f694_1024x1024.png" class="card-img-top" alt="Nước ép Dứa - cà rốt - cam">--%>
+<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
+<%--                    <div>--%>
+<%--                        <h5 class="card-title">Nước ép Dứa - cà rốt - cam</h5>--%>
+<%--                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <a href="product/product-detail03.html" class="btn btn-sm btn-outline-success"--%>
+<%--                           style="margin-bottom: 5px">Chi--%>
+<%--                            tiết</a>--%>
+<%--                        <a href="product/product-detail03.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
-        <!-- Card 3 -->
-        <div class="col">
-            <div class="card product-card h-100 text-center">
-                <img src="images/product/oi.jpg" class="card-img-top" alt="Nước ổi">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <h5 class="card-title">Nước ổi</h5>
-                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
-                    </div>
-                    <div>
-                        <a href="product/product-detail05.html" class="btn btn-sm btn-outline-success"
-                           style="margin-bottom: 5px">Chi
-                            tiết</a>
-                        <a href="product/product-detail05.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--        <!-- Card 3 -->--%>
+<%--        <div class="col">--%>
+<%--            <div class="card product-card h-100 text-center">--%>
+<%--                <img src="images/product/oi.jpg" class="card-img-top" alt="Nước ổi">--%>
+<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
+<%--                    <div>--%>
+<%--                        <h5 class="card-title">Nước ổi</h5>--%>
+<%--                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <a href="product/product-detail05.html" class="btn btn-sm btn-outline-success"--%>
+<%--                           style="margin-bottom: 5px">Chi--%>
+<%--                            tiết</a>--%>
+<%--                        <a href="product/product-detail05.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
-        <!-- Card 4 -->
-        <div class="col">
-            <div class="card product-card h-100 text-center">
-                <img src="images/product/xoai.jpg" class="card-img-top" alt="Nước Xoài">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <div>
-                        <h5 class="card-title">Nước Xoài</h5>
-                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>
-                    </div>
-                    <div>
-                        <a href="product/product-detail04.html" class="btn btn-sm btn-outline-success"
-                           style="margin-bottom: 5px">Chi
-                            tiết</a>
-                        <a href="product/product-detail04.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>
+<%--        <!-- Card 4 -->--%>
+<%--        <div class="col">--%>
+<%--            <div class="card product-card h-100 text-center">--%>
+<%--                <img src="images/product/xoai.jpg" class="card-img-top" alt="Nước Xoài">--%>
+<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
+<%--                    <div>--%>
+<%--                        <h5 class="card-title">Nước Xoài</h5>--%>
+<%--                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <a href="product/product-detail04.html" class="btn btn-sm btn-outline-success"--%>
+<%--                           style="margin-bottom: 5px">Chi--%>
+<%--                            tiết</a>--%>
+<%--                        <a href="product/product-detail04.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <div class="text-center mt-5">--%>
+<%--        <a href="products.html" class="btn btn-outline-success btn-lg">Xem tất cả sản phẩm</a>--%>
+<%--    </div>--%>
+<%--</section>--%>
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5 animate__animated animate__fadeIn">
+            <h2 class="display-5 fw-bold text-success">SẢN PHẨM NỔI BẬT</h2>
+            <p class="lead text-muted">Những lựa chọn được yêu thích nhất tại Juicy</p>
+        </div>
+        <div class="row g-4">
+            <c:forEach items="${featuredList}" var="p">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm border-0">
+                        <div class="position-relative overflow-hidden">
+                            <img src="${p.img}" class="card-img-top" alt="${p.name}">
+                            <div class="card-badge bg-success text-white">Bán chạy</div>
+                        </div>
+                        <div class="card-body p-3 text-center">
+                            <h5 class="card-title text-dark fw-bold">${p.name}</h5>
+                            <p class="card-text text-danger fw-bold fs-5">
+                                <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ" maxFractionDigits="0"/>
+                            </p>
+                            <div class="d-grid gap-2">
+                                <a href="product-detail?id=${p.id}" class="btn btn-outline-success rounded-pill">Chi tiết</a>
+                                <button class="btn btn-warning rounded-pill fw-bold">Thêm giỏ hàng</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
-    </div>
-    <div class="text-center mt-5">
-        <a href="products.html" class="btn btn-outline-success btn-lg">Xem tất cả sản phẩm</a>
     </div>
 </section>
 

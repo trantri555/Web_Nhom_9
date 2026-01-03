@@ -103,8 +103,6 @@
 /// /        }
 /// /    }
 /// /}
-//package dao;
-//
 //import java.util.ArrayList;
 //import java.util.HashMap;
 //import java.util.List;
@@ -122,12 +120,12 @@
 //        // ... (Các dòng data.put khác giữ nguyên)
 //    }
 //
-//    // Sửa hàm lấy danh sách
+//     Sửa hàm lấy danh sách
 //    public List<Product> getListProduct() {
 //        return new ArrayList<>(data.values());
 //    }
 //
-//    // Sửa hàm lấy theo ID
+//     Sửa hàm lấy theo ID
 //    public Product findById(int id) {
 //        for (Product p : data.values()){
 //            if (p.getId()==id) return p;
@@ -138,14 +136,13 @@
 //}
 package dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import model.Product;
 
-public class ProductDAO {
+public class ProductDAO extends BaseDao{
     static Map<Integer, Product> data = new HashMap<>();
 
     static {
@@ -155,9 +152,6 @@ public class ProductDAO {
         // ... nạp tiếp các sản phẩm khác
     }
 
-    //    public List<Product> getListProduct() {
-//        return new ArrayList<>(data.values());
-//    }
     public List<Product> getListProduct() {
         // Sử dụng Jdbi từ BaseDao để truy vấn database thật
         return get().withHandle(handle -> {

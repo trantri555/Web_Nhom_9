@@ -18,7 +18,7 @@ public class ProductDetailController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
 
             // 2. Tìm sản phẩm theo ID
-            Product p = dao.getProductById(id);
+            Product p = dao.findById(id);
 
             if (p != null) {
                 // 3. Đẩy đối tượng sản phẩm sang trang JSP

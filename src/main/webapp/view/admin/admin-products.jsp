@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -66,42 +68,25 @@
             <th>Hành động</th>
         </tr>
         </thead>
-        <tbody id="productTable">
-        <tr>
-            <td><img src="images/product/camtuoi.jpg" width="60"></td>
-            <td>Nước ép cam</td>
-            <td>45.000₫</td>
-            <td>Nước ép</td>
-            <td>100</td>
-            <td>
-                <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
-                <button class="btn btn-warning btn-sm">Báo hết hàng</button>
-                <button class="btn btn-danger btn-sm">Xóa</button>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="images/product/miadautam.jpg" width="60"></td>
-            <td>Nước ép Mía Dâu Tằm</td>
-            <td>45.000₫</td>
-            <td>Nước ép</td>
-            <td>50</td>
-            <td>
-                <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
-                <button class="btn btn-warning btn-sm">Báo hết hàng</button>
-                <button class="btn btn-danger btn-sm">Xóa</button>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="images/product/duacarotcam.jpg" width="60"></td>
-            <td>Juicy - Nước ép Dứa - cà rốt - cam</td>
-            <td>45.000₫</td>
-            <td>Nước ép</td>
-            <td>0</td>
-            <td>
-                <button class="btn btn-primary btn-sm">Chỉnh Sửa</button>
-                <button class="btn btn-warning btn-sm">Báo hết hàng</button>
-                <button class="btn btn-danger btn-sm">Xóa</button>
-            </td>
+        <tbody>
+        <c:forEach var="p" items="${products}">
+            <tr>
+                <td>
+                    <img src="images/product/${p.image}" width="60">
+                </td>
+                <td>${p.name}</td>
+                <td>${p.price}₫</td>
+                <td>${p.category}</td>
+                <td>${p.quantity}</td>
+                <td>
+                    <form method="post" action="products" style="display:inline">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="${p.id}">
+                        <button class="btn btn-danger btn-sm">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>
@@ -121,40 +106,37 @@
 
             <!-- Body -->
             <div class="modal-body">
-                <form>
+                <form method="post" action="products">
+                    <input type="hidden" name="action" value="add">
 
-                    <div class="row">
-                        <!-- Hình ảnh -->
-                        <div class="col-md-4 text-center">
-                            <img src="images/product/placeholder.png"
-                                 class="img-fluid rounded border mb-3"
-                                 alt="Preview"
-                                 style="max-height: 200px;">
-                            <input type="file" class="form-control">
-                        </div>
-
-                        <!-- Thông tin -->
-                        <div class="col-md-8">
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Tên sản phẩm</label>
-                                <input type="text" class="form-control" placeholder="VD: Nước ép cam tươi">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Giá (VNĐ)</label>
-                                <input type="number" class="form-control" placeholder="45000">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Mô tả sản phẩm</label>
-                                <textarea class="form-control" rows="4"
-                                          placeholder="Mô tả chi tiết sản phẩm, nguyên liệu, lợi ích..."></textarea>
-                            </div>
-
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Tên sản phẩm</label>
+                        <input type="text" name="name" class="form-control" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Giá (VNĐ)</label>
+                        <input type="number" name="price" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Loại</label>
+                        <input type="text" name="category" class="form-control" value="Nước ép">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Số lượng</label>
+                        <input type="number" name="quantity" class="form-control" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Hủy
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            Lưu sản phẩm
+                        </button>
+                    </div>
                 </form>
             </div>
 

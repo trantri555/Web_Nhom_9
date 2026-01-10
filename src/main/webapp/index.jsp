@@ -34,8 +34,6 @@
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link fw-semibold" href="product">Sản Phẩm</a>
-
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
                     </li>
                     <li class="nav-item">

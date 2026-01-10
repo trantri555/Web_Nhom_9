@@ -36,10 +36,9 @@ export function handleLogout() {
     }
 }
 
-// ĐĂNG NHẬP / ĐĂNG KÝ LOGIC
+// ĐĂNG NHẬP  LOGIC
 export function initAuthForms() {
     const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
     if (loginForm) {
         loginForm.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -51,24 +50,12 @@ export function initAuthForms() {
                 localStorage.setItem('isLoggedIn', 'true');
                 updateAuthUI(true);
                 alert("Đăng nhập thành công!");
-                window.location.href = "admin-dashboard.html";
+                window.location.href = "admin-dashboard.jsp";
             } else {
                 alert("Sai thông tin đăng nhập!");
             }
         });
     }
 
-    if (registerForm) {
-        registerForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            localStorage.setItem('isLoggedIn', 'true');
-            updateAuthUI(true);
 
-            alert("Đăng ký thành công!");
-
-            // Chuyển hướng về trang chủ hoặc trang đăng nhập sau khi đăng ký thành công
-            window.location.href = "index.html";
-
-        });
-    }
 }

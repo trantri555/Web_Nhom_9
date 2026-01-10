@@ -87,6 +87,26 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+    //Tìm bằng id
+    public Order findById(int id) {
+        String sql = "SELECT * FROM orders WHERE id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Order(
+                        rs.getInt("id"),
+                        rs.getString("customer_name"),
+                        rs.getDouble("total_price"),
+                        rs.getString("status"),
+                        rs.getDate("order_date")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }

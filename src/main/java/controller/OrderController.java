@@ -32,6 +32,8 @@ import model.Order;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.User;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.Date;
@@ -51,6 +53,17 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Kiểm tra đăng nhập->tránh người không có quyền chọt dô
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("../login");
+            return;
+        }
+        User user = (User) session.getAttribute("user");
+        if (!"ADMIN".equals(user.getRole())) {
+            response.sendError(403);
+            return;
+        }
 
         List<Order> orders = orderDAO.getAllOrders();
         request.setAttribute("orders", orders);
@@ -62,10 +75,18 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        //Kiểm tra đăng nhập
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("login");
+            return;
+        }
         String action = request.getParameter("action");
-
-        // 🔹 THÊM ĐƠN HÀNG
+        if (action == null) {
+            response.sendRedirect("orders");
+            return;
+        }
+        // THÊM ĐƠN HÀNG
         if ("add".equals(action)) {
             String customerName = request.getParameter("customerName");
             double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
@@ -79,7 +100,7 @@ public class OrderController extends HttpServlet {
             orderDAO.addOrder(order);
         }
 
-        // 🔹 CẬP NHẬT TRẠNG THÁI
+        //  CẬP NHẬT TRẠNG THÁI
         if ("updateStatus".equals(action)) {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             String status = request.getParameter("status");
@@ -88,8 +109,23 @@ public class OrderController extends HttpServlet {
         //xóa đơn hàng
         if ("delete".equals(action)) {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
+            User user = (User) session.getAttribute("user");
+            if (user == null || !"ADMIN".equals(user.getRole())) {
+                response.sendError(403);
+                return;}
+
+            Order o = orderDAO.findById(orderId);
+            if (o == null) {
+                response.sendError(404);
+                return; }
+
+            if (!"Chờ xác nhận".equals(o.getStatus())) {
+                response.sendError(400);
+                return;
+            }
             orderDAO.deleteOrder(orderId);
         }
+
 
         response.sendRedirect("orders");
     }

@@ -56,31 +56,22 @@ public class BaseDao { // Bỏ abstract để có thể test hoặc để nguyê
 
     private void makeConnect() {
         MysqlDataSource dataSource = new MysqlDataSource();
-
-        // 1. Sửa getURL -> setURL
-        // 2. Sửa jdbi:mysql -> jdbc:mysql
         String url = "jdbc:mysql://" + DBproperties.getDbHost() + ":" + DBproperties.getDbPort() + "/" + DBproperties.getDbName();
         dataSource.setURL(url);
-
         dataSource.setUser(DBproperties.getUsername());
         dataSource.setPassword(DBproperties.getPassword());
 
         try {
             dataSource.setUseCompression(true);
             dataSource.setAutoReconnect(true);
-
-            // Cần thêm cấu hình này để tránh lỗi múi giờ nếu dùng MySQL mới
             dataSource.setServerTimezone("UTC");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException(throwables);
         }
 
-        // 3. Sửa jdbi.create -> Jdbi.create (Gọi static method từ Class)
         jdbi = Jdbi.create(dataSource);
 
-        // 4. Quan trọng: Cần install plugin để Jdbi hiểu cách map Bean (Product.class)
-        // jdbi.installPlugin(new org.jdbi.v3.core.kotlin.KotlinPlugin());  Nếu dùng Kotlin
+        // QUAN TRỌNG: Hãy bỏ comment dòng này nếu bạn đã add dependency jdbi3-sqlobject vào pom.xml
         // jdbi.installPlugin(new org.jdbi.v3.sqlobject.SqlObjectPlugin());
     }
     public static void main(String[] args) {

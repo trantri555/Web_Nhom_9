@@ -64,4 +64,29 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+    public void addOrder(Order order) {
+        String sql = "INSERT INTO orders(customer_name, total_price, status, order_date) VALUES (?,?,?,?)";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, order.getCustomerName());
+            ps.setDouble(2, order.getTotalPrice());
+            ps.setString(3, order.getStatus());
+            ps.setDate(4, new java.sql.Date(order.getOrderDate().getTime()));
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteOrder(int orderId) {
+        String sql = "DELETE FROM orders WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

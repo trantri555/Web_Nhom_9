@@ -34,6 +34,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/admin/orders")
@@ -64,13 +65,34 @@ public class OrderController extends HttpServlet {
 
         String action = request.getParameter("action");
 
+        // 🔹 THÊM ĐƠN HÀNG
+        if ("add".equals(action)) {
+            String customerName = request.getParameter("customerName");
+            double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
+
+            Order order = new Order();
+            order.setCustomerName(customerName);
+            order.setTotalPrice(totalPrice);
+            order.setStatus("Chờ xác nhận");
+            order.setOrderDate(new Date());
+
+            orderDAO.addOrder(order);
+        }
+
+        // 🔹 CẬP NHẬT TRẠNG THÁI
         if ("updateStatus".equals(action)) {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             String status = request.getParameter("status");
-
             orderDAO.updateStatus(orderId, status);
+        }
+        //xóa đơn hàng
+        if ("delete".equals(action)) {
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            orderDAO.deleteOrder(orderId);
         }
 
         response.sendRedirect("orders");
     }
+
+
 }

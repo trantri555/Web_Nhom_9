@@ -1,4 +1,6 @@
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -10,52 +12,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .error-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background-color: #f8f9fa;
-      padding: 20px;
-    }
+  <link rel="stylesheet" href="css/error.css">
 
-    .error-code {
-      font-size: 10rem;
-      font-weight: 900;
-      color: var(--color-primary);
-      line-height: 1;
-      margin-bottom: 0;
-    }
-
-    .error-message {
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--color-dark-text);
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-
-    .error-description {
-      font-size: 1.1rem;
-      color: #6c757d;
-      margin-bottom: 40px;
-    }
-
-    .btn-home-404 {
-      padding: 12px 30px;
-      font-size: 1.1rem;
-      border-radius: 50px;
-      transition: transform 0.3s ease;
-    }
-  </style>
 </head>
 <body>
 
 <main class="error-container">
-  <a class="mb-4 d-inline-block" href="index.html">
+  <a class="mb-4 d-inline-block" href="/">
     <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="80">
   </a>
   <h1 class="error-code">404</h1>
@@ -64,7 +27,7 @@
     Rất tiếc, đường dẫn bạn truy cập có thể đã bị thay đổi hoặc không còn tồn tại.
     <br>Hãy quay lại trang chủ để khám phá các sản phẩm tươi ngon của chúng tôi!
   </p>
-  <a href="index.html" class="btn btn-primary-custom btn-home-404 shadow-lg">
+  <a href="/" class="btn btn-primary-custom btn-home-404 shadow-lg">
     <i class="bi bi-house-door-fill me-2"></i> Quay Về Trang Chủ
   </a>
 </main>

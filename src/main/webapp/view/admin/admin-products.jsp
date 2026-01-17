@@ -80,9 +80,9 @@
                 <td>${p.quantity}</td>
                 <td>
                     <form method="post" action="products" style="display:inline">
-                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="action" value="hidden">
                         <input type="hidden" name="id" value="${p.id}">
-                        <button class="btn btn-danger btn-sm">Xóa</button>
+                        <button class="btn btn-danger btn-sm">Ẩn</button>
                     </form>
                 </td>
             </tr>

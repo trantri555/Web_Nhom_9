@@ -21,10 +21,7 @@ public class DashboardServlet extends HttpServlet {
         req.setAttribute("topProducts",
                 productService.getTop3BestSeller());
 
-        req.getRequestDispatcher("/views/admin-dashboard.jsp")
-                .forward(req, resp);
-
-        req.getRequestDispatcher("/views/admin-dashboard.jsp")
+        req.getRequestDispatcher("/views/admin/admin-dashboard.jsp")
                 .forward(req, resp);
     }
 }

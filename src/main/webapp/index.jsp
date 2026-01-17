@@ -22,7 +22,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand fw-bold text-success fs-3" href="/">
+            <a class="navbar-brand fw-bold text-success fs-3" href="${pageContext.request.contextPath}/home">
                 <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
                 JUICY <span class="text-warning"></span>
             </a>
@@ -30,10 +30,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link active fw-semibold" href="/">Trang Chủ</a>
+                        <a class="nav-link active fw-semibold" href="${pageContext.request.contextPath}/home">Trang
+                            Chủ</a>
                     </li>
                     <li class="nav-item">
-
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
@@ -215,24 +215,16 @@
             <h2 class="display-5 fw-bold text-success">SẢN PHẨM NỔI BẬT</h2>
             <p class="lead text-muted">Những lựa chọn được yêu thích nhất tại Juicy</p>
         </div>
-        <div class="row g-4">
+        <div class="row">
             <c:forEach items="${featuredList}" var="p">
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="card product-card h-100 shadow-sm border-0">
-                        <div class="position-relative overflow-hidden">
-                            <img src="${p.img}" class="card-img-top" alt="${p.name}">
-                            <div class="card-badge bg-success text-white">Bán chạy</div>
-                        </div>
-                        <div class="card-body p-3 text-center">
-                            <h5 class="card-title text-dark fw-bold">${p.name}</h5>
-                            <p class="card-text text-danger fw-bold fs-5">
-                                <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ" maxFractionDigits="0"/>
-                            </p>
-                            <div class="d-grid gap-2">
-                                <a href="product-detail?id=${p.id}" class="btn btn-outline-success rounded-pill">Chi tiết</a>
-                                <button class="btn btn-warning rounded-pill fw-bold">Thêm giỏ hàng</button>
-                            </div>
-                        </div>
+                <div class="col-md-3">
+                    <div class="product-item shadow-sm p-3 mb-5 bg-white rounded text-center">
+                        <img src="images/products/${p.img}" class="img-fluid" alt="${p.name}">
+                        <h5 class="mt-3">${p.name}</h5>
+                        <p class="text-danger fw-bold">
+                            <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ"/>
+                        </p>
+                        <a href="product-detail?id=${p.id}" class="btn btn-success">Mua ngay</a>
                     </div>
                 </div>
             </c:forEach>

@@ -1,14 +1,12 @@
-package controller;
+package controller.admin;
 
-import dao.ProductDAO;
-import model.Product;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import service.ProductService;
 
 import java.io.IOException;
-import java.util.List;
+
 @WebServlet("/admin/dashboard")
 public class DashboardServlet extends HttpServlet {
     private final ProductService productService = new ProductService();

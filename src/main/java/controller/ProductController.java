@@ -1,15 +1,3 @@
-//package controller;
-//
-//import dao.ProductDAO;
-//import model.Product;
-//import jakarta.servlet.*;
-//import jakarta.servlet.http.*;
-//import jakarta.servlet.annotation.*;
-//import java.io.IOException;
-//import java.util.List;
-//
-//@WebServlet(name = "ProductServlet", value = "/products")
-//public class ProductServlet extends HttpServlet {
 package controller;
 
 import dao.ProductDAO;
@@ -31,7 +19,7 @@ public class ProductController extends HttpServlet {
         request.setAttribute("productList", list);
 
         // Chuyển hướng (Đảm bảo đường dẫn này đúng với vị trí file jsp của bạn)
-        request.getRequestDispatcher("products.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/products.jsp").forward(request, response);
     }
 }
 //    @Override

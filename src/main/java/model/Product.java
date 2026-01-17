@@ -117,10 +117,22 @@ public class Product implements Serializable {
     public String getName() { return name; }
     public double getPrice() { return price; }
     public int getVolume() { return volume; }
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
     public String getSupplier_name() { return supplier_name; }
+    public void setSupplier_name(String supplier_name) {
+        this.supplier_name = supplier_name;
+    }
 
     public String getImg() { return img; }
-    public void setImgage(String img) { this.img = img; } // Cần thiết cho Service xử lý ảnh mặc định
+    public void setImgage(String img) {
+        this.img = img;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    // Cần thiết cho Service xử lý ảnh mặc định
 
     public int getQuantity() { return quantity; }
     public String getDescription() { return description; }

@@ -150,4 +150,19 @@ public class ProductDAO extends BaseDao {
                         .orElse(null)
         );
     }
+
+    public void hide(int id) {
+        String sql = """
+            UPDATE Product
+            SET status = 'inactive'
+            WHERE id_product = :id
+        """;
+
+        get().useHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("id", id)
+                        .execute()
+        );
+    }
+
 }

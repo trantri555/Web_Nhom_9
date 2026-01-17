@@ -20,7 +20,7 @@ public class AddCart extends HttpServlet {
         // 2 đăng nhập mới được add cart
         if (session.getAttribute("user") == null) {
             response.sendRedirect("login.jsp");
-            return;
+            return;}
             // 3. Validate dữ liệu
             int id;
             int quantity;
@@ -59,4 +59,3 @@ public class AddCart extends HttpServlet {
             // hoặc: response.sendRedirect("cart.jsp");
         }
     }
-}

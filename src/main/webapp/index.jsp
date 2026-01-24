@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -128,87 +129,6 @@
     </div>
 </section>
 
-<%--<section class="container my-5">--%>
-<%--    <h2 class="text-center mb-5 text-success fw-bold">SẢN PHẨM NỔI BẬT</h2>--%>
-<%--    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 align-items-stretch">--%>
-<%--        <!-- Card 1 -->--%>
-<%--        <div class="col">--%>
-<%--            <div class="card product-card h-100 text-center">--%>
-<%--                <img src="images/product/camtuoi.jpg" class="card-img-top" alt="Nước Ép Cam">--%>
-<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
-<%--                    <div>--%>
-<%--                        <h5 class="card-title">Nước Ép Cam</h5>--%>
-<%--                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="product/product-detail01.html" class="btn btn-sm btn-outline-success">Chi tiết</a>--%>
-<%--                        <a href="product/product-detail01.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<%--        <!-- Card 2 -->--%>
-<%--        <div class="col">--%>
-<%--            <div class="card product-card h-100 text-center">--%>
-<%--                <img src="https://product.hstatic.net/200000411483/product/nuoc_ep_dua_ca_rot_cam_95014e20846943adbfb27a800a71f694_1024x1024.png" class="card-img-top" alt="Nước ép Dứa - cà rốt - cam">--%>
-<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
-<%--                    <div>--%>
-<%--                        <h5 class="card-title">Nước ép Dứa - cà rốt - cam</h5>--%>
-<%--                        <p class="card-text text-danger fw-bold mb-3">45.000₫</p>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="product/product-detail03.html" class="btn btn-sm btn-outline-success"--%>
-<%--                           style="margin-bottom: 5px">Chi--%>
-<%--                            tiết</a>--%>
-<%--                        <a href="product/product-detail03.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<%--        <!-- Card 3 -->--%>
-<%--        <div class="col">--%>
-<%--            <div class="card product-card h-100 text-center">--%>
-<%--                <img src="images/product/oi.jpg" class="card-img-top" alt="Nước ổi">--%>
-<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
-<%--                    <div>--%>
-<%--                        <h5 class="card-title">Nước ổi</h5>--%>
-<%--                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="product/product-detail05.html" class="btn btn-sm btn-outline-success"--%>
-<%--                           style="margin-bottom: 5px">Chi--%>
-<%--                            tiết</a>--%>
-<%--                        <a href="product/product-detail05.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<%--        <!-- Card 4 -->--%>
-<%--        <div class="col">--%>
-<%--            <div class="card product-card h-100 text-center">--%>
-<%--                <img src="images/product/xoai.jpg" class="card-img-top" alt="Nước Xoài">--%>
-<%--                <div class="card-body d-flex flex-column justify-content-between">--%>
-<%--                    <div>--%>
-<%--                        <h5 class="card-title">Nước Xoài</h5>--%>
-<%--                        <p class="card-text text-danger fw-bold mb-3">45.000đ</p>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="product/product-detail04.html" class="btn btn-sm btn-outline-success"--%>
-<%--                           style="margin-bottom: 5px">Chi--%>
-<%--                            tiết</a>--%>
-<%--                        <a href="product/product-detail04.html" class="btn btn-sm btn-primary-custom">Thêm vào giỏ</a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div class="text-center mt-5">--%>
-<%--        <a href="products.html" class="btn btn-outline-success btn-lg">Xem tất cả sản phẩm</a>--%>
-<%--    </div>--%>
-<%--</section>--%>
 <section class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5 animate__animated animate__fadeIn">
@@ -218,13 +138,20 @@
         <div class="row">
             <c:forEach items="${featuredList}" var="p">
                 <div class="col-md-3">
-                    <div class="product-item shadow-sm p-3 mb-5 bg-white rounded text-center">
-                        <img src="images/products/${p.img}" class="img-fluid" alt="${p.name}">
-                        <h5 class="mt-3">${p.name}</h5>
-                        <p class="text-danger fw-bold">
-                            <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ"/>
+                    <div class="product-item shadow-sm p-3 mb-5 bg-white rounded text-center h-100">
+                        <img src="${p.img}" class="img-fluid" alt="${p.name}"
+                             onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'"
+                             style="height: 200px; object-fit: contain;">
+
+                        <h5 class="mt-3 fw-bold">${p.name}</h5>
+
+                        <p class="text-danger fw-bold fs-5">
+                            <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ" maxFractionDigits="0"/>
                         </p>
-                        <a href="product-detail?id=${p.id}" class="btn btn-success">Mua ngay</a>
+
+                        <div class="d-grid">
+                            <a href="product-detail?id=${p.id}" class="btn btn-success rounded-pill">Mua ngay</a>
+                        </div>
                     </div>
                 </div>
             </c:forEach>

@@ -6,7 +6,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/home")
@@ -15,11 +14,13 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
 
-//        // Lấy 4 sản phẩm nổi bật
-//        List<Product> featured = dao.getTopFeatured(4);
-//        request.setAttribute("featuredList", featured);
-//
-//        // Chuyển hướng tới index.jsp
-//        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        // 1. Lấy dữ liệu sản phẩm nổi bật
+        List<Product> featured = dao.getListProduct4();
+
+        // 2. Gán vào request với tên "featuredList" khớp với index.jsp
+        request.setAttribute("featuredList", featured);
+
+        // 3. Forward sang trang index.jsp
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

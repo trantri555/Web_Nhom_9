@@ -63,7 +63,7 @@
             <th>Ảnh</th>
             <th>Tên SP</th>
             <th>Giá</th>
-            <th>Loại</th>
+            <th>Thể tích</th>
             <th>Số lượng</th>
             <th>Hành động</th>
         </tr>
@@ -80,9 +80,9 @@
                 <td>${p.quantity}</td>
                 <td>
                     <form method="post" action="products" style="display:inline">
-                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="action" value="hidden">
                         <input type="hidden" name="id" value="${p.id}">
-                        <button class="btn btn-danger btn-sm">Xóa</button>
+                        <button class="btn btn-danger btn-sm">Ẩn</button>
                     </form>
                 </td>
             </tr>
@@ -106,9 +106,8 @@
 
             <!-- Body -->
             <div class="modal-body">
-                <form method="post" action="products">
+                <form method="post" action="/add-product" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="add">
-
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Tên sản phẩm</label>
                         <input type="text" name="name" class="form-control" required>
@@ -120,13 +119,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Loại</label>
-                        <input type="text" name="category" class="form-control" value="Nước ép">
+                        <label class="form-label fw-semibold">Thể tích</label>
+                        <input type="text" name="volume" class="form-control" placeholder="Thể tích">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Số lượng</label>
                         <input type="number" name="quantity" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Hình ảnh</label>
+                        <input type="file" name="image" class="form-control" required>
+                        <c:if test="${param.error == 'no_image'}">
+                            <div class="alert alert-danger">
+                                Vui lòng chọn hình ảnh cho sản phẩm!
+                            </div>
+                        </c:if>
                     </div>
 
                     <div class="modal-footer">
@@ -139,6 +147,12 @@
                     </div>
                 </form>
             </div>
+            <c:if test="${param.success == 'add'}">
+                <div class="alert alert-success">
+                    Thêm sản phẩm thành công!
+                </div>
+            </c:if>
+
 
             <!-- Footer -->
             <div class="modal-footer">

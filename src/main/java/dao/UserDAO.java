@@ -7,7 +7,7 @@ import model.User;
 public class UserDAO {
     // Tạo danh sách User ảo thay vì kết nối Database
     private static List<User> listUsers = new ArrayList<>();
-
+    private static int AUTO_ID = 4; //biến tạm, sau khi add database sẽ đổi
     static {
         // Khởi tạo một số tài khoản mẫu
         // Cấu trúc: id, username, password, fullName, email, role
@@ -24,5 +24,21 @@ public class UserDAO {
             }
         }
         return null; // Không tìm thấy
+    }
+    //  Kiểm tra username/email tồn tại
+    public boolean isUserEmailExists(String email) {
+        for (User u : listUsers) {
+            if (u.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Lưu user mới
+    public void register(User user) {
+        user = new User(AUTO_ID++, user.getUsername(),
+                user.getPassword(), "User mới", user.getEmail(), 0);
+        listUsers.add(user);
     }
 }

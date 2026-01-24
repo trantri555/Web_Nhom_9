@@ -46,30 +46,55 @@
     </nav>
 </header>
 <div class="container my-4">
+
     <h3>Danh sách đơn hàng</h3>
 
     <table class="table table-bordered bg-white">
         <thead>
-            <tr>
-                <th>Mã đơn</th>
-                <th>Khách hàng</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
-            </tr>
+        <tr>
+            <th>Mã đơn</th>
+            <th>Khách hàng</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
         </thead>
+
         <tbody>
+        <c:forEach items="${orders}" var="o">
             <tr>
-                <td>#DH001</td>
-                <td>Nguyễn Văn A</td>
-                <td>150.000</td>
+                <td>#DH${o.id}</td>
+                <td>${o.customerName}</td>
+                <td>${o.totalPrice}</td>
                 <td>
-                    <select class="form-select">
-                        <option>Chờ xác nhận</option>
-                        <option>Đã chuẩn bị</option>
-                        <option>Đang vận chuyển</option>
-                    </select>
+                    <form method="post" action="orders">
+                        <input type="hidden" name="action" value="updateStatus"/>
+                        <input type="hidden" name="orderId" value="${o.id}"/>
+
+                        <select name="status" onchange="this.form.submit()">
+                            <option ${o.status == 'Chờ xác nhận' ? 'selected' : ''}>
+                                Chờ xác nhận
+                            </option>
+                            <option ${o.status == 'Đã chuẩn bị' ? 'selected' : ''}>
+                                Đã chuẩn bị
+                            </option>
+                            <option ${o.status == 'Đang vận chuyển' ? 'selected' : ''}>
+                                Đang vận chuyển
+                            </option>
+                        </select>
+                    </form>
+                </td>
+
+                <td>
+                    <form method="post" action="orders"
+                          onsubmit="return confirm('Xóa đơn hàng?')">
+                        <input type="hidden" name="action" value="delete"/>
+                        <input type="hidden" name="orderId" value="${o.id}"/>
+                        <button class="btn btn-danger btn-sm">Xóa</button>
+                    </form>
                 </td>
             </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

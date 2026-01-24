@@ -116,26 +116,61 @@
             </div>
 
             <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                <form id="registerForm">
+                <form id="registerForm" action="${pageContext.request.contextPath}/register" method="post">
+                    <!--Hiển thị thông báo khi đăng nhập-->
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger mb-3">
+                                ${error}
+                        </div>
+                    </c:if>
+
+                    <c:if test="${not empty sessionScope.success}">
+                        <div class="alert alert-success">
+                                ${sessionScope.success}
+                        </div>
+                        <c:remove var="success" scope="session"/>
+                    </c:if>
+
+
+
                     <div class="mb-3">
                         <label for="regFullName" class="form-label fw-semibold">Họ và Tên</label>
                         <input type="text" class="form-control" id="regFullName" name="fullName" required
-                               placeholder="Nhập họ tên của bạn"/>
+                               placeholder="Nhập họ tên của bạn" value="${oldFullName}"/>
+
                     </div>
                     <div class="mb-3">
                         <label for="regEmail" class="form-label fw-semibold">Email</label>
                         <input type="email" class="form-control" id="regEmail" name="email" required
-                               placeholder="Nhập địa chỉ email"/>
+                               placeholder="Nhập địa chỉ email" value="${oldEmail}"/>
+                        <c:if test="${errors.email != null}">
+                            <div class="text-danger small">
+                                    ${errors.email}
+                            </div>
+                        </c:if>
+
                     </div>
                     <div class="mb-3">
                         <label for="regPassword" class="form-label fw-semibold">Mật khẩu</label>
                         <input type="password" class="form-control" id="regPassword" name="password" required
-                               placeholder="Tạo mật khẩu (tối thiểu 6 ký tự)"/>
+                               placeholder="Tạo mật khẩu (tối thiểu 8 ký tự, kí tự viết hoa và kí tự đặt biệt)"/>
+                        <c:if test="${errors.password != null}">
+                            <div class="text-danger small">
+                                    ${errors.password}
+                            </div>
+                        </c:if>
+
                     </div>
                     <div class="mb-4">
                         <label for="regConfirmPassword" class="form-label fw-semibold">Xác nhận Mật khẩu</label>
                         <input type="password" class="form-control" id="regConfirmPassword" name="confirmPassword"
                                required placeholder="Nhập lại mật khẩu"/>
+                        <c:if test="${errors.confirmPassword != null}">
+                            <div class="text-danger small">
+                                    ${errors.confirmPassword}
+                            </div>
+                        </c:if>
+
                     </div>
                     <button type="submit" class="btn btn-primary-custom w-100 fw-bold py-2">Đăng Ký</button>
                 </form>

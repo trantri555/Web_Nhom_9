@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Hiển thị trang login khi người dùng truy cập /login
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
     }
 
     @Override

@@ -1,13 +1,14 @@
 package controller.cart;
 
-import cart.Cart;
+import model.Cart;
 import dao.ProductDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.*;
 import model.Product;
 
 import java.io.IOException;
-
+@WebFilter("/add_cart")
 public class AddCart extends HttpServlet {
 
     @Override

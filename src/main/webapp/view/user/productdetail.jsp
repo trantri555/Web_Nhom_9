@@ -84,7 +84,7 @@
           </p>
         </div>
 
-        <form action="add-to-cart" method="POST">
+        <form action="add_cart" method="POST">
           <input type="hidden" name="productId" value="${product.id}">
           <div class="d-flex align-items-center gap-3 mb-4">
             <div class="input-group" style="width: 130px;">

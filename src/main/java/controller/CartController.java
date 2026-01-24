@@ -1,0 +1,72 @@
+package controller;
+
+import dao.ProductDAO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import model.Cart;
+import model.Product;
+
+import java.io.IOException;
+
+@WebServlet("/cart")
+public class CartController extends HttpServlet {
+
+    private ProductDAO productDAO;
+
+    @Override
+    public void init() {
+        productDAO = new ProductDAO();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+        }
+
+        String action = request.getParameter("action");
+
+        try {
+            if ("add".equals(action)) {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+                Product product = productDAO.findById(productId);
+                if (product != null) {
+                    cart.addProduct(product, quantity);
+                }
+
+            } else if ("remove".equals(action)) {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                cart.deleteProduct(productId);
+
+            } else if ("update".equals(action)) {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                cart.update(productId, quantity);
+            }
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        session.setAttribute("cart", cart);
+
+        // quay lại trang giỏ hàng
+        response.sendRedirect(request.getContextPath() + "/cart.jsp");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // chỉ hiển thị cart
+        response.sendRedirect(request.getContextPath() + "/cart.jsp");
+    }
+}

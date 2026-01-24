@@ -18,11 +18,11 @@ public class HiddenProductServlet extends HttpServlet {
                 String action = request.getParameter("action");
                 int id = Integer.parseInt(request.getParameter("id"));
 
-                if ("delete".equals(action)) {
-                    ProductDAO dao = new ProductDAO();
-                    dao.hide(id); // hoặc update status = 'inactive'
-                }
-
-                response.sendRedirect("admin-product.jsp?success=hide");
+//                if ("delete".equals(action)) {
+//                    ProductDAO dao = new ProductDAO();
+//                    dao.hide(id); // hoặc update status = 'inactive'
+//                }
+//
+//                response.sendRedirect("admin-product.jsp?success=hide");
             }
         }

@@ -10,8 +10,8 @@ import util.DBContext;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
-
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
 
@@ -28,25 +28,37 @@ public class CheckoutServlet extends HttpServlet {
         }
 
         String customerName = request.getParameter("customerName");
+        String paymentMethod = request.getParameter("paymentMethod");
 
         Connection conn = null;
 
         try {
             conn = DBContext.getConnection();
-            conn.setAutoCommit(false); //  TRANSACTION
+            conn.setAutoCommit(false); //  transaction
 
-            // 1. Tạo order
+            // ===== 1. Tạo Order =====
             Order order = new Order();
             order.setCustomerName(customerName);
             order.setTotalPrice(cart.getTotalPrice());
-            order.setStatus("PAID");
             order.setOrderDate(new Date());
 
-            OrderDAO orderDAO = new OrderDAO(conn);
-            int orderId = orderDAO.insertOrder(order); /////Lỗi////////
+            if ("COD".equals(paymentMethod)) {
+                order.setPaymentMethod("COD");
+                order.setPaymentStatus("UNPAID");
+                order.setStatus("Chờ xác nhận");
+            } else if ("EWALLET".equals(paymentMethod)) {
+                order.setPaymentMethod("MOMO");
+                order.setPaymentStatus("PENDING");
+                order.setStatus("Chờ thanh toán");
+            } else {
+                throw new ServletException("Phương thức thanh toán không hợp lệ");
+            }
 
-            // 2. Tạo order_items
-            OrderItemDAO itemDAO = new OrderItemDAO();
+            OrderDAO orderDAO = new OrderDAO(conn);
+            int orderId = orderDAO.insertAndReturnId(order);
+
+            // ===== 2. Tạo OrderItem =====
+            OrderItemDAO itemDAO = new OrderItemDAO(conn);
 
             for (CartItem ci : cart.getAllItems()) {
                 OrderItem oi = new OrderItem();
@@ -54,21 +66,23 @@ public class CheckoutServlet extends HttpServlet {
                 oi.setProductId(ci.getProduct().getId());
                 oi.setQuantity(ci.getQuantity());
                 oi.setPriceAtTime(ci.getPrice());
-
                 itemDAO.insert(oi);
             }
 
             conn.commit(); //  OK
+            session.removeAttribute("cart");
 
-            session.removeAttribute("cart"); // clear cart
-            response.sendRedirect("success.jsp");
+            // ===== 3. Redirect theo payment =====
+            if ("COD".equals(paymentMethod)) {
+                response.sendRedirect("success.jsp");
+            } else {
+                response.sendRedirect("momo-payment?orderId=" + orderId);
+            }
 
         } catch (Exception e) {
             try {
-                if (conn != null) conn.rollback(); //  lỗi rollback
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+                if (conn != null) conn.rollback();
+            } catch (Exception ignored) {}
             throw new ServletException(e);
 
         } finally {

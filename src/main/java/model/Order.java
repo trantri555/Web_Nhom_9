@@ -8,7 +8,8 @@ public class Order {
     private double totalPrice;
     private String status;
     private Date orderDate;
-
+    private String paymentMethod;
+    private String paymentStatus;
     public Order() {}
 
     public Order(int id, String customerName, double totalPrice, String status, Date orderDate) {
@@ -35,4 +36,19 @@ public class Order {
     public Date getOrderDate() { return orderDate; }
     public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
 }

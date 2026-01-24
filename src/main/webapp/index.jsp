@@ -138,20 +138,14 @@
         <div class="row">
             <c:forEach items="${featuredList}" var="p">
                 <div class="col-md-3">
-                    <div class="product-item shadow-sm p-3 mb-5 bg-white rounded text-center h-100">
+                    <div class="product-item shadow-sm p-3 mb-5 bg-white rounded text-center">
                         <img src="${p.img}" class="img-fluid" alt="${p.name}"
-                             onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'"
-                             style="height: 200px; object-fit: contain;">
+                             onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'">
 
-                        <h5 class="mt-3 fw-bold">${p.name}</h5>
-
-                        <p class="text-danger fw-bold fs-5">
-                            <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ" maxFractionDigits="0"/>
-                        </p>
-
-                        <div class="d-grid">
-                            <a href="product-detail?id=${p.id}" class="btn btn-success rounded-pill">Mua ngay</a>
-                        </div>
+                        <h5 class="mt-3">${p.name}</h5> <p class="text-danger fw-bold">
+                        <fmt:formatNumber value="${p.price}" type="currency" currencySymbol="đ" maxFractionDigits="0"/>
+                    </p>
+                        <a href="product-detail?id=${p.id}" class="btn btn-success">Mua ngay</a>
                     </div>
                 </div>
             </c:forEach>

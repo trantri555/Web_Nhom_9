@@ -1,10 +1,13 @@
 package dao;
 
 import model.Product;
+import org.jdbi.v3.core.Jdbi;
+
 import java.util.List;
 
 
 public class ProductDAO extends BaseDao {
+
     public List<Product> getAll() {
         String sql = """
                 SELECT
@@ -55,22 +58,58 @@ public class ProductDAO extends BaseDao {
                         .orElse(null)
         );
     }
-//
-//    //  Thêm sản phẩm
-//    public void insert(Product p) {
-//        String sql = """
-//            INSERT INTO Product
-//            (product_name, price, volume, supplier_name, quantity, image, description)
-//            VALUES (:name, :price, :volume, :supplier, :quantity, :img, :description)
-//        """;
-//
-//        get().useHandle(handle ->
-//                handle.createUpdate(sql)
-//                        .bindBean(p)
-//                        .execute()
-//        );
-//    }
-//
+
+
+
+    //  Thêm sản phẩm
+    public void insert(Product p) {
+        String sql = """
+            INSERT INTO Product
+            (product_name, price, volume, supplier_name, quantity, image, description)
+            VALUES (:name, :price, :volume, :supplier, :quantity, :img, :description)
+        """;
+
+        get().useHandle(handle ->
+                handle.createUpdate(sql)
+                        .bindBean(p)
+                        .execute()
+        );
+    }
+
+    // fill sản phẩm lọc ra sản phẩm
+    public List<Product> getProducts(String sortBy) {
+        // Câu query cơ bản
+        String sql = """
+        SELECT 
+            p.id AS id, 
+            p.product_name AS name, 
+            p.price, 
+            p.volume, 
+            p.supplier_name, 
+            p.quantity, 
+            pi.image_URL AS img, 
+            p.description 
+        FROM products p
+        LEFT JOIN product_images pi ON p.id = pi.id_product
+        GROUP BY p.id
+    """;
+
+        // Thêm logic sắp xếp dựa trên tham số truyền vào
+        if ("priceAsc".equals(sortBy)) {
+            sql += " ORDER BY p.price ASC";
+        } else if ("priceDesc".equals(sortBy)) {
+            sql += " ORDER BY p.price DESC";
+        } else if ("nameAsc".equals(sortBy)) {
+            sql += " ORDER BY p.product_name ASC";
+        }
+
+        String finalSql = sql;
+        return jdbi.withHandle(handle ->
+                handle.createQuery(finalSql)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 //    // Xóa sản phẩm
 //    public void delete(int id) {
 //        get().useHandle(handle ->

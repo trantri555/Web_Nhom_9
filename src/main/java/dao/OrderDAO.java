@@ -87,25 +87,14 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
-    //Tìm bằng id
-    public Order findById(int id) {
-        String sql = "SELECT * FROM orders WHERE id = ?";
+    public void deleteAllOrders() {
+        String sql = "DELETE FROM orders";
+
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Order(
-                        rs.getInt("id"),
-                        rs.getString("customer_name"),
-                        rs.getDouble("total_price"),
-                        rs.getString("status"),
-                        rs.getDate("order_date")
-                );
-            }
-        } catch (SQLException e) {
+            ps.executeUpdate();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
 

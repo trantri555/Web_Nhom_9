@@ -124,6 +124,9 @@ public class OrderController extends HttpServlet {
                 return;
             }
             orderDAO.deleteOrder(orderId);
+        }// 🔥 XÓA TOÀN BỘ ĐƠN HÀNG
+        if ("deleteAll".equals(action)) {
+            orderDAO.deleteAllOrders();
         }
 
 

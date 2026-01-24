@@ -29,6 +29,7 @@ public class ProductDAO extends BaseDao {
 
     // Lấy TOP sản phẩm nổi bật dựa trên số lượng bán (cho trang Home)
     public List<Product> getTopFeatured(int limit) {
+        // JOIN thêm bảng product_images để lấy pi.image_URL gán vào img
         String sql = """
             SELECT 
                 p.id AS id,

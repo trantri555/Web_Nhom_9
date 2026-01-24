@@ -15,11 +15,11 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
 
-        // Lấy 4 sản phẩm nổi bật
-        List<Product> featured = dao.getTopFeatured(4);
-        request.setAttribute("featuredList", featured);
-
-        // Chuyển hướng tới index.jsp
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+//        // Lấy 4 sản phẩm nổi bật
+//        List<Product> featured = dao.getTopFeatured(4);
+//        request.setAttribute("featuredList", featured);
+//
+//        // Chuyển hướng tới index.jsp
+//        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

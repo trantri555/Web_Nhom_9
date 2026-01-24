@@ -63,7 +63,7 @@ public class AddProductServlet extends HttpServlet {
         p.setName(name);
         p.setPrice(price);
         p.setQuantity(quantity);
-        p.setImgage(savedFileName);          // ⚠️ xem phần sửa model
+        p.setImg(savedFileName);          // ⚠️ xem phần sửa model
         p.setDescription(description);
         p.setSupplier_name(supplier);
         p.setVolume(volume);

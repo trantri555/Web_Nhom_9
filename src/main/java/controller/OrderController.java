@@ -100,37 +100,37 @@ public class OrderController extends HttpServlet {
             orderDAO.addOrder(order);
         }
 
-        //  CẬP NHẬT TRẠNG THÁI
-        if ("updateStatus".equals(action)) {
-            int orderId = Integer.parseInt(request.getParameter("orderId"));
-            String status = request.getParameter("status");
-            orderDAO.updateStatus(orderId, status);
-        }
-        //xóa đơn hàng
-        if ("delete".equals(action)) {
-            int orderId = Integer.parseInt(request.getParameter("orderId"));
-            User user = (User) session.getAttribute("user");
-            if (user == null || !"ADMIN".equals(user.getRole())) {
-                response.sendError(403);
-                return;}
-
-            Order o = orderDAO.findById(orderId);
-            if (o == null) {
-                response.sendError(404);
-                return; }
-
-            if (!"Chờ xác nhận".equals(o.getStatus())) {
-                response.sendError(400);
-                return;
-            }
-            orderDAO.deleteOrder(orderId);
-        }// 🔥 XÓA TOÀN BỘ ĐƠN HÀNG
-        if ("deleteAll".equals(action)) {
-            orderDAO.deleteAllOrders();
-        }
-
-
-        response.sendRedirect("orders");
+//        //  CẬP NHẬT TRẠNG THÁI
+//        if ("updateStatus".equals(action)) {
+//            int orderId = Integer.parseInt(request.getParameter("orderId"));
+//            String status = request.getParameter("status");
+//            orderDAO.updateStatus(orderId, status);
+//        }
+//        //xóa đơn hàng
+//        if ("delete".equals(action)) {
+//            int orderId = Integer.parseInt(request.getParameter("orderId"));
+//            User user = (User) session.getAttribute("user");
+//            if (user == null || !"ADMIN".equals(user.getRole())) {
+//                response.sendError(403);
+//                return;}
+//
+//            Order o = orderDAO.findById(orderId);
+//            if (o == null) {
+//                response.sendError(404);
+//                return; }
+//
+//            if (!"Chờ xác nhận".equals(o.getStatus())) {
+//                response.sendError(400);
+//                return;
+//            }
+//            orderDAO.deleteOrder(orderId);
+//        }// 🔥 XÓA TOÀN BỘ ĐƠN HÀNG
+//        if ("deleteAll".equals(action)) {
+//            orderDAO.deleteAllOrders();
+//        }
+//
+//
+//        response.sendRedirect("orders");
     }
 
 

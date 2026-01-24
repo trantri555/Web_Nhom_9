@@ -57,12 +57,7 @@ public class OrderServlet extends HttpServlet {
 
             // 6. Insert order_items từ cart
             for (CartItem item : cart.getAllItems()) {
-                orderItemDAO.insert(
-                        orderId,
-                        item.getProduct().getId(),
-                        item.getQuantity(),
-                        item.getPrice()
-                );
+//                orderItemDAO.insert(order);
             }
 
             // 7. Commit transaction
@@ -83,3 +78,5 @@ public class OrderServlet extends HttpServlet {
             throw new ServletException(e);
         }
     }
+
+}

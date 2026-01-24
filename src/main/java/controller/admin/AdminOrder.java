@@ -113,17 +113,17 @@ public class AdminOrder extends HttpServlet {
             if (user == null || !"ADMIN".equals(user.getRole())) {
                 response.sendError(403);
                 return;}
+//Chờ sửa
+//            Order o = orderDAO.findById(orderId);
+//            if (o == null) {
+//                response.sendError(404);
+//                return; }
 
-            Order o = orderDAO.findById(orderId);
-            if (o == null) {
-                response.sendError(404);
-                return; }
-
-            if (!"Chờ xác nhận".equals(o.getStatus())) {
-                response.sendError(400);
-                return;
-            }
-            orderDAO.deleteOrder(orderId);
+//            if (!"Chờ xác nhận".equals(o.getStatus())) {
+//                response.sendError(400);
+//                return;
+//            }
+//            orderDAO.deleteOrder(orderId);
         }// 🔥 XÓA TOÀN BỘ ĐƠN HÀNG
         if ("deleteAll".equals(action)) {
             orderDAO.deleteAllOrders();

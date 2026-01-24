@@ -1,34 +1,59 @@
 package dao;
 
 import model.Product;
-import org.jdbi.v3.core.Jdbi;
-
 import java.util.List;
-
 
 public class ProductDAO extends BaseDao {
 
+    // Lấy tất cả sản phẩm (cho trang Products)
     public List<Product> getAll() {
         String sql = """
-                SELECT
-                                         p.id AS id,
-                                         p.product_name AS name,
-                                         p.price,
-                                         p.volume,
-                                         p.supplier_name,
-                                         p.quantity,
-                                         pi.image_URL AS img, -- Lấy link ảnh từ bảng product_images
-                                         p.description
-                                     FROM products p
-                                     LEFT JOIN product_images pi ON p.image = pi.id
-                                     GROUP BY p.id
-    """;
+            SELECT 
+                p.id AS id, 
+                p.product_name AS name, 
+                p.price, 
+                p.volume, 
+                p.supplier_name, 
+                p.quantity, 
+                pi.image_URL AS img, 
+                p.description 
+            FROM products p
+            LEFT JOIN product_images pi ON p.image = pi.id
+            WHERE p.status = 'active'
+            GROUP BY p.id, pi.image_URL
+        """;
+        return get().withHandle(handle ->
+                handle.createQuery(sql).mapToBean(Product.class).list()
+        );
+    }
 
-        return jdbi.withHandle(handle ->
+    // Lấy TOP sản phẩm nổi bật dựa trên số lượng bán (cho trang Home)
+    public List<Product> getTopFeatured(int limit) {
+        String sql = """
+            SELECT 
+                p.id AS id,
+                p.product_name AS name, 
+                p.price, 
+                pi.image_URL AS img, 
+                SUM(oi.quantity) AS total_sold
+            FROM products p
+            LEFT JOIN product_images pi ON p.image = pi.id
+            LEFT JOIN orderitems oi ON p.id = oi.id_product
+            WHERE p.status = 'active'
+            GROUP BY p.id, p.product_name, p.price, pi.image_URL
+            ORDER BY total_sold DESC
+            LIMIT :limit
+        """;
+        return get().withHandle(handle ->
                 handle.createQuery(sql)
+                        .bind("limit", limit)
                         .mapToBean(Product.class)
                         .list()
         );
+    }
+
+    public List<Product> getListProduct4() {
+        return getTopFeatured(4);
     }
 
     public List<Product> getListProduct() {
@@ -58,8 +83,6 @@ public class ProductDAO extends BaseDao {
                         .orElse(null)
         );
     }
-
-
 
     //  Thêm sản phẩm
     public void insert(Product p) {
@@ -110,55 +133,4 @@ public class ProductDAO extends BaseDao {
                         .list()
         );
     }
-//    // Xóa sản phẩm
-//    public void delete(int id) {
-//        get().useHandle(handle ->
-//                handle.createUpdate("DELETE FROM Product WHERE id_product = :id")
-//                        .bind("id", id)
-//                        .execute()
-//        );
-//    }
-//
-//    // Cập nhật sản phẩm
-//    public void update(Product p) {
-//        String sql = """
-//            UPDATE Product SET
-//                product_name = :name,
-//                price        = :price,
-//                volume       = :volume,
-//                supplier_name= :supplier,
-//                quantity     = :quantity,
-//                image        = :img,
-//                description  = :description
-//            WHERE id_product = :id
-//        """;
-//
-//        get().useHandle(handle ->
-//                handle.createUpdate(sql)
-//                        .bindBean(p)
-//                        .execute()
-//        );
-//    }
-//    public List<Product> getTop3BestSeller() {
-//
-//        String sql = """
-//            SELECT
-//                p.id_product   AS id,
-//                p.product_name AS name,
-//                SUM(od.quantity) AS sold
-//            FROM Order_Detail od
-//            JOIN Product p ON od.id_product = p.id_product
-//            JOIN Orders o ON od.id_order = o.id_order
-//            WHERE o.status = 'COMPLETED'
-//            GROUP BY p.id_product, p.product_name
-//            ORDER BY sold DESC
-//            LIMIT 3
-//        """;
-//
-//        return get().withHandle(h ->
-//                h.createQuery(sql)
-//                        .mapToBean(Product.class)
-//                        .list()
-//        );
-//    }
 }

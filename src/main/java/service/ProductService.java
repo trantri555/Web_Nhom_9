@@ -10,6 +10,7 @@ public class ProductService {
 
     private final ProductDAO pdao = new ProductDAO();
     private final ProductDAO productDAO = new ProductDAO();
+
     //  Lấy danh sách sản phẩm
     public List<Product> getListProduct() {
         List<Product> list = pdao.getAll();
@@ -77,21 +78,23 @@ public class ProductService {
         return result;
     }
 
-    // Thêm sản phẩm (CHUYỂN QUA DAO)
-    public void add(Product p) {
-        pdao.insert(p);
-    }
-
-    //  Xóa sản phẩm (CHUYỂN QUA DAO)
-    public void delete(int id) {
-        pdao.delete(id);
-    }
+    //
+//    // Thêm sản phẩm (CHUYỂN QUA DAO)
+//    public void add(Product p) {
+//        pdao.insert(p);
+//    }
+//
+//    //  Xóa sản phẩm (CHUYỂN QUA DAO)
+//    public void delete(int id) {
+//        pdao.delete(id);
+//    }
     private void handleImage(Product p) {
         if (p.getImg() == null || p.getImg().isEmpty() || p.getImg().equals("linkanh")) {
-            p.setImgage("images/default-product.png");
+            p.setImg("images/default-product.png");
         }
-    }
-    public List<Product> getTop3BestSeller() {
-        return productDAO.getTop3BestSeller();
+//    }
+//    public List<Product> getTop3BestSeller() {
+//        return productDAO.getTop3BestSeller();
+//    }
     }
 }

@@ -89,6 +89,9 @@ public class OrderController extends HttpServlet {
         if ("delete".equals(action)) {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             orderDAO.deleteOrder(orderId);
+        }// 🔥 XÓA TOÀN BỘ ĐƠN HÀNG
+        if ("deleteAll".equals(action)) {
+            orderDAO.deleteAllOrders();
         }
 
         response.sendRedirect("orders");

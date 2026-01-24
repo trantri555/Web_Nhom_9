@@ -87,6 +87,15 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+    public void deleteAllOrders() {
+        String sql = "DELETE FROM orders";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

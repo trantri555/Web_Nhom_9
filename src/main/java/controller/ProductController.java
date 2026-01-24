@@ -31,7 +31,7 @@ public class ProductController extends HttpServlet {
         request.setAttribute("productList", list);
 
         // Chuyển hướng (Đảm bảo đường dẫn này đúng với vị trí file jsp của bạn)
-        request.getRequestDispatcher("products.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/user/products.jsp").forward(request, response);
     }
 }
 //    @Override

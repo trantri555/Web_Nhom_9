@@ -20,11 +20,11 @@
 //            return;
 //        }
 //
-//        request.getRequestDispatcher("/view/user/order.jsp")
+//        request.getRequestDispatcher("/view/user/cart.jsp")
 //                .forward(request, response);
 //    }
 //}
-package controller;
+package controller.admin;
 
 import dao.OrderDAO;
 import model.Order;
@@ -40,7 +40,7 @@ import java.util.Date;
 import java.util.List;
 
 @WebServlet("/admin/orders")
-public class OrderController extends HttpServlet {
+public class AdminOrder extends HttpServlet {
 
     private OrderDAO orderDAO;
 

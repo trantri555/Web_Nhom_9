@@ -7,6 +7,6 @@ import java.io.IOException;
 public class ShowCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("order.jsp").forward(request, response);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 }

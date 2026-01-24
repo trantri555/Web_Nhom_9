@@ -1,12 +1,12 @@
 package controller.cart;
-import cart.CartItem;
+import model.CartItem;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import model.Product;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
-import cart.Cart;
+import model.Cart;
 import controller.ProductServlet;
 public class DelProduct extends HttpServlet {
     @Override
@@ -17,9 +17,9 @@ public class DelProduct extends HttpServlet {
         CartItem cartitem= cart.deleteProduct(id);
         if (  cartitem != null) {
             session.setAttribute("cart", cart);
-            response.sendRedirect("order.jsp");
+            response.sendRedirect("cart.jsp");
         } else {
-            response.sendRedirect("order.jsp");
+            response.sendRedirect("cart.jsp");
 
         }
     }

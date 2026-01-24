@@ -107,6 +107,23 @@ public class OrderDAO {
         }
         return null;
     }
+    public int insertAndReturnId(Order order) throws SQLException {
+        String sql = "INSERT INTO orders(customer_name, total_price, status, order_date) VALUES (?,?,?,?)";
+        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setString(1, order.getCustomerName());
+        ps.setDouble(2, order.getTotalPrice());
+        ps.setString(3, order.getStatus());
+        ps.setDate(4, new java.sql.Date(order.getOrderDate().getTime()));
+
+        ps.executeUpdate();
+
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return 0;
+    }
 
 
 }

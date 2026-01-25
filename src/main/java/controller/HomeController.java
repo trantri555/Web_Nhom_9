@@ -13,7 +13,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
-        List<Product> featured = dao.getTopFeatured(4);
+        List<Product> featured = dao.getTop3BestSeller();
 
         // KIỂM TRA DEBUG: In ra console để xem có dữ liệu không
         System.out.println("DEBUG: So luong SP noi bat: " + (featured != null ? featured.size() : "NULL"));

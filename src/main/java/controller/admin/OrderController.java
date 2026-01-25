@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet("/admin/orders")
+@WebServlet("/admin/manage-orders")
 public class OrderController extends HttpServlet {
 
     private OrderDAO orderDAO;
@@ -44,7 +44,7 @@ public class OrderController extends HttpServlet {
         List<Order> orders = orderDAO.getAllOrders();
         request.setAttribute("orders", orders);
 
-        request.getRequestDispatcher("/admin-orders.jsp")
+        request.getRequestDispatcher("/view/admin/admin-orders.jsp")
                 .forward(request, response);
     }
 
@@ -67,7 +67,7 @@ public class OrderController extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
-            response.sendRedirect("orders");
+            response.sendRedirect("manage-orders");
             return;
         }
 
@@ -106,6 +106,6 @@ public class OrderController extends HttpServlet {
                 break;
         }
 
-        response.sendRedirect("orders");
+        response.sendRedirect("manage-orders");
     }
 }

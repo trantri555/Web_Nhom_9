@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ProductDAO extends BaseDao {
 
+    // Lấy tất cả sản phẩm (cho trang Products)
     public List<Product> getAll() {
         String sql = """
                             SELECT
@@ -25,6 +26,10 @@ public class ProductDAO extends BaseDao {
         return jdbi.withHandle(handle -> handle.createQuery(sql)
                 .mapToBean(Product.class)
                 .list());
+    }
+
+    public List<Product> getListProduct4() {
+        return getTopFeatured(4);
     }
 
     public List<Product> getListProduct() {

@@ -1,6 +1,5 @@
-package cart;
+package model;
 
-import model.Product;
 import java.io.Serializable;
 public class CartItem implements Serializable {
     private Product product;
@@ -23,6 +22,10 @@ public class CartItem implements Serializable {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void increaseQuantity(int quantity) {

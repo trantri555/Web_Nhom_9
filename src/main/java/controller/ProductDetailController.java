@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/product-detail")
-public class ProductDetailController extends HttpServlet {
+public class  ProductDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -63,6 +66,7 @@
 <!-- GIỎ HÀNG -->
 <section class="container my-5">
     <h2 class="text-center text-success fw-bold mb-4">Giỏ Hàng Của Bạn</h2>
+
     <div class="row g-4">
         <!-- Danh sách sản phẩm -->
         <div class="col-lg-8">
@@ -77,82 +81,166 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody id="cartItems">
-                        <c:forEach var="item" items="${sessionScope.cart.list}" var="p">
-                    <!-- Mẫu sản phẩm -->
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="images/product/camtuoi.jpg" width="60" class="rounded me-3" alt="Nước ép cam">
-                                <div>
-                                    <h6 class="fw-semibold mb-0">${p.product.name}</h6>
-                                    <small class="text-muted">Chai 350ml</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <input type="number" class="form-control text-center" value="${p.quantity}" min="1" style="width:70px">
-                        </td>
-                        <td class="text-end">${p.product.price}</td>
-                        <td class="text-end">${p.totalPrice}</td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="images/product/dua.jpg" width="60" class="rounded me-3" alt="Nước ép dứa">
-                                <div>
-                                    <h6 class="fw-semibold mb-0">Nước Ép Dứa</h6>
-                                    <small class="text-muted">Chai 350ml</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <input type="number" class="form-control text-center" value="2" min="1" style="width:70px">
-                        </td>
-                        <td class="text-end">30.000₫</td>
-                        <td class="text-end">60.000₫</td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                        </td>
-                    </tr>
-                        </c:forEach>
+
+                    <tbody>
+                    <c:choose>
+
+                        <!-- Giỏ hàng trống -->
+                        <c:when test="${sessionScope.cart == null || sessionScope.cart.allItems.empty}">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    🛒 Giỏ hàng đang trống
+                                </td>
+                            </tr>
+                        </c:when>
+
+                        <!-- Có sản phẩm -->
+                        <c:otherwise>
+                            <c:forEach var="item" items="${sessionScope.cart.allItems}">
+                                <tr>
+                                    <!-- Sản phẩm -->
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="${item.product.image}"
+                                                 width="60"
+                                                 class="rounded me-3"
+                                                 alt="${item.product.name}">
+                                            <div>
+                                                <h6 class="fw-semibold mb-0">
+                                                        ${item.product.name}
+                                                </h6>
+                                                <small class="text-muted">
+                                                        ${item.product.volume} ml
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Số lượng -->
+                                    <td class="text-center">
+                                        <form action="${pageContext.request.contextPath}/cart"
+                                              method="post"
+                                              class="d-inline">
+                                            <input type="hidden" name="action" value="update">
+                                            <input type="hidden" name="productId"
+                                                   value="${item.product.id}">
+                                            <input type="number"
+                                                   name="quantity"
+                                                   value="${item.quantity}"
+                                                   min="1"
+                                                   class="form-control text-center"
+                                                   style="width:70px"
+                                                   onchange="this.form.submit()">
+                                        </form>
+                                    </td>
+
+                                    <!-- Đơn giá -->
+                                    <td class="text-end">
+                                        <fmt:formatNumber value="${item.price}"
+                                                          type="currency"
+                                                          currencySymbol="đ"
+                                                          maxFractionDigits="0"/>
+                                    </td>
+
+                                    <!-- Thành tiền -->
+                                    <td class="text-end fw-bold text-success">
+                                        <fmt:formatNumber value="${item.totalPrice}"
+                                                          type="currency"
+                                                          currencySymbol="đ"
+                                                          maxFractionDigits="0"/>
+                                    </td>
+
+                                    <!-- Xóa -->
+                                    <td class="text-end">
+                                        <form action="${pageContext.request.contextPath}/cart"
+                                              method="post">
+                                            <input type="hidden" name="action" value="remove">
+                                            <input type="hidden" name="productId"
+                                                   value="${item.product.id}">
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:otherwise>
+
+                    </c:choose>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Thanh toán -->
+        <c:set var="shippingFee" value="15000"/>
+
         <div class="col-lg-4">
             <div class="shadow rounded bg-white p-4">
                 <h5 class="fw-bold mb-3 text-success">Tổng Đơn Hàng</h5>
+
+                <!-- Tạm tính -->
                 <div class="d-flex justify-content-between mb-2">
-                    <span>Tạm tính:</span> <span>95.000₫</span>
+                    <span>Tạm tính:</span>
+                    <span>
+                <fmt:formatNumber value="${sessionScope.cart.totalPrice}"
+                                  type="currency"
+                                  currencySymbol="đ"
+                                  maxFractionDigits="0"/>
+            </span>
                 </div>
+
+                <!-- Phí ship -->
                 <div class="d-flex justify-content-between mb-2">
-                    <span>Phí giao hàng:</span> <span>15.000₫</span>
+                    <span>Phí giao hàng:</span>
+                    <span>
+                <fmt:formatNumber value="${shippingFee}"
+                                  type="currency"
+                                  currencySymbol="đ"
+                                  maxFractionDigits="0"/>
+            </span>
                 </div>
+
+                <!-- Tổng cộng -->
                 <div class="d-flex justify-content-between fw-bold border-top pt-2">
-                    <span>Tổng cộng:</span> <span>110.000₫</span>
+                    <span>Tổng cộng:</span>
+                    <span class="text-success">
+                <fmt:formatNumber
+                        value="${sessionScope.cart.totalPrice + shippingFee}"
+                        type="currency"
+                        currencySymbol="đ"
+                        maxFractionDigits="0"/>
+            </span>
                 </div>
+
+                <!-- Mã giảm giá (chưa xử lý logic) -->
                 <div class="mt-3">
                     <label class="form-label fw-semibold">Mã giảm giá</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nhập mã...">
-                        <button class="btn btn-outline-success">Áp dụng</button>
-                    </div>
+                    <form action="#" method="post" class="input-group">
+                        <input type="text" class="form-control" name="coupon"
+                               placeholder="Nhập mã...">
+                        <button class="btn btn-outline-success" disabled>
+                            Áp dụng
+                        </button>
+                    </form>
                 </div>
-                <a href="#checkout" class="btn btn-success w-100 mt-4 fw-semibold rounded-pill">
-                    <i class="bi bi-credit-card me-1"></i> Thanh Toán Ngay
-                </a>
+
+                <!-- Thanh toán -->
+                <c:choose>
+                    <c:when test="${sessionScope.cart == null || sessionScope.cart.empty}">
+                        <button class="btn btn-secondary w-100 mt-4 rounded-pill" disabled>
+                            Giỏ hàng trống
+                        </button>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/checkout"
+                           class="btn btn-success w-100 mt-4 fw-semibold rounded-pill">
+                            <i class="bi bi-credit-card me-1"></i> Thanh Toán Ngay
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- THÔNG TIN THANH TOÁN -->
 <section id="checkout" class="container my-5">
     <h3 class="text-center text-success fw-bold mb-4">Thông Tin Thanh Toán</h3>
     <div class="row justify-content-center">

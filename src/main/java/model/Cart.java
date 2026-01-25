@@ -1,8 +1,7 @@
-package cart;
+package model;
 
-import java.util.*;
 import java.io.Serializable;
-import model.Product;
+import java.util.*;
 
 public class Cart implements Serializable {
     Map<Integer, CartItem> data;
@@ -40,8 +39,17 @@ public class Cart implements Serializable {
         }
         return totalQuantity;
     }
-    public boolean update(int id, Product p){
+    public boolean update(int id, int q){
+        if (!data.containsKey(id)) return false;
 
-        return false;
+        if (q <= 0) {
+            data.remove(id);
+        } else {
+            data.get(id).setQuantity(q);
+        }
+        return true;
+    }
+    public boolean isEmpty() {
+        return data.isEmpty();
     }
 }

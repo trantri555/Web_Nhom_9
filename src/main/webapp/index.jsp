@@ -102,7 +102,8 @@
                                         <h2 class="fw-bold">Nước Ép Cam Tươi Mát</h2>
                                         <p>Giảm ngay <span class="text-warning fw-bold">20%</span> cho đơn hàng đầu
                                             tiên!</p>
-                                        <a href="products.html" class="btn btn-warning rounded-pill px-4">Mua Ngay</a>
+                                        <a href="${pageContext.request.contextPath}/products"
+                                            class="btn btn-warning rounded-pill px-4">Mua Ngay</a>
                                     </div>
                                 </div>
 
@@ -111,7 +112,8 @@
                                     <div class="carousel-caption  d-md-block">
                                         <h2 class="fw-bold">Tiện Lợi – Nhanh Chóng – Hiệu Quả</h2>
                                         <p>Mang đến trải nghiệm tốt nhất từng phút giây</p>
-                                        <a href="products.html" class="btn btn-warning rounded-pill px-4">Xem Thêm</a>
+                                        <a href="${pageContext.request.contextPath}/products"
+                                            class="btn btn-warning rounded-pill px-4">Xem Thêm</a>
                                     </div>
                                 </div>
 
@@ -121,7 +123,8 @@
                                     <div class="carousel-caption  d-md-block">
                                         <h2 class="fw-bold">Gọi Là Có – Giao Ngay Tận Cửa</h2>
                                         <p>Miễn phí giao hàng toàn TP.HCM trong hôm nay!</p>
-                                        <a href="product" class="btn btn-warning rounded-pill px-4">Đặt Ngay</a>
+                                        <a href="${pageContext.request.contextPath}/products"
+                                            class="btn btn-warning rounded-pill px-4">Đặt Ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +140,7 @@
                             </button>
                         </section>
 
-                        <a href="products.html"
+                        <a href="${pageContext.request.contextPath}/products"
                             class="btn btn-lg btn-primary-custom px-4 py-2 rounded-pill shadow animate__animated animate__fadeInUp">
                             ĐẶT HÀNG NGAY
                         </a>

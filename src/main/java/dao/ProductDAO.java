@@ -130,27 +130,29 @@ public class ProductDAO extends BaseDao {
     // .execute()
     // );
     // }
-    // public List<Product> getTop3BestSeller() {
-    //
-    // String sql = """
-    // SELECT
-    // p.id_product AS id,
-    // p.product_name AS name,
-    // SUM(od.quantity) AS sold
-    // FROM Order_Detail od
-    // JOIN Product p ON od.id_product = p.id_product
-    // JOIN Orders o ON od.id_order = o.id_order
-    // WHERE o.status = 'COMPLETED'
-    // GROUP BY p.id_product, p.product_name
-    // ORDER BY sold DESC
-    // LIMIT 3
-    // """;
-    //
-    // return get().withHandle(h ->
-    // h.createQuery(sql)
-    // .mapToBean(Product.class)
-    // .list()
-    // );
+    public List<Product> getTop3BestSeller() {
+
+        String sql = """
+                SELECT
+                    p.id AS id,
+                    p.product_name AS name,
+                    p.price,
+                    p.volume,
+                    p.supplier_name,
+                    p.quantity,
+                    pi.image_URL AS img,
+                    p.description
+                FROM products p
+                LEFT JOIN product_images pi ON p.image = pi.id
+                ORDER BY RAND()
+                LIMIT 8
+                """;
+
+        return get().withHandle(h -> h.createQuery(sql)
+                .mapToBean(Product.class)
+                .list());
+    }
+
     // // Sản phẩm liên quan (Random 8 sản phẩm khác)
     public List<Product> getRelatedProducts(int currentId) {
         String sql = """
@@ -311,4 +313,5 @@ public class ProductDAO extends BaseDao {
             return query.mapToBean(Product.class).list();
         });
     }
+
 }

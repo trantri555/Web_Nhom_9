@@ -80,4 +80,18 @@ public class ProductService {
         // return productDAO.getTop3BestSeller();
         // }
     }
+    // --- PHÂN TRANG ---
+    public int getTotalProducts() {
+        return pdao.getTotalProducts();
+    }
+
+    public List<Product> getProductsByPage(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        List<Product> list = pdao.getProductsByPage(offset, pageSize);
+        for (Product p : list) {
+            handleImage(p);
+        }
+        return list;
+    }
 }
+

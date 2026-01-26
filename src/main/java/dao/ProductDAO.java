@@ -28,10 +28,6 @@ public class ProductDAO extends BaseDao {
                 .list());
     }
 
-    public List<Product> getListProduct4() {
-        return getTopFeatured(4);
-    }
-
     public List<Product> getListProduct() {
         return getAll();
     }

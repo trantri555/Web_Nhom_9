@@ -40,6 +40,38 @@
                         background-color: #fff;
                         padding: 10px;
                     }
+
+                    /* --- PHÂN TRANG CIRCULAR --- */
+                    .pagination-custom .page-item {
+                        margin: 0 5px;
+                    }
+
+                    .pagination-custom .page-link {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50% !important;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 1px solid #dee2e6;
+                        color: #495057;
+                        font-weight: 500;
+                        transition: all 0.3s;
+                    }
+
+                    .pagination-custom .page-item.active .page-link {
+                        background-color: #0d3d28;
+                        /* Dark green matching request */
+                        border-color: #0d3d28;
+                        color: white;
+                        box-shadow: 0 4px 8px rgba(13, 61, 40, 0.3);
+                    }
+
+                    .pagination-custom .page-link:hover:not(.active) {
+                        background-color: #f8f9fa;
+                        border-color: #0d3d28;
+                        color: #0d3d28;
+                    }
                 </style>
             </head>
 
@@ -220,6 +252,39 @@
                                             </div>
                                         </c:forEach>
                                     </div>
+
+                                    <%-- PHÂN TRANG UI --%>
+                                        <c:if test="${totalPages > 1}">
+                                            <nav aria-label="Product pagination" class="mt-5">
+                                                <ul class="pagination pagination-custom justify-content-center">
+                                                    <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                        <a class="page-link"
+                                                            href="?page=1&minPrice=${currentMinPrice}&maxPrice=${currentMaxPrice}&volume=${currentVolume}&supplier=${currentSupplier}&sort=${currentSort}"
+                                                            title="Trang đầu">
+                                                            <i class="bi bi-chevron-double-left small"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <c:forEach begin="${currentPage - 2 < 1 ? 1 : currentPage - 2}"
+                                                        end="${currentPage + 2 > totalPages ? totalPages : currentPage + 2}"
+                                                        var="i">
+                                                        <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                                            <a class="page-link"
+                                                                href="?page=${i}&minPrice=${currentMinPrice}&maxPrice=${currentMaxPrice}&volume=${currentVolume}&supplier=${currentSupplier}&sort=${currentSort}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+
+                                                    <li
+                                                        class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                                        <a class="page-link"
+                                                            href="?page=${totalPages}&minPrice=${currentMinPrice}&maxPrice=${currentMaxPrice}&volume=${currentVolume}&supplier=${currentSupplier}&sort=${currentSort}"
+                                                            title="Trang cuối">
+                                                            <i class="bi bi-chevron-double-right small"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </c:if>
                                 </div>
                     </div>
                 </div>

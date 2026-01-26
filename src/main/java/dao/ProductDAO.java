@@ -197,7 +197,7 @@ public class ProductDAO extends BaseDao {
 
     // Lọc sản phẩm
     public List<Product> getFilteredProducts(Double minPrice, Double maxPrice, String volumeStr, String supplier,
-                                             String sortBy) {
+                                             String sortBy, int offset, int limit) {
         StringBuilder sql = new StringBuilder("""
                     SELECT
                         p.id AS id,
@@ -233,14 +233,18 @@ public class ProductDAO extends BaseDao {
             sql.append(" AND p.supplier_name = :supplier");
         }
 
-        // Sorting (Logic cũ)
+        // Sorting
         if ("priceAsc".equals(sortBy)) {
             sql.append(" ORDER BY p.price ASC");
         } else if ("priceDesc".equals(sortBy)) {
             sql.append(" ORDER BY p.price DESC");
         } else if ("nameAsc".equals(sortBy)) {
             sql.append(" ORDER BY p.product_name ASC");
+        } else {
+            sql.append(" ORDER BY p.id ASC"); // Default sort for stable pagination
         }
+
+        sql.append(" LIMIT :offset, :limit");
 
         Integer finalVolume = volume;
         return get().withHandle(handle -> {
@@ -253,7 +257,42 @@ public class ProductDAO extends BaseDao {
                 query.bind("volume", finalVolume);
             if (supplier != null && !supplier.isEmpty())
                 query.bind("supplier", supplier);
+            query.bind("offset", offset);
+            query.bind("limit", limit);
             return query.mapToBean(Product.class).list();
+        });
+    }
+
+    public int getTotalFilteredProducts(Double minPrice, Double maxPrice, String volumeStr, String supplier) {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products p WHERE 1=1 ");
+        if (minPrice != null)
+            sql.append(" AND p.price >= :minPrice");
+        if (maxPrice != null)
+            sql.append(" AND p.price <= :maxPrice");
+
+        Integer volume = null;
+        if (volumeStr != null && !volumeStr.isEmpty()) {
+            try {
+                volume = Integer.parseInt(volumeStr);
+                sql.append(" AND p.volume = :volume");
+            } catch (NumberFormatException e) {
+            }
+        }
+        if (supplier != null && !supplier.isEmpty())
+            sql.append(" AND p.supplier_name = :supplier");
+
+        Integer finalVolume = volume;
+        return get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+            if (minPrice != null)
+                query.bind("minPrice", minPrice);
+            if (maxPrice != null)
+                query.bind("maxPrice", maxPrice);
+            if (finalVolume != null)
+                query.bind("volume", finalVolume);
+            if (supplier != null && !supplier.isEmpty())
+                query.bind("supplier", supplier);
+            return query.mapTo(Integer.class).one();
         });
     }
 
@@ -313,6 +352,37 @@ public class ProductDAO extends BaseDao {
             }
             return query.mapToBean(Product.class).list();
         });
+    }
+
+    // --- PHÂN TRANG ---
+    public int getTotalProducts() {
+        String sql = "SELECT COUNT(*) FROM products";
+        return get().withHandle(handle -> handle.createQuery(sql)
+                .mapTo(Integer.class)
+                .one());
+    }
+
+    public List<Product> getProductsByPage(int offset, int limit) {
+        String sql = """
+                    SELECT
+                        p.id AS id,
+                        p.product_name AS name,
+                        p.price,
+                        p.volume,
+                        p.supplier_name,
+                        p.quantity,
+                        pi.image_URL AS img,
+                        p.description
+                    FROM products p
+                    LEFT JOIN product_images pi ON p.image = pi.id
+                    GROUP BY p.id
+                    LIMIT :offset, :limit
+                """;
+        return get().withHandle(handle -> handle.createQuery(sql)
+                .bind("offset", offset)
+                .bind("limit", limit)
+                .mapToBean(Product.class)
+                .list());
     }
 
 }

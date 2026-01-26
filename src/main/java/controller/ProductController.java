@@ -22,6 +22,19 @@ public class ProductController extends HttpServlet {
         String supplier = request.getParameter("supplier");
         String sortBy = request.getParameter("sort");
 
+        // --- PHÂN TRANG ---
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+        }
+        int pageSize = 12;
+        int offset = (page - 1) * pageSize;
+
         Double minPrice = null;
         Double maxPrice = null;
 
@@ -34,8 +47,10 @@ public class ProductController extends HttpServlet {
             // Ignore invalid input
         }
 
-        // 2. Gọi DAO để lấy danh sách đã lọc
-        List<Product> list = dao.getFilteredProducts(minPrice, maxPrice, volumeStr, supplier, sortBy);
+        // 2. Gọi DAO để lấy danh sách đã lọc (có phân trang)
+        List<Product> list = dao.getFilteredProducts(minPrice, maxPrice, volumeStr, supplier, sortBy, offset, pageSize);
+        int totalProducts = dao.getTotalFilteredProducts(minPrice, maxPrice, volumeStr, supplier);
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
         // 3. Lấy danh sách volume và supplier để hiển thị checkbox/select
         List<Integer> volumeList = dao.getAllVolumes();
@@ -45,6 +60,10 @@ public class ProductController extends HttpServlet {
         request.setAttribute("productList", list);
         request.setAttribute("volumeList", volumeList);
         request.setAttribute("supplierList", supplierList);
+
+        // Phân trang
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
 
         // Giữ lại giá trị filter để điền lại vào form
         request.setAttribute("currentMinPrice", minPriceStr);

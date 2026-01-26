@@ -15,11 +15,32 @@ import java.util.List;
 public class ListProductController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ProductService ps = new ProductService();
-        List<Product> list = ps.getListProduct();
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("D:\\Web_Nhom_9\\src\\main\\webapp\\WEB-INF\\user\\products.jsp").forward(request,response);
 
+        // 1. Lấy trang hiện tại
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+        }
 
+        int pageSize = 12; // 12 sản phẩm mỗi trang
+
+        // 2. Lấy dữ liệu
+        List<Product> list = ps.getProductsByPage(page, pageSize);
+        int totalProducts = ps.getTotalProducts();
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+
+        // 3. Set attributes
+        request.setAttribute("productList", list);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
+        // 4. Forward
+        request.getRequestDispatcher("/view/user/products.jsp").forward(request, response);
     }
 
     public void destroy() {

@@ -5,6 +5,7 @@ import model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+
 import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/login")
@@ -17,7 +18,12 @@ public class LoginServlet extends HttpServlet {
         // 1. Kiểm tra nếu đã có Session rồi thì không cần check Cookie nữa
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("auth") != null) {
-            response.sendRedirect("products");
+            User u = (User) session.getAttribute("auth");
+            if (u.getRole() == 1) {
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/products");
+            }
             return;
         }
 
@@ -36,7 +42,11 @@ public class LoginServlet extends HttpServlet {
                 User u = dao.login(cuser, cpass);
                 if (u != null) {
                     request.getSession().setAttribute("auth", u);
-                    response.sendRedirect("products");
+                    if (u.getRole() == 1) {
+                        response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/products");
+                    }
                     return;
                 }
             }
@@ -75,7 +85,12 @@ public class LoginServlet extends HttpServlet {
             }
             response.addCookie(uCookie);
             response.addCookie(pCookie);
-            response.sendRedirect("products");
+            if (u.getRole() == 1) {
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/products");
+            }
+            return;
         } else {
             request.setAttribute("mess", "Sai tài khoản hoặc mật khẩu!");
             request.setAttribute("loginEmail", user); // Keep input

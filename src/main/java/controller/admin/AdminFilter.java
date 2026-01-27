@@ -15,14 +15,20 @@ public class AdminFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-
         HttpSession session = request.getSession(false);
 
-        if (session == null || !"admin".equals(session.getAttribute("role"))) {
-            request.getRequestDispatcher("/403.jsp").forward(request, response);
+        // 1. Lấy đối tượng User từ session thông qua key "auth"
+        model.User user = (session != null) ? (model.User) session.getAttribute("auth") : null;
+
+        // 2. Kiểm tra: Nếu chưa đăng nhập HOẶC không phải là Admin (role != 1)
+        if (user == null || user.getRole() != 1) {
+            // Chuyển hướng về trang login hoặc forward sang 403
+            // Ở đây tôi dùng redirect về login để an toàn
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        chain.doFilter(req, res); // cho đi tiếp
+        // 3. Nếu mọi thứ ổn, cho phép đi tiếp
+        chain.doFilter(req, res);
     }
 }

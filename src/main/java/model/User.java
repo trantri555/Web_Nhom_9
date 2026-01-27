@@ -6,11 +6,11 @@ public class User {
     private String password;
     private String fullName;
     private String email;
-    private int role; // 1: Admin, 0: User
+    private String role; // 1: Admin, 0: User
 
     public User() {}
 
-    public User(int id, String username, String password, String fullName, String email, int role) {
+    public User(int id, String username, String password, String fullName, String email, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -30,6 +30,6 @@ public class User {
     public void setFullName(String fullName) { this.fullName = fullName; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-    public int getRole() { return role; }
-    public void setRole(int role) { this.role = role; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }

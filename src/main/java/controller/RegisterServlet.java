@@ -67,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
         }
 
         //  Lưu user
-        User newUser = new User(0, email, password, "", email, 0);
+        User newUser = new User(0, email, password, "", email, "user");
         userDAO.register(newUser);
 
         // Thông báo Thành công va chuyen ve trang san pham

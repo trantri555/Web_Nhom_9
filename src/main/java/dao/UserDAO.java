@@ -11,9 +11,9 @@ public class UserDAO {
     static {
         // Khởi tạo một số tài khoản mẫu
         // Cấu trúc: id, username, password, fullName, email, role
-        listUsers.add(new User(1, "admin", "123", "Quản Trị Viên", "admin@gmail.com", 1));
-        listUsers.add(new User(2, "user", "123", "Khách Hàng A", "user@gmail.com", 0));
-        listUsers.add(new User(3, "test@gmail.com", "123", "Người dùng Test", "test@gmail.com", 0));
+        listUsers.add(new User(1, "admin", "123", "Quản Trị Viên", "admin@gmail.com", "admin"));
+        listUsers.add(new User(2, "user", "123", "Khách Hàng A", "user@gmail.com", "user"));
+        listUsers.add(new User(3, "test@gmail.com", "123", "Người dùng Test", "test@gmail.com", "user"));
     }
 
     public User login(String user, String pass) {
@@ -38,7 +38,7 @@ public class UserDAO {
     // Lưu user mới
     public void register(User user) {
         user = new User(AUTO_ID++, user.getUsername(),
-                user.getPassword(), "User mới", user.getEmail(), 0);
+                user.getPassword(), "User mới", user.getEmail(), "user");
         listUsers.add(user);
     }
 }

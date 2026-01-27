@@ -38,7 +38,6 @@ public class CheckoutServlet extends HttpServlet {
 
             // ===== 1. Tạo Order =====
             Order order = new Order();
-            order.setCustomerName(customerName);
             order.setTotalPrice(cart.getTotalPrice());
             order.setOrderDate(new Date());
 

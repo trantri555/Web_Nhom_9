@@ -91,13 +91,35 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/home">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-semibold" href="${pageContext.request.contextPath}/product">Sản Phẩm</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/about">Giới thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/home">Trang
+                        Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-semibold"
+                                            href="${pageContext.request.contextPath}/product">Sản phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold"
+                                            href="${pageContext.request.contextPath}/about">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold"
+                                            href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
                 </ul>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-warning rounded-pill ms-lg-3 fw-semibold shadow-sm">Đăng Nhập</a>
-                <a href="${pageContext.request.contextPath}/order" class="btn btn-warning rounded-pill ms-lg-3 fw-semibold shadow-sm">
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="loginButtonContainer">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Đăng Nhập</a>
+                        </div>
+
+                    </c:otherwise>
+                </c:choose>
+
+                <a href="${pageContext.request.contextPath}/order"
+                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -138,11 +160,13 @@
                             <label class="form-label fw-bold text-dark small text-uppercase">Khoảng giá</label>
                             <div class="input-group input-group-sm mb-2">
                                 <span class="input-group-text bg-white">₫</span>
-                                <input type="number" name="minPrice" class="form-control" placeholder="Từ" value="${currentMinPrice}">
+                                <input type="number" name="minPrice" class="form-control" placeholder="Từ"
+                                       value="${currentMinPrice}">
                             </div>
                             <div class="input-group input-group-sm">
                                 <span class="input-group-text bg-white">₫</span>
-                                <input type="number" name="maxPrice" class="form-control" placeholder="Đến" value="${currentMaxPrice}">
+                                <input type="number" name="maxPrice" class="form-control" placeholder="Đến"
+                                       value="${currentMaxPrice}">
                             </div>
                         </div>
 
@@ -294,8 +318,8 @@
         </div>
     </div>
 </footer>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
 
+</body>
 </html>

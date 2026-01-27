@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -40,19 +41,26 @@
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
-                <div id="loginButtonContainer">
-                    <a href="login"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Đăng Nhập</a>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="loginButtonContainer">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Đăng Nhập</a>
+                        </div>
 
-                <div id="userInfoContainer" class="d-none">
-                    <a href="profile"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Thông Tin</a>
-                </div>
+                    </c:otherwise>
+                </c:choose>
 
-                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                <a href="${pageContext.request.contextPath}/order"
+                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -87,7 +95,7 @@
 
             <div class="tab-pane fade ${activeTab == 'register' ? '' : 'show active'}" id="login"
                  role="tabpanel" aria-labelledby="login-tab">
-                <form action="login" id="loginForm" method="post">
+                <form action="${pageContext.request.contextPath}/login" id="loginForm" method="post">
 
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label fw-semibold">Email hoặc Tên đăng
@@ -102,7 +110,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                            <input class="form-check-input" type="checkbox" value="" id="rememberMe" name="remember">
                             <label class="form-check-label" for="rememberMe">
                                 Ghi nhớ đăng nhập
                             </label>
@@ -261,14 +269,5 @@
     </div>
 </footer>
 <script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
-<script type="module">
-    import { updateAuthUI } from '../../js/auth.js';
-
-    // Kiểm tra session 'auth' (đối tượng User bạn lưu khi đăng nhập thành công)
-    const isLoggedIn = ${sessionScope.auth != null ? 'true' : 'false'};
-
-    // Thực hiện ẩn hiện ngay khi nạp bất kỳ trang nào có chứa Header
-    updateAuthUI(isLoggedIn);
-</script>
 </body>
 </html>

@@ -51,17 +51,23 @@
                            href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
-                <div id="loginButtonContainer">
-                    <a href="login"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Đăng Nhập</a>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="loginButtonContainer">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Đăng Nhập</a>
+                        </div>
 
-                <div id="userInfoContainer" class="d-none">
-                    <a href="profile"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Thông Tin</a>
-                </div>
+                    </c:otherwise>
+                </c:choose>
 
                 <a href="${pageContext.request.contextPath}/order"
                    class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
@@ -156,137 +162,72 @@
                 Những lựa chọn được yêu thích nhất tại Juicy
             </p>
         </div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                <c:forEach items="${featuredList}" var="p">
-                    <div class="col">
-                        <div class="card product-card h-100 text-center">
-                            <img src="${p.img}" class="card-img-top" alt="${p.name}"
-                                 onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'"/>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            <c:forEach items="${featuredList}" var="p">
+                <div class="col">
+                    <div class="card product-card h-100 text-center">
+                        <img src="${p.img}" class="card-img-top" alt="${p.name}"
+                             onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'"/>
 
-                            <div class="card-body d-flex flex-column">
-                                <h6 class="text-muted small">${p.volume}ml</h6>
-                                <h5 class="card-title fw-bold fs-6">${p.name}</h5>
-                                <p class="card-text text-danger fw-bold fs-5 my-2">
-                                    <fmt:formatNumber value="${p.price}" type="currency"
-                                                      currencySymbol="đ" maxFractionDigits="0"/>
-                                </p>
-                                <div class="mt-auto pt-3">
-                                    <a href="${pageContext.request.contextPath}/product-detail?id=${p.id}"
-                                       class="btn btn-sm btn-outline-success rounded-pill px-3">Chi
-                                        tiết</a>
-                                    <button
-                                            class="btn btn-sm btn-primary-custom rounded-pill px-3">Thêm
-                                        vào giỏ
-                                    </button>
-                                </div>
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="text-muted small">${p.volume}ml</h6>
+                            <h5 class="card-title fw-bold fs-6">${p.name}</h5>
+                            <p class="card-text text-danger fw-bold fs-5 my-2">
+                                <fmt:formatNumber value="${p.price}" type="currency"
+                                                  currencySymbol="đ" maxFractionDigits="0"/>
+                            </p>
+                            <div class="mt-auto pt-3">
+                                <a href="${pageContext.request.contextPath}/product-detail?id=${p.id}"
+                                   class="btn btn-sm btn-outline-success rounded-pill px-3">Chi
+                                    tiết</a>
+                                <button
+                                        class="btn btn-sm btn-primary-custom rounded-pill px-3">Thêm
+                                    vào giỏ
+                                </button>
                             </div>
                         </div>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </section>
 
-<section
-        class="container-fluid bg-light py-5 mb-5">
-    <div
-            class="container">
-        <h2
-                class="text-center mb-4 text-secondary fw-bold">
-            VÌ
-            SAO
-            CHỌN
-            JUICY?
+<section class="container-fluid bg-light py-5 mb-5">
+    <div class="container">
+        <h2 class="text-center mb-4 text-secondary fw-bold">
+            VÌ SAO CHỌN JUICY?
         </h2>
-        <div
-                class="row text-center">
-            <div
-                    class="col-md-4 mb-3">
-                <div
-                        class="p-4 border rounded shadow-sm h-100">
-                    <i
-                            class="bi bi-patch-check-fill text-success h1"></i>
-                    <h3
-                            class="text-success">
-                        Tiêu
-                        Chuẩn
-                        GlobalGap
+        <div class="row text-center">
+            <div class="col-md-4 mb-3">
+                <div class="p-4 border rounded shadow-sm h-100">
+                    <i class="bi bi-patch-check-fill text-success h1"></i>
+                    <h3 class="text-success">
+                        Tiêu Chuẩn GlobalGap
                     </h3>
-                    <p>
-                        Nguyên
-                        liệu
-                        sạch,
-                        tươi,
-                        an
-                        toàn
-                        tuyệt
-                        đối,
-                        không
-                        chất
-                        bảo
-                        quản.
+                    <p>Nguyên liệu sạch, tươi, an toàn tuyệt đối, không chất bảo quản.
                     </p>
                 </div>
             </div>
-            <div
-                    class="col-md-4 mb-3">
-                <div
-                        class="p-4 border rounded shadow-sm h-100">
-                    <i
-                            class="bi bi-truck text-warning h1"></i>
-                    <h3
-                            class="text-success">
-                        Giao
-                        Hàng
-                        Tốc
-                        Độ
+            <div class="col-md-4 mb-3">
+                <div class="p-4 border rounded shadow-sm h-100">
+                    <i class="bi bi-truck text-warning h1"></i>
+                    <h3 class="text-success">
+                        Giao Hàng Tốc Độ
                     </h3>
                     <p>
-                        Giao
-                        hàng
-                        nhanh
-                        trong
-                        ngày,
-                        bảo
-                        quản
-                        lạnh
-                        giữ
-                        trọn
-                        độ
-                        tươi
-                        ngon.
+                        Giao hàng nhanh trong ngày, bảo quản lạnh trọn độ tươi ngon.
                     </p>
                 </div>
             </div>
-            <div
-                    class="col-md-4 mb-3">
-                <div
-                        class="p-4 border rounded shadow-sm h-100">
-                    <i
-                            class="bi bi-shop text-primary-custom h1"></i>
-                    <h3
-                            class="text-success">
-                        Sản
-                        Phẩm
-                        Đa
-                        Dạng
+            <div class="col-md-4 mb-3">
+                <div class="p-4 border rounded shadow-sm h-100">
+                    <i class="bi bi-shop text-primary-custom h1"></i>
+                    <h3 class="text-success">
+                        Sản Phẩm Đa Dạng
                     </h3>
                     <p>
-                        Đa
-                        dạng
-                        trái
-                        cây
-                        nội
-                        địa
-                        và
-                        nhập
-                        khẩu,
-                        nước
-                        ép
-                        và
-                        sinh
-                        tố
-                        tươi.
+                        Đa dạng trái cây nội địa và nhập khẩu, nước ép và sinh tố tươi.
                     </p>
                 </div>
             </div>
@@ -294,271 +235,99 @@
     </div>
 </section>
 <!-- GIỚI THIỆU -->
-<section
-        id="gioi-thieu"
-        class="about-section py-5">
-    <div
-            class="container">
-        <div
-                class="row align-items-center">
-            <div
-                    class="col-md-6 mb-4 mb-md-0">
-                <img src="images/banner/about-fruit.jpg"
-                     class="img-fluid rounded-4 shadow"
-                     alt="Giới thiệu Juicy">
+<section id="gioi-thieu" class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="images/banner/about-fruit.jpg" class="img-fluid rounded-4 shadow" alt="Giới thiệu Juicy">
             </div>
-            <div
-                    class="col-md-6">
-                <h2
-                        class="fw-bold text-success mb-3">
-                    Giới
-                    Thiệu
-                    Về
-                    Juicy
-                    🍊
+            <div class="col-md-6">
+                <h2 class="fw-bold text-success mb-3">
+                    Giới Thiệu Về Juicy 🍊
                 </h2>
-                <p
-                        class="lead">
-                    <strong>Juicy</strong>
-                    là
-                    thương
-                    hiệu
-                    chuyên
-                    cung
-                    cấp
-                    <em>trái
-                        cây
-                        tươi,
-                        nước
-                        ép
-                        lạnh,
-                        và
-                        sinh
-                        tố
-                        nguyên
-                        chất</em>,
-                    mang
-                    đến
-                    nguồn
-                    dinh
-                    dưỡng
-                    lành
-                    mạnh
-                    từ
-                    thiên
-                    nhiên
-                    cho
-                    mọi
-                    gia
-                    đình
-                    Việt.
+                <p class="lead">
+                    <strong>Juicy</strong>là thương hiệu chuyên cung cấp
+                    <em>trái cây tươi, nước ép lạnh, và sinh tố nguyên chất</em>,
+                    mang đến nguồn dinh dưỡng lành mạnh từ thiên nhiên cho mọi gia đình Việt.
                 </p>
-                <p>
-                    Với
-                    cam
-                    kết
-                    “<strong>Tươi
-                    ngon
-                    –
-                    Tận
-                    tâm
-                    –
-                    Tự
-                    nhiên</strong>”,
-                    chúng
-                    tôi
-                    lựa
-                    chọn
-                    nguyên
-                    liệu
-                    từ
-                    các
-                    nông
-                    trại
-                    đạt
-                    chuẩn
-                    <span
-                            class="text-success fw-semibold">GlobalGAP</span>,
-                    đảm
-                    bảo
-                    an
-                    toàn
-                    và
-                    chất
-                    lượng
-                    cao
-                    nhất.
+                <p>Với cam kết “<strong>Tươi ngon – Tận tâm – Tự nhiên</strong>”, chúng tôi lựa chọn nguyên liệu từ các
+                    nông trại đạt chuẩn
+                    <span class="text-success fw-semibold">GlobalGAP</span>, đảm bảo an toàn và chất lượng cao nhất.
                 </p>
-                <ul
-                        class="list-unstyled">
+                <ul class="list-unstyled">
                     <li>
-                        <i
-                                class="bi bi-check-circle-fill text-success me-2"></i>100%
-                        trái
-                        cây
-                        sạch,
-                        không
-                        chất
-                        bảo
-                        quản
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>100% trái cây sạch, không chất bảo quản
                     </li>
                     <li>
-                        <i
-                                class="bi bi-check-circle-fill text-success me-2"></i>Giao
-                        hàng
-                        nhanh
-                        trong
-                        2
-                        giờ
-                        tại
-                        TP.HCM
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>Giao hàng nhanh trong 2 giờ tại TP.HCM
                     </li>
                     <li>
-                        <i
-                                class="bi bi-check-circle-fill text-success me-2"></i>Nước
-                        ép
-                        cold-press
-                        giữ
-                        nguyên
-                        dưỡng
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>Nước ép cold-press giữ nguyên dưỡng
                         chất
                     </li>
                 </ul>
-                <a href="about.html"
-                   class="btn btn-primary-custom mt-3">Khám
-                    phá
-                    thêm</a>
+                <a href="about.html" class="btn btn-primary-custom mt-3">Khám phá thêm</a>
             </div>
         </div>
     </div>
 </section>
 
-<footer
-        class="bg-dark text-white pt-5 pb-4">
-    <div
-            class="container text-center text-md-start">
-        <div
-                class="row text-center text-md-start">
-            <div
-                    class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5
-                        class="text-uppercase mb-4 fw-bold text-success">
-                    JUICY
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row text-center text-md-start">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY
                 </h5>
-                <p>Mang
-                    đến
-                    nguồn
-                    dinh
-                    dưỡng
-                    từ
-                    thiên
-                    nhiên,
-                    tốt
-                    cho
-                    sức
-                    khỏe.
+                <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.
                 </p>
             </div>
 
-            <div
-                    class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <h5
-                        class="text-uppercase mb-4 fw-bold text-success">
-                    Danh
-                    Mục
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục
                 </h5>
                 <p>
-                    <a href="products.html"
-                       class="text-white text-decoration-none">Nước
-                        Ép</a>
+                    <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
                 </p>
                 <p>
-                    <a href="products.html"
-                       class="text-white text-decoration-none">Trái
-                        Cây
-                        Văn
-                        Phòng</a>
+                    <a href="products.html" class="text-white text-decoration-none">Trái Cây Văn Phòng</a>
                 </p>
                 <p>
-                    <a href="404.html"
-                       class="text-white text-decoration-none">Khuyến
-                        Mãi</a>
+                    <a href="404.html" class="text-white text-decoration-none">Khuyến Mãi</a>
                 </p>
             </div>
 
-            <div
-                    class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5
-                        class="text-uppercase mb-4 fw-bold text-success">
-                    Liên
-                    Hệ
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ
                 </h5>
                 <p>
-                    <i
-                            class="bi bi-geo-alt-fill me-2"></i>
-                    Đường
-                    số
-                    7,
-                    Đông
-                    Hoà,
-                    Thủ
-                    Đức,
-                    Thành
-                    phố
-                    Hồ
-                    Chí
-                    Minh,
-                    Việt
+                    <i class="bi bi-geo-alt-fill me-2"></i>Đường số 7, Đông Hoà, Thủ Đức, Thành phố Hồ Chí Minh, Việt
                     Nam
                 </p>
-                <p><i
-                        class="bi bi-envelope-fill me-2"></i>
+                <p><i class="bi bi-envelope-fill me-2"></i>
                     order@juicy.vn
                 </p>
-                <p><i
-                        class="bi bi-telephone-fill me-2"></i>
-                    0347
-                    270
-                    120
+                <p><i class="bi bi-telephone-fill me-2"></i>0347 270 120
                 </p>
             </div>
-            <div
-                    class="col-md-3 mb-4">
-                <h5
-                        class="text-uppercase fw-bold text-success">
-                    Theo
-                    Dõi
-                    Chúng
-                    Tôi
+            <div class="col-md-3 mb-4">
+                <h5 class="text-uppercase fw-bold text-success">
+                    Theo Dõi Chúng Tôi
                 </h5>
-                <a href="#"
-                   class="text-white me-3"><i
-                        class="bi bi-facebook"></i></a>
-                <a href="#"
-                   class="text-white me-3"><i
-                        class="bi bi-instagram"></i></a>
-                <a href="#"
-                   class="text-white me-3"><i
-                        class="bi bi-tiktok"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
             </div>
         </div>
-        <div
-                class="row mt-3">
-            <div
-                    class="col-md-12 text-center pt-3 border-top border-secondary">
-                <p>© 2024
-                    Juicy.
-                    All
-                    Rights
-                    Reserved.
+        <div class="row mt-3">
+            <div class="col-md-12 text-center pt-3 border-top border-secondary">
+                <p>© 2024 Juicy. All Rights Reserved.
                 </p>
             </div>
         </div>
     </div>
 </footer>
-<script
-        type="module"
-        src="js/init.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
+
 </body>
 
 </html>

@@ -8,7 +8,7 @@ import util.DBContext;
 
 public class UserDAO {
     // Check login: Join account and user tables
-    public User checkLogin(String emailOrUsername, String password) {
+    public User login(String emailOrUsername, String password) {
         String query = "SELECT a.id, a.username, a.password, a.role, u.name, u.email " +
                 "FROM account a LEFT JOIN user u ON a.id = u.id_account " +
                 "WHERE (a.username = :user OR u.email = :user) AND a.password = :pass";

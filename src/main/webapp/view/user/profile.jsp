@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="/">Trang Chủ</a>
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/home">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
@@ -40,19 +41,26 @@
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
-                <div id="loginButtonContainer">
-                    <a href="login"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Đăng Nhập</a>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="loginButtonContainer">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Đăng Nhập</a>
+                        </div>
 
-                <div id="userInfoContainer" class="d-none">
-                    <a href="profile"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Thông Tin</a>
-                </div>
+                    </c:otherwise>
+                </c:choose>
 
-                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                <a href="${pageContext.request.contextPath}/order"
+                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -100,7 +108,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary-custom fw-bold">Cập nhật thông tin</button>
-                        <a href="#" id="logoutButton" class="btn btn-outline-danger fw-bold">Đăng xuất</a></div>
+                        <a href="${pageContext.request.contextPath}/logout" id="logoutButton" class="btn btn-outline-danger fw-bold">Đăng xuất</a></div>
                 </form>
             </div>
         </div>
@@ -141,6 +149,6 @@
         </div>
     </div>
 </footer>
-<script type="module" src="js/init.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
 </body>
 </html>

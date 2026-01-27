@@ -1,5 +1,6 @@
 package controller.admin;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -7,22 +8,14 @@ import java.io.IOException;
 
 @WebServlet("/admin/dashboard")
 public class DashboardServlet extends HttpServlet {
-    // private final ProductService productService = new ProductService();
-    // protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-    // throws ServletException, IOException {
-    //
-    // req.setAttribute("todayOrders", 32);
-    // req.setAttribute("weekOrders", 180);
-    // req.setAttribute("monthOrders", 980);
-    //
-    // // Top 3 bán chạy
-    // req.setAttribute("topProducts",
-    // productService.getTop3BestSeller());
-    //
-    // req.getRequestDispatcher("/views/admin-dashboard.jsp")
-    // .forward(req, resp);
-    //
-    // req.getRequestDispatcher("/views/admin-dashboard.jsp")
-    // .forward(req, resp);
-    // }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        // Giả lập dữ liệu hoặc gọi Service ở đây
+        req.setAttribute("todayOrders", 32);
+
+        // Đảm bảo đường dẫn này trỏ đúng đến file .jsp admin của bạn
+        req.getRequestDispatcher("/view/admin/admin-dashboard.jsp").forward(req, resp);
+    }
 }

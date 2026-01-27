@@ -5,11 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBContext {
-    private static final String URL = "jdbc:mysql://localhost:3306/juicy_db"
+    private static final String URL = "jdbc:mysql://localhost:3306/juicy_web"
             + "?useSSL=false&allowPublicKeyRetrieval=true"
             + "&serverTimezone=Asia/Ho_Chi_Minh";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "Hockun001$";
 
     // Thêm biến static để dùng chung một đối tượng Jdbi duy nhất (Singleton)
     private static Jdbi jdbi;

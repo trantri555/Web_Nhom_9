@@ -246,10 +246,13 @@
                                     <a href="${pageContext.request.contextPath}/product-detail?id=${p.id}"
                                        class="btn btn-sm btn-outline-success rounded-pill px-3">Chi
                                         tiết</a>
-                                    <button
-                                            class="btn btn-sm btn-primary-custom rounded-pill px-3">Thêm
-                                        vào giỏ
-                                    </button>
+                                    <form action="/cart" method="post">
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="hidden" name="productId" value="${p.id}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" class="btn btn-sm btn-primary-custom rounded-pill px-3" >Thêm
+                                            vào giỏ</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

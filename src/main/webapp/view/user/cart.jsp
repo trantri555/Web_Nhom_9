@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <html lang="vi">
 <head>
@@ -43,26 +43,19 @@
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
-                <c:choose>
-                    <c:when test="${not empty sessionScope.auth}">
-                        <div id="userInfoContainer">
-                            <a href="${pageContext.request.contextPath}/profile"
-                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                                Thông Tin</a>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div id="loginButtonContainer">
-                            <a href="${pageContext.request.contextPath}/login"
-                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                                Đăng Nhập</a>
-                        </div>
+                <div id="loginButtonContainer">
+                    <a href="login"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Đăng Nhập</a>
+                </div>
 
-                    </c:otherwise>
-                </c:choose>
+                <div id="userInfoContainer" class="d-none">
+                    <a href="profile"
+                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                        Thông Tin</a>
+                </div>
 
-                <a href="${pageContext.request.contextPath}/order"
-                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -91,8 +84,9 @@
 
                     <tbody>
                     <c:choose>
-                        <!-- Giỏ hàng trống -->
-                        <c:when test="${sessionScope.cart == null || sessionScope.cart.allItems.empty}">
+
+                        <%-- Đưa comment vào trong hoặc xóa đi --%>
+                        <c:when test="${empty sessionScope.cart || empty sessionScope.cart.allItems}">
                             <tr>
                                 <td colspan="5" class="text-center text-muted py-4">
                                     🛒 Giỏ hàng đang trống
@@ -100,14 +94,14 @@
                             </tr>
                         </c:when>
 
-                        <!-- Có sản phẩm -->
+                        <%-- Có sản phẩm --%>
                         <c:otherwise>
-                            <c:forEach var="item" items="${sessionScope.cart.allItems}">
+                            <c:forEach items="${sessionScope.cart.allItems}" var="item">
                                 <tr>
-                                    <!-- Sản phẩm -->
+                                        <%-- Sản phẩm --%>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="${item.product.image}"
+                                            <img src="${item.product.img}"
                                                  width="60"
                                                  class="rounded me-3"
                                                  alt="${item.product.name}">
@@ -122,7 +116,7 @@
                                         </div>
                                     </td>
 
-                                    <!-- Số lượng -->
+                                        <%-- Số lượng --%>
                                     <td class="text-center">
                                         <form action="${pageContext.request.contextPath}/cart"
                                               method="post"
@@ -140,7 +134,7 @@
                                         </form>
                                     </td>
 
-                                    <!-- Đơn giá -->
+                                        <%-- Đơn giá --%>
                                     <td class="text-end">
                                         <fmt:formatNumber value="${item.price}"
                                                           type="currency"
@@ -148,7 +142,7 @@
                                                           maxFractionDigits="0"/>
                                     </td>
 
-                                    <!-- Thành tiền -->
+                                        <%-- Thành tiền --%>
                                     <td class="text-end fw-bold text-success">
                                         <fmt:formatNumber value="${item.totalPrice}"
                                                           type="currency"
@@ -156,7 +150,7 @@
                                                           maxFractionDigits="0"/>
                                     </td>
 
-                                    <!-- Xóa -->
+                                        <%-- Xóa --%>
                                     <td class="text-end">
                                         <form action="${pageContext.request.contextPath}/cart"
                                               method="post">
@@ -232,7 +226,7 @@
 
                 <!-- Thanh toán -->
                 <c:choose>
-                    <c:when test="${sessionScope.cart == null || sessionScope.cart.empty}">
+                    <c:when test="${sessionScope.cart == null || empty sessionScope.cart}">
                         <button class="btn btn-secondary w-100 mt-4 rounded-pill" disabled>
                             Giỏ hàng trống
                         </button>
@@ -258,8 +252,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Địa chỉ giao hàng</label>
-                            <input type="text" class="form-control" placeholder="Số nhà, đường, phường, quận..."
-                                   required>
+                            <input type="text" class="form-control" placeholder="Số nhà, đường, phường, quận..." required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Số điện thoại</label>
@@ -283,58 +276,55 @@
                     </form>
                 </div>
             </div>
-
         </section>
-    </div>
-</section>
 
-<footer class="bg-dark text-white pt-5 pb-4">
-    <div class="container text-center text-md-start">
-        <div class="row text-center text-md-start">
-            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
-                <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
-            </div>
+        <footer class="bg-dark text-white pt-5 pb-4">
+            <div class="container text-center text-md-start">
+                <div class="row text-center text-md-start">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
+                        <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
+                    </div>
 
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục</h5>
-                <p>
-                    <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
-                </p>
-                <p>
-                    <a href="products.html" class="text-white text-decoration-none"
-                    >Trái Cây Văn Phòng</a
-                    >
-                </p>
-                <p>
-                    <a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a>
-                </p>
-            </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục</h5>
+                        <p>
+                            <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
+                        </p>
+                        <p>
+                            <a href="products.html" class="text-white text-decoration-none"
+                            >Trái Cây Văn Phòng</a
+                            >
+                        </p>
+                        <p>
+                            <a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a>
+                        </p>
+                    </div>
 
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
-                <p>
-                    <i class="bi bi-geo-alt-fill me-2"></i> Đường số 7, Đông Hoà, Thủ
-                    Đức, Thành phố Hồ Chí Minh, Việt Nam
-                </p>
-                <p><i class="bi bi-envelope-fill me-2"></i> order@juicy.vn</p>
-                <p><i class="bi bi-telephone-fill me-2"></i> 0347 270 120</p>
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
+                        <p>
+                            <i class="bi bi-geo-alt-fill me-2"></i> Đường số 7, Đông Hoà, Thủ
+                            Đức, Thành phố Hồ Chí Minh, Việt Nam
+                        </p>
+                        <p><i class="bi bi-envelope-fill me-2"></i> order@juicy.vn</p>
+                        <p><i class="bi bi-telephone-fill me-2"></i> 0347 270 120</p>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <h5 class="text-uppercase fw-bold text-success">Theo Dõi Chúng Tôi</h5>
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center pt-3 border-top border-secondary">
+                        <p>&copy; 2024 Juicy. All Rights Reserved.</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <h5 class="text-uppercase fw-bold text-success">Theo Dõi Chúng Tôi</h5>
-                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12 text-center pt-3 border-top border-secondary">
-                <p>&copy; 2024 Juicy. All Rights Reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer>
-<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
+        </footer>
+        <script type="module" src="js/init.js"></script>
 </body>
 </html>
 

@@ -22,58 +22,72 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(">>> REGISTER SERVLET CALLED");
-
+        String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
-        String fullName= request.getParameter("fullName");
-        // Kiểm tra form
-        //  Kiểm tra email tồn tại
+        String fullName = request.getParameter("fullName");
+
+        Map<String, String> errors = new HashMap<>(); // Lưu các lỗi
+
+        // 1. Check existing user/email
         if (userDAO.isUserEmailExists(email)) {
-            request.setAttribute("error", "Tài khoản đã tồn tại!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-            return;
+            errors.put("email", "Email đã tồn tại!");
         }
-        Map<String, String> errors = new HashMap<>(); //Lưu các lỗi
-        //Kiểm tra mật khẩu
+        if (userDAO.isUserNameExists(username)) {
+            errors.put("username", "Tên tài khoản đã tồn tại!");
+        }
+
+        // 2. Validate password
         if (password == null || password.isEmpty()) {
             errors.put("password", "Mật khẩu không được để trống");
         } else if (!isStrongPassword(password)) {
-            errors.put("password",
-                    "Mật khẩu ≥ 8 ký tự, có chữ hoa và ký tự đặc biệt");
+            errors.put("password", "Mật khẩu ≥ 8 ký tự, có chữ hoa và ký tự đặc biệt");
+
         } else if (!password.equals(confirmPassword)) {
-            errors.put("confirmPassword","Nhập lại mật khẩu chưa chính xác");
+            errors.put("confirmPassword", "Nhập lại mật khẩu chưa chính xác");
         }
 
-        // Có lỗi → quay lại form
+        // 3. Return if errors
         if (!errors.isEmpty()) {
             request.setAttribute("errors", errors);
-            request.setAttribute("oldUsername", email);
+            request.setAttribute("oldUsername", username);
             request.setAttribute("oldFullName", fullName);
             request.setAttribute("oldEmail", email);
 
+            // Switch to register tab automatically using JS or just show errors
+            // Switch to register tab automatically
+            request.setAttribute("activeTab", "register");
+            request.setAttribute("error", "Vui lòng kiểm tra lại thông tin!"); // General error
             request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
             return;
         }
 
 
-        //  Kiểm tra độ mạnh mật khẩu
-        if (!isStrongPassword(password)) {
-            request.setAttribute("error",
-                    "Mật khẩu phải ≥ 8 ký tự, có chữ hoa và ký tự đặc biệt!");
+// 4. Register
+        try {
+            User newUser = new User();
+            newUser.setUsername(username);
+            newUser.setPassword(password);
+            newUser.setFullName(fullName);
+            newUser.setEmail(email);
+            newUser.setRole(0); // Default user role
+
+            userDAO.register(newUser);
+
+            // 5. Success
+            request.setAttribute("success", "Đăng ký thành công! Vui lòng đăng nhập.");
             request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
-            return;
+        } catch (Exception e) {
+            e.printStackTrace(); // Log err to server console
+            request.setAttribute("errors", errors); // Keep existing errors map if any (though likely empty here)
+            request.setAttribute("oldUsername", username);
+            request.setAttribute("oldFullName", fullName);
+            request.setAttribute("oldEmail", email);
+            request.setAttribute("activeTab", "register");
+            request.setAttribute("error", "Lỗi hệ thống: " + e.getMessage());
+            request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
         }
-
-        //  Lưu user
-        User newUser = new User(0, email, password, "", email, 0);
-        userDAO.register(newUser);
-
-        // Thông báo Thành công va chuyen ve trang san pham
-        request.setAttribute("success", "Đăng ký thành công! Vui lòng đăng nhập.");
-        request.getRequestDispatcher("/view/user/login.jsp")
-                .forward(request, response);
     }
 
     // Hàm kiểm tra mật khẩu mạnh
@@ -85,4 +99,4 @@ public class RegisterServlet extends HttpServlet {
 
         return hasUpper && hasSpecial;
     }
-    }
+}

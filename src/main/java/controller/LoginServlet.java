@@ -13,32 +13,64 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Hiển thị trang login khi người dùng truy cập /login
+        // Check "Remember Me" cookies
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            String cuser = null;
+            String cpass = null;
+            for (Cookie c : cookies) {
+                if ("cuser".equals(c.getName()))
+                    cuser = c.getValue();
+                if ("cpass".equals(c.getName()))
+                    cpass = c.getValue();
+            }
+
+            if (cuser != null && cpass != null) {
+                UserDAO dao = new UserDAO();
+                User u = dao.checkLogin(cuser, cpass);
+                if (u != null) {
+                    request.getSession().setAttribute("acc", u);
+                    response.sendRedirect("products");
+                    return;
+                }
+            }
+        }
+
         request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // 1. Lấy dữ liệu từ form JSP
-        // Chú ý: "loginEmail" và "password" phải trùng với name="..." trong <input> của JSP
-        String user = request.getParameter("loginEmail");
+        String user = request.getParameter("loginEmail"); // Input name in JSP is loginEmail (used for both
+        // email/username)
         String pass = request.getParameter("password");
+        String remember = request.getParameter("remember"); // Checkbox name
 
-        // 2. Gọi lớp DAO (lúc này đang dùng dữ liệu ảo)
         UserDAO dao = new UserDAO();
-        User u = dao.login(user, pass);
+        User u = dao.checkLogin(user, pass);
 
         if (u != null) {
-            // Đăng nhập thành công: Lưu vào Session
             HttpSession session = request.getSession();
             session.setAttribute("acc", u);
 
-            // Chuyển hướng về trang chủ
-            response.sendRedirect("products"); // Hoặc "index.jsp" tùy bạn
+            // Handle Cookies
+            Cookie uCookie = new Cookie("cuser", user);
+            Cookie pCookie = new Cookie("cpass", pass);
+            if (remember != null) {
+                uCookie.setMaxAge(60 * 60 * 24 * 7); // 7 days
+                pCookie.setMaxAge(60 * 60 * 24 * 7);
+            } else {
+                uCookie.setMaxAge(0);
+                pCookie.setMaxAge(0);
+            }
+            response.addCookie(uCookie);
+            response.addCookie(pCookie);
+
+            response.sendRedirect("products");
         } else {
-            // Đăng nhập thất bại: Gửi thông báo lỗi
             request.setAttribute("mess", "Sai tài khoản hoặc mật khẩu!");
+            request.setAttribute("loginEmail", user); // Keep input
             request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
         }
     }

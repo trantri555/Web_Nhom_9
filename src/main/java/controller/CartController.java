@@ -23,7 +23,7 @@ public class CartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
@@ -35,20 +35,24 @@ public class CartController extends HttpServlet {
         try {
             if ("add".equals(action)) {
                 int productId = Integer.parseInt(request.getParameter("productId"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                String quantityRaw = request.getParameter("quantity");
+
+                // Nếu có truyền quantity (từ trang detail) thì lấy,
+                // nếu không (từ trang list) thì mặc định là 1
+                int quantity = (quantityRaw != null) ? Integer.parseInt(quantityRaw) : 1;
 
                 Product product = productDAO.findById(productId);
                 if (product != null) {
                     cart.addProduct(product, quantity);
                 }
-
             } else if ("remove".equals(action)) {
                 int productId = Integer.parseInt(request.getParameter("productId"));
                 cart.deleteProduct(productId);
 
             } else if ("update".equals(action)) {
                 int productId = Integer.parseInt(request.getParameter("productId"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                String quantityRaw = request.getParameter("quantity");
+                int quantity = (quantityRaw != null) ? Integer.parseInt(quantityRaw) : 1;
                 cart.update(productId, quantity);
             }
 
@@ -59,7 +63,7 @@ public class CartController extends HttpServlet {
         session.setAttribute("cart", cart);
 
         // quay lại trang giỏ hàng
-        response.sendRedirect(request.getContextPath() + "/cart.jsp");
+        response.sendRedirect(request.getHeader("referer"));
     }
 
     @Override
@@ -67,6 +71,7 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 
         // chỉ hiển thị cart
-        response.sendRedirect(request.getContextPath() + "/cart.jsp");
+        request.getRequestDispatcher("/view/user/cart.jsp")
+                .forward(request, response);
     }
 }

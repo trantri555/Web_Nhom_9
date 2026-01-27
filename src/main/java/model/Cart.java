@@ -49,7 +49,7 @@ public class Cart implements Serializable {
         }
         return true;
     }
-    public boolean isEmpty() {
+    public boolean empty() {
         return data.isEmpty();
     }
 }

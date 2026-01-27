@@ -79,7 +79,6 @@ public class OrderController extends HttpServlet {
                 double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
 
                 Order order = new Order();
-                order.setCustomerName(customerName);
                 order.setTotalPrice(totalPrice);
                 order.setStatus("Chờ xác nhận");
                 order.setOrderDate(new Date());

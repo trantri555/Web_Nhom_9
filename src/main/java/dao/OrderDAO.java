@@ -24,7 +24,6 @@ public class OrderDAO {
             while (rs.next()) {
                 Order o = new Order(
                         rs.getInt("id"),
-                        rs.getString("customer_name"),
                         rs.getDouble("total_price"),
                         rs.getString("status"),
                         rs.getDate("order_date")
@@ -39,10 +38,9 @@ public class OrderDAO {
 
     // Thêm đơn hàng
     public void insertOrder(Order order) {
-        String sql = "INSERT INTO orders(customer_name, total_price, status, order_date) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO orders( total_price, status, order_date) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, order.getCustomerName());
             ps.setDouble(2, order.getTotalPrice());
             ps.setString(3, order.getStatus());
             ps.setDate(4, new java.sql.Date(order.getOrderDate().getTime()));
@@ -65,10 +63,9 @@ public class OrderDAO {
         }
     }
     public void addOrder(Order order) {
-        String sql = "INSERT INTO orders(customer_name, total_price, status, order_date) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO orders(total_price, status, order_date) VALUES (?,?,?,?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, order.getCustomerName());
             ps.setDouble(2, order.getTotalPrice());
             ps.setString(3, order.getStatus());
             ps.setDate(4, new java.sql.Date(order.getOrderDate().getTime()));
@@ -97,10 +94,9 @@ public class OrderDAO {
         }
     }
     public int insertAndReturnId(Order order) throws SQLException {
-        String sql = "INSERT INTO orders(customer_name, total_price, status, order_date) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO orders( total_price, status, order_date) VALUES (?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        ps.setString(1, order.getCustomerName());
         ps.setDouble(2, order.getTotalPrice());
         ps.setString(3, order.getStatus());
         ps.setDate(4, new java.sql.Date(order.getOrderDate().getTime()));

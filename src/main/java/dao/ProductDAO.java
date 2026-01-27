@@ -45,7 +45,7 @@ public class ProductDAO extends BaseDao {
                         pi.image_URL AS img,
                         p.description
                     FROM products p
-                    LEFT JOIN product_images pi ON p.image = pi.id
+                    JOIN product_images pi ON p.image = pi.id
                     WHERE p.id = :id
                 """;
 
@@ -131,7 +131,7 @@ public class ProductDAO extends BaseDao {
     // .execute()
     // );
     // }
-    public List<Product> getTop3BestSeller() {
+    public List<Product> getTopBestSeller() {
 
         String sql = """
                 SELECT

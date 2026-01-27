@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <!-- HEADER -->
@@ -28,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link  fw-semibold" href="/">Trang Chủ</a>
+                        <a class="nav-link  fw-semibold" href="${pageContext.request.contextPath}/home">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản phẩm</a>
@@ -40,19 +41,26 @@
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
-                <div id="loginButtonContainer">
-                    <a href="login"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Đăng Nhập</a>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="loginButtonContainer">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Đăng Nhập</a>
+                        </div>
 
-                <div id="userInfoContainer" class="d-none">
-                    <a href="profile"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Thông Tin</a>
-                </div>
+                    </c:otherwise>
+                </c:choose>
 
-                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                <a href="${pageContext.request.contextPath}/order"
+                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -60,34 +68,38 @@
     </nav>
 </header>
 <section class="container py-5">
-    <div class="auth-container border">
+    <div class="auth-container">
         <h2 class="text-center fw-bold text-success mb-4">Quản Lý Tài Khoản</h2>
 
         <ul class="nav nav-tabs nav-fill mb-4" id="authTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login"
-                        type="button" role="tab">ĐĂNG NHẬP
+                <button class="nav-link ${activeTab == 'register' ? '' : 'active'}" id="login-tab"
+                        data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab"
+                        aria-selected="${activeTab == 'register' ? 'false' : 'true'}">ĐĂNG NHẬP
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button"
-                        role="tab">ĐĂNG KÝ
+                <button class="nav-link ${activeTab == 'register' ? 'active' : ''}" id="register-tab"
+                        data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab"
+                        aria-selected="${activeTab == 'register' ? 'true' : 'false'}">ĐĂNG KÝ
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="forgot-tab" data-bs-toggle="tab" data-bs-target="#forgot" type="button"
-                        role="tab">QUÊN MẬT KHẨU
+                <button class="nav-link" id="forgot-tab" data-bs-toggle="tab" data-bs-target="#forgot"
+                        type="button" role="tab">QUÊN MẬT KHẨU
                 </button>
             </li>
         </ul>
 
         <div class="tab-content" id="authTabsContent">
 
-            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                <form action="login" id="loginForm" method="post">
+            <div class="tab-pane fade ${activeTab == 'register' ? '' : 'show active'}" id="login"
+                 role="tabpanel" aria-labelledby="login-tab">
+                <form action="${pageContext.request.contextPath}/login" id="loginForm" method="post">
 
                     <div class="mb-3">
-                        <label for="loginEmail" class="form-label fw-semibold">Email hoặc Tên đăng nhập</label>
+                        <label for="loginEmail" class="form-label fw-semibold">Email hoặc Tên đăng
+                            nhập</label>
                         <input type="text" class="form-control" id="loginEmail" name="email" required
                                placeholder="Nhập email của bạn"/>
                     </div>
@@ -98,7 +110,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                            <input class="form-check-input" type="checkbox" value="" id="rememberMe" name="remember">
                             <label class="form-check-label" for="rememberMe">
                                 Ghi nhớ đăng nhập
                             </label>
@@ -115,7 +127,8 @@
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+            <div class="tab-pane fade ${activeTab == 'register' ? 'show active' : ''}" id="register"
+                 role="tabpanel" aria-labelledby="register-tab">
                 <form id="registerForm" action="${pageContext.request.contextPath}/register" method="post">
                     <!--Hiển thị thông báo khi đăng nhập-->
                     <c:if test="${not empty error}">
@@ -124,19 +137,25 @@
                         </div>
                     </c:if>
 
-                    <c:if test="${not empty sessionScope.success}">
-                        <div class="alert alert-success">
-                                ${sessionScope.success}
+                    <!-- Success Alert (Check Request Scope too) -->
+                    <c:if test="${not empty requestScope.success or not empty sessionScope.success}">
+                        <div class="alert alert-success mb-3">
+                                ${not empty requestScope.success ? requestScope.success : sessionScope.success}
                         </div>
-                        <c:remove var="success" scope="session"/>
+                        <c:if test="${not empty sessionScope.success}">
+                            <c:remove var="success" scope="session"/>
+                        </c:if>
                     </c:if>
-
-
 
                     <div class="mb-3">
                         <label for="regFullName" class="form-label fw-semibold">Họ và Tên</label>
-                        <input type="text" class="form-control" id="regFullName" name="fullName" required
-                               placeholder="Nhập họ tên của bạn" value="${oldFullName}"/>
+                        <input type="text" class="form-control" id="regFullName" name="username" required
+                               placeholder="Nhập họ tên của bạn" value="${oldUsername}"/>
+                        <c:if test="${errors.username != null}">
+                            <div class="text-danger small">
+                                    ${errors.username}
+                            </div>
+                        </c:if>
 
                     </div>
                     <div class="mb-3">
@@ -249,6 +268,6 @@
         </div>
     </div>
 </footer>
-<script type="module" src="js/init.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
 </body>
 </html>

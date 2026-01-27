@@ -43,19 +43,26 @@
                         <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/contact">Liên hệ</a>
                     </li>
                 </ul>
-                <div id="loginButtonContainer">
-                    <a href="login"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Đăng Nhập</a>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="loginButtonContainer">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Đăng Nhập</a>
+                        </div>
 
-                <div id="userInfoContainer" class="d-none">
-                    <a href="profile"
-                       class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                        Thông Tin</a>
-                </div>
+                    </c:otherwise>
+                </c:choose>
 
-                <a href="order.html" class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                <a href="${pageContext.request.contextPath}/order"
+                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                 </a>
             </div>
@@ -84,7 +91,6 @@
 
                     <tbody>
                     <c:choose>
-
                         <!-- Giỏ hàng trống -->
                         <c:when test="${sessionScope.cart == null || sessionScope.cart.allItems.empty}">
                             <tr>
@@ -241,40 +247,44 @@
             </div>
         </div>
 
-<section id="checkout" class="container my-5">
-    <h3 class="text-center text-success fw-bold mb-4">Thông Tin Thanh Toán</h3>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form class="p-4 shadow rounded bg-white">
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Họ và Tên</label>
-                    <input type="text" class="form-control" placeholder="Nguyễn Văn A" required>
+        <section id="checkout" class="container my-5">
+            <h3 class="text-center text-success fw-bold mb-4">Thông Tin Thanh Toán</h3>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form class="p-4 shadow rounded bg-white">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Họ và Tên</label>
+                            <input type="text" class="form-control" placeholder="Nguyễn Văn A" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Địa chỉ giao hàng</label>
+                            <input type="text" class="form-control" placeholder="Số nhà, đường, phường, quận..."
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Số điện thoại</label>
+                            <input type="tel" class="form-control" placeholder="0123456789" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Phương thức thanh toán</label>
+                            <select class="form-select" required>
+                                <option value="">-- Chọn phương thức --</option>
+                                <option>Thanh toán khi nhận hàng (COD)</option>
+                                <option>Chuyển khoản ngân hàng</option>
+                                <option>Ví điện tử (Momo, ZaloPay...)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold">
+                            <i class="bi bi-check-circle me-1"></i> Xác Nhận Đặt Hàng
+                        </button>
+                        <p id="orderSuccess" class="text-success fw-semibold mt-3" style="display:none;">
+                            Cảm ơn bạn! Đơn hàng đã được ghi nhận.
+                        </p>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Địa chỉ giao hàng</label>
-                    <input type="text" class="form-control" placeholder="Số nhà, đường, phường, quận..." required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Số điện thoại</label>
-                    <input type="tel" class="form-control" placeholder="0123456789" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Phương thức thanh toán</label>
-                    <select class="form-select" required>
-                        <option value="">-- Chọn phương thức --</option>
-                        <option>Thanh toán khi nhận hàng (COD)</option>
-                        <option>Chuyển khoản ngân hàng</option>
-                        <option>Ví điện tử (Momo, ZaloPay...)</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold">
-                    <i class="bi bi-check-circle me-1"></i> Xác Nhận Đặt Hàng
-                </button>
-                <p id="orderSuccess" class="text-success fw-semibold mt-3" style="display:none;">
-                    Cảm ơn bạn! Đơn hàng đã được ghi nhận.
-                </p>
-            </form>
-        </div>
+            </div>
+
+        </section>
     </div>
 </section>
 
@@ -324,7 +334,7 @@
         </div>
     </div>
 </footer>
-<script type="module" src="js/init.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
 </body>
 </html>
 

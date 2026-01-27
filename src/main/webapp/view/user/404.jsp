@@ -27,7 +27,7 @@
     Rất tiếc, đường dẫn bạn truy cập có thể đã bị thay đổi hoặc không còn tồn tại.
     <br>Hãy quay lại trang chủ để khám phá các sản phẩm tươi ngon của chúng tôi!
   </p>
-  <a href="/" class="btn btn-primary-custom btn-home-404 shadow-lg">
+  <a href="${pageContext.request.contextPath}/home" class="btn btn-primary-custom btn-home-404 shadow-lg">
     <i class="bi bi-house-door-fill me-2"></i> Quay Về Trang Chủ
   </a>
 </main>

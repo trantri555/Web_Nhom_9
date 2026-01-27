@@ -1,262 +1,269 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <html lang="vi">
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32">
-        <link rel="shortcut icon" href="images/logo/logo-juicy.png" type="image/png">
-        <title>Juicy - Nước Ép Tươi Ngon &amp; Healthy</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/product.css">
-    </head>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/png" href="images/logo/logo-juicy.png" sizes="32x32">
+    <link rel="shortcut icon" href="images/logo/logo-juicy.png" type="image/png">
+    <title>Juicy - Nước Ép Tươi Ngon &amp; Healthy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
+</head>
 
-    <body>
-        <!-- HEADER -->
-        <header class="sticky-top shadow-sm">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand fw-bold text-success fs-3" href="/">
-                        <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
-                        JUICY <span class="text-warning"></span>
-                    </a>
+<body>
+<!-- HEADER -->
+<header class="sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand fw-bold text-success fs-3" href="/">
+                <img src="images/logo/logo-juicy.png" alt="Juicy Logo" height="40" class="me-2">
+                JUICY <span class="text-warning"></span>
+            </a>
 
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto align-items-lg-center">
-                            <li class="nav-item">
-                                <a class="nav-link  fw-semibold" href="/">Trang Chủ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản
-                                    phẩm</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active fw-semibold"
-                                    href="${pageContext.request.contextPath}/about">Giới thiệu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link  fw-semibold" href="${pageContext.request.contextPath}/contact">Liên
-                                    hệ</a>
-                            </li>
-                        </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link  fw-semibold" href="${pageContext.request.contextPath}/home">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/products">Sản
+                            phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active fw-semibold"
+                           href="${pageContext.request.contextPath}/about">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  fw-semibold" href="${pageContext.request.contextPath}/contact">Liên
+                            hệ</a>
+                    </li>
+                </ul>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.auth}">
+                        <div id="userInfoContainer">
+                            <a href="${pageContext.request.contextPath}/profile"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                                Thông Tin</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
                         <div id="loginButtonContainer">
-                            <a href="login"
-                                class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                            <a href="${pageContext.request.contextPath}/login"
+                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                                 Đăng Nhập</a>
                         </div>
 
-                        <div id="userInfoContainer" class="d-none">
-                            <a href="profile"
-                                class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                                Thông Tin</a>
-                        </div>
+                    </c:otherwise>
+                </c:choose>
 
-                        <a href="order.html"
-                            class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                            <i class="bi bi-cart me-1"></i> Giỏ Hàng
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <!--Thêm thanh tìm kiếm vào dưới phần header của website-->
-        <section class="bg-light py-4 border-bottom">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <form class="d-flex" action="${pageContext.request.contextPath}/search" method="get">
-                            <input class="form-control form-control-lg me-2 border-success" type="search" name="query"
-                                placeholder="Tìm kiếm tên sản phẩm, loại trái cây..." aria-label="Search">
-                            <button class="btn btn-primary-custom btn-lg fw-bold" type="submit">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </form>
-                    </div>
+                <a href="${pageContext.request.contextPath}/order"
+                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
+                    <i class="bi bi-cart me-1"></i> Giỏ Hàng
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<!--Thêm thanh tìm kiếm vào dưới phần header của website-->
+<section class="bg-light py-4 border-bottom">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form class="d-flex" action="${pageContext.request.contextPath}/search" method="get">
+                    <input class="form-control form-control-lg me-2 border-success" type="search" name="query"
+                           placeholder="Tìm kiếm tên sản phẩm, loại trái cây..." aria-label="Search">
+                    <button class="btn btn-primary-custom btn-lg fw-bold" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- HERO BANNER -->
+<section class="hero-section d-flex align-items-center justify-content-center text-center">
+    <section><img src="images/banner/bannerabout.jpg" class="hero-section"></section>
+    <!-- dành cho sửa đổi chỉnh banner -->
+</section>
+
+<!-- SỨ MỆNH & CAM KẾT -->
+<section class="container py-5">
+    <div class="row align-items-center gy-5">
+        <div class="col-md-6">
+            <img src="images/banner/about-fruit.jpg" class="img-fluid rounded-4 shadow" alt="Trái cây tươi">
+        </div>
+        <div class="col-md-6">
+            <h2 class="fw-bold text-success mb-3">Sứ Mệnh &amp; Cam Kết</h2>
+            <p>Chúng tôi mang đến nguồn dinh dưỡng từ thiên nhiên, giúp bạn duy trì lối sống lành mạnh. Mỗi sản
+                phẩm
+                Juicy được chọn lọc kỹ lưỡng, từ nguyên liệu tươi ngon đến quy trình ép lạnh giữ trọn dưỡng
+                chất.</p>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Nguyên liệu tươi đạt chuẩn
+                    GlobalGAP
+                </li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Cold-press giữ nguyên vitamin &amp;
+                    enzyme
+                </li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i>Không phẩm màu, không chất bảo quản
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Đội ngũ -->
+    <div class="row align-items-center gy-5">
+        <div class="col-md-6 order-md-2">
+            <img src="images/banner/about-team.jpg" class="img-fluid rounded-4 shadow" alt="Đội ngũ Juicy">
+        </div>
+        <div class="col-md-6 order-md-1">
+            <h2 class="fw-bold text-success mb-3">Đội Ngũ Juicy</h2>
+            <p>
+                Chúng tôi là một tập thể trẻ, năng động, đam mê sức khỏe và yêu thiên nhiên. Mỗi thành viên của
+                Juicy
+                đều làm việc với tinh thần tận tâm và sáng tạo để mang lại trải nghiệm tốt nhất cho khách hàng.
+            </p>
+            <p>
+                Cảm ơn bạn đã đồng hành cùng Juicy trên hành trình lan tỏa lối sống xanh, sạch và lành mạnh! 🌿
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- LỊCH SỬ HÌNH THÀNH -->
+<section class="bg-light py-5">
+    <div class="container">
+        <h2 class="fw-bold text-success mb-4 text-center">Lịch Sử Hình Thành</h2>
+        <p class="text-center mb-5">Juicy ra đời với tầm nhìn mang trái cây tươi ngon &amp; nước ép chất lượng
+            cao đến
+            mọi gia đình Việt Nam. Bắt đầu từ một cửa hàng nhỏ, đến nay chúng tôi đã phục vụ hàng ngàn khách
+            hàng mỗi
+            ngày.</p>
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <i class="bi bi-lightning-charge-fill fs-1 text-success mb-2"></i>
+                <h5 class="fw-bold">2018</h5>
+                <p>Khởi nghiệp với cửa hàng đầu tiên tại TP.HCM</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-people-fill fs-1 text-success mb-2"></i>
+                <h5 class="fw-bold">2020</h5>
+                <p>Mở rộng chuỗi cửa hàng &amp; xây dựng thương hiệu uy tín</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-award-fill fs-1 text-success mb-2"></i>
+                <h5 class="fw-bold">2023</h5>
+                <p>Đạt chứng nhận chất lượng &amp; phục vụ khách hàng toàn quốc</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUY TRÌNH -->
+<section class="container py-5">
+    <h2 class="fw-bold text-success mb-4 text-center">Quy Trình Chọn Lọc &amp; Ép Lạnh</h2>
+    <div class="row g-4 text-center">
+        <div class="col-md-3">
+            <i class="bi bi-search fs-1 text-success mb-2"></i>
+            <h6 class="fw-bold">Chọn Lựa</h6>
+            <p>Nguyên liệu tươi ngon, đạt chuẩn chất lượng</p>
+        </div>
+        <div class="col-md-3">
+            <i class="bi bi-droplet fs-1 text-success mb-2"></i>
+            <h6 class="fw-bold">Ép Lạnh</h6>
+            <p>Giữ nguyên dưỡng chất &amp; hương vị tự nhiên</p>
+        </div>
+        <div class="col-md-3">
+            <i class="bi bi-thermometer-half fs-1 text-success mb-2"></i>
+            <h6 class="fw-bold">Kiểm Tra</h6>
+            <p>Đảm bảo an toàn và chất lượng cao nhất</p>
+        </div>
+        <div class="col-md-3">
+            <i class="bi bi-hand-thumbs-up-fill fs-1 text-success mb-2"></i>
+            <h6 class="fw-bold">Giao Hàng</h6>
+            <p>Đến tay khách hàng nhanh chóng &amp; tươi ngon</p>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="bg-light py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold text-success mb-4">Khách Hàng Nói Gì?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3">
+                    <p>"Nước ép Juicy luôn tươi ngon, mỗi sáng là động lực tuyệt vời cho cả ngày!"</p>
+                    <h6 class="fw-bold mb-0">Nguyễn Thị Lan</h6>
                 </div>
             </div>
-        </section>
-        <!-- HERO BANNER -->
-        <section class="hero-section d-flex align-items-center justify-content-center text-center">
-            <section><img src="images/banner/bannerabout.jpg" class="hero-section"></section>
-            <!-- dành cho sửa đổi chỉnh banner -->
-        </section>
-
-        <!-- SỨ MỆNH & CAM KẾT -->
-        <section class="container py-5">
-            <div class="row align-items-center gy-5">
-                <div class="col-md-6">
-                    <img src="images/banner/about-fruit.jpg" class="img-fluid rounded-4 shadow" alt="Trái cây tươi">
-                </div>
-                <div class="col-md-6">
-                    <h2 class="fw-bold text-success mb-3">Sứ Mệnh &amp; Cam Kết</h2>
-                    <p>Chúng tôi mang đến nguồn dinh dưỡng từ thiên nhiên, giúp bạn duy trì lối sống lành mạnh. Mỗi sản
-                        phẩm
-                        Juicy được chọn lọc kỹ lưỡng, từ nguyên liệu tươi ngon đến quy trình ép lạnh giữ trọn dưỡng
-                        chất.</p>
-                    <ul class="list-unstyled">
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Nguyên liệu tươi đạt chuẩn
-                            GlobalGAP</li>
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Cold-press giữ nguyên vitamin &amp;
-                            enzyme
-                        </li>
-                        <li><i class="bi bi-check-circle-fill text-success me-2"></i>Không phẩm màu, không chất bảo quản
-                        </li>
-                    </ul>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3">
+                    <p>"Mình rất thích cam kết không chất bảo quản, yên tâm dùng mỗi ngày."</p>
+                    <h6 class="fw-bold mb-0">Trần Văn Hưng</h6>
                 </div>
             </div>
-            <!-- Đội ngũ -->
-            <div class="row align-items-center gy-5">
-                <div class="col-md-6 order-md-2">
-                    <img src="images/banner/about-team.jpg" class="img-fluid rounded-4 shadow" alt="Đội ngũ Juicy">
-                </div>
-                <div class="col-md-6 order-md-1">
-                    <h2 class="fw-bold text-success mb-3">Đội Ngũ Juicy</h2>
-                    <p>
-                        Chúng tôi là một tập thể trẻ, năng động, đam mê sức khỏe và yêu thiên nhiên. Mỗi thành viên của
-                        Juicy
-                        đều làm việc với tinh thần tận tâm và sáng tạo để mang lại trải nghiệm tốt nhất cho khách hàng.
-                    </p>
-                    <p>
-                        Cảm ơn bạn đã đồng hành cùng Juicy trên hành trình lan tỏa lối sống xanh, sạch và lành mạnh! 🌿
-                    </p>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3">
+                    <p>"Giao hàng nhanh, đóng gói cẩn thận. Juicy xứng đáng 5 sao!"</p>
+                    <h6 class="fw-bold mb-0">Lê Thị Minh</h6>
                 </div>
             </div>
-        </section>
-
-        <!-- LỊCH SỬ HÌNH THÀNH -->
-        <section class="bg-light py-5">
-            <div class="container">
-                <h2 class="fw-bold text-success mb-4 text-center">Lịch Sử Hình Thành</h2>
-                <p class="text-center mb-5">Juicy ra đời với tầm nhìn mang trái cây tươi ngon &amp; nước ép chất lượng
-                    cao đến
-                    mọi gia đình Việt Nam. Bắt đầu từ một cửa hàng nhỏ, đến nay chúng tôi đã phục vụ hàng ngàn khách
-                    hàng mỗi
-                    ngày.</p>
-                <div class="row g-4 text-center">
-                    <div class="col-md-4">
-                        <i class="bi bi-lightning-charge-fill fs-1 text-success mb-2"></i>
-                        <h5 class="fw-bold">2018</h5>
-                        <p>Khởi nghiệp với cửa hàng đầu tiên tại TP.HCM</p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="bi bi-people-fill fs-1 text-success mb-2"></i>
-                        <h5 class="fw-bold">2020</h5>
-                        <p>Mở rộng chuỗi cửa hàng &amp; xây dựng thương hiệu uy tín</p>
-                    </div>
-                    <div class="col-md-4">
-                        <i class="bi bi-award-fill fs-1 text-success mb-2"></i>
-                        <h5 class="fw-bold">2023</h5>
-                        <p>Đạt chứng nhận chất lượng &amp; phục vụ khách hàng toàn quốc</p>
-                    </div>
-                </div>
+        </div>
+    </div>
+</section>
+<!--footer-->
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row text-center text-md-start">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
+                <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
             </div>
-        </section>
 
-        <!-- QUY TRÌNH -->
-        <section class="container py-5">
-            <h2 class="fw-bold text-success mb-4 text-center">Quy Trình Chọn Lọc &amp; Ép Lạnh</h2>
-            <div class="row g-4 text-center">
-                <div class="col-md-3">
-                    <i class="bi bi-search fs-1 text-success mb-2"></i>
-                    <h6 class="fw-bold">Chọn Lựa</h6>
-                    <p>Nguyên liệu tươi ngon, đạt chuẩn chất lượng</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="bi bi-droplet fs-1 text-success mb-2"></i>
-                    <h6 class="fw-bold">Ép Lạnh</h6>
-                    <p>Giữ nguyên dưỡng chất &amp; hương vị tự nhiên</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="bi bi-thermometer-half fs-1 text-success mb-2"></i>
-                    <h6 class="fw-bold">Kiểm Tra</h6>
-                    <p>Đảm bảo an toàn và chất lượng cao nhất</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="bi bi-hand-thumbs-up-fill fs-1 text-success mb-2"></i>
-                    <h6 class="fw-bold">Giao Hàng</h6>
-                    <p>Đến tay khách hàng nhanh chóng &amp; tươi ngon</p>
-                </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục</h5>
+                <p>
+                    <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
+                </p>
+                <p>
+                    <a href="products.html" class="text-white text-decoration-none">Trái Cây Văn Phòng</a>
+                </p>
+                <p>
+                    <a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a>
+                </p>
             </div>
-        </section>
 
-        <!-- TESTIMONIAL -->
-        <section class="bg-light py-5">
-            <div class="container text-center">
-                <h2 class="fw-bold text-success mb-4">Khách Hàng Nói Gì?</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card border-0 shadow-sm p-3">
-                            <p>"Nước ép Juicy luôn tươi ngon, mỗi sáng là động lực tuyệt vời cho cả ngày!"</p>
-                            <h6 class="fw-bold mb-0">Nguyễn Thị Lan</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card border-0 shadow-sm p-3">
-                            <p>"Mình rất thích cam kết không chất bảo quản, yên tâm dùng mỗi ngày."</p>
-                            <h6 class="fw-bold mb-0">Trần Văn Hưng</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card border-0 shadow-sm p-3">
-                            <p>"Giao hàng nhanh, đóng gói cẩn thận. Juicy xứng đáng 5 sao!"</p>
-                            <h6 class="fw-bold mb-0">Lê Thị Minh</h6>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
+                <p>
+                    <i class="bi bi-geo-alt-fill me-2"></i> Đường số 7, Đông Hoà, Thủ
+                    Đức, Thành phố Hồ Chí Minh, Việt Nam
+                </p>
+                <p><i class="bi bi-envelope-fill me-2"></i> order@juicy.vn</p>
+                <p><i class="bi bi-telephone-fill me-2"></i> 0347 270 120</p>
             </div>
-        </section>
-        <!--footer-->
-        <footer class="bg-dark text-white pt-5 pb-4">
-            <div class="container text-center text-md-start">
-                <div class="row text-center text-md-start">
-                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
-                        <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
-                    </div>
-
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h5 class="text-uppercase mb-4 fw-bold text-success">Danh Mục</h5>
-                        <p>
-                            <a href="products.html" class="text-white text-decoration-none">Nước Ép</a>
-                        </p>
-                        <p>
-                            <a href="products.html" class="text-white text-decoration-none">Trái Cây Văn Phòng</a>
-                        </p>
-                        <p>
-                            <a href="promotions.html" class="text-white text-decoration-none">Khuyến Mãi</a>
-                        </p>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
-                        <p>
-                            <i class="bi bi-geo-alt-fill me-2"></i> Đường số 7, Đông Hoà, Thủ
-                            Đức, Thành phố Hồ Chí Minh, Việt Nam
-                        </p>
-                        <p><i class="bi bi-envelope-fill me-2"></i> order@juicy.vn</p>
-                        <p><i class="bi bi-telephone-fill me-2"></i> 0347 270 120</p>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <h5 class="text-uppercase fw-bold text-success">Theo Dõi Chúng Tôi</h5>
-                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12 text-center pt-3 border-top border-secondary">
-                        <p>© 2024 Juicy. All Rights Reserved.</p>
-                    </div>
-                </div>
+            <div class="col-md-3 mb-4">
+                <h5 class="text-uppercase fw-bold text-success">Theo Dõi Chúng Tôi</h5>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-tiktok"></i></a>
             </div>
-        </footer>
-        <script type="module" src="js/init.js"></script>
-    </body>
-
-    </html>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 text-center pt-3 border-top border-secondary">
+                <p>© 2024 Juicy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
+</body>
+</html>

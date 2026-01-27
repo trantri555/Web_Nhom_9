@@ -16,12 +16,11 @@ public class ProfileController extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("user") == null) {
+        if (session == null || session.getAttribute("auth") == null) {
             response.sendRedirect("login");
             return;
         }
 
-        request.getRequestDispatcher("/view/user/profile.jsp")
-                .forward(request, response);
+        request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
     }
 }

@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 @WebServlet("/add-product")
-@MultipartConfig(
-        maxFileSize = 5 * 1024 * 1024,
-        maxRequestSize = 10 * 1024 * 1024
-)
+@MultipartConfig(maxFileSize = 5 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 public class AddProductServlet extends HttpServlet {
 
     @Override
@@ -24,54 +21,88 @@ public class AddProductServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        //1. Lấy dữ liệu form
+        // 1. Lấy dữ liệu form
         String name = request.getParameter("name");
         String supplier = request.getParameter("supplier_name");
         String description = request.getParameter("description");
 
-        double price;
-        int volume, quantity;
+        // Handle optional input gracefully
+        double price = 0;
+        int volume = 0;
+        int quantity = 0;
 
         try {
-            price = Double.parseDouble(request.getParameter("price"));
-            volume = Integer.parseInt(request.getParameter("volume"));
-            quantity = Integer.parseInt(request.getParameter("quantity"));
+            String priceStr = request.getParameter("price");
+            if (priceStr != null && !priceStr.isEmpty())
+                price = Double.parseDouble(priceStr);
+
+            String volumeStr = request.getParameter("volume");
+            if (volumeStr != null && !volumeStr.isEmpty())
+                volume = Integer.parseInt(volumeStr);
+
+            String quantityStr = request.getParameter("quantity");
+            if (quantityStr != null && !quantityStr.isEmpty())
+                quantity = Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
             response.sendRedirect("admin-product.jsp?error=invalid_number");
             return;
         }
 
-        //2. Upload ảnh
-        Part imagePart = request.getPart("image");
-        if (imagePart == null || imagePart.getSize() == 0) {
+        // 2. Prepare upload
+        // Change path to images/product to match frontend
+        String uploadPath = getServletContext().getRealPath("/images/product");
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists())
+            uploadDir.mkdirs();
+
+        java.util.List<String> savedFileNames = new java.util.ArrayList<>();
+
+        // Loop through all parts to find multiple "images"
+        for (Part part : request.getParts()) {
+            if ("images".equals(part.getName()) && part.getSize() > 0) {
+                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                String savedFileName = System.currentTimeMillis() + "_" + fileName;
+                part.write(uploadPath + File.separator + savedFileName);
+                savedFileNames.add(savedFileName);
+            }
+        }
+
+        if (savedFileNames.isEmpty()) {
+            // Fallback for singular "image" if someone didn't update JSP
+            Part part = request.getPart("image");
+            if (part != null && part.getSize() > 0) {
+                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                String savedFileName = System.currentTimeMillis() + "_" + fileName;
+                part.write(uploadPath + File.separator + savedFileName);
+                savedFileNames.add(savedFileName);
+            }
+        }
+
+        if (savedFileNames.isEmpty()) {
             response.sendRedirect("admin-product.jsp?error=no_image");
             return;
         }
 
-        String fileName = Paths.get(imagePart.getSubmittedFileName())
-                .getFileName().toString();
-
-        String uploadPath = getServletContext().getRealPath("/uploads/products");
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) uploadDir.mkdirs();
-
-        String savedFileName = System.currentTimeMillis() + "_" + fileName;
-        imagePart.write(uploadPath + File.separator + savedFileName);
-
-        //3. Set Product
+        // 3. Set Product
         Product p = new Product();
         p.setName(name);
         p.setPrice(price);
         p.setQuantity(quantity);
-        p.setImg(savedFileName);          // ⚠️ xem phần sửa model
+        // Use the first image as the main thumbnail
+        p.setImg(savedFileNames.get(0));
         p.setDescription(description);
         p.setSupplier_name(supplier);
         p.setVolume(volume);
 
-        //4. Insert DB
+        // 4. Insert DB
         ProductDAO dao = new ProductDAO();
-        dao.insert(p);
+        int newProductId = dao.insert(p);
 
-        response.sendRedirect("admin-product.jsp?success=add");
+        // 5. Insert extra images
+        for (String img : savedFileNames) {
+            dao.insertImage(newProductId, img);
+        }
+
+        response.sendRedirect(request.getContextPath() + "/admin/products?success=add");
     }
 }

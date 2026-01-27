@@ -19,7 +19,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (cart == null || cart.getAllItems().isEmpty()) {

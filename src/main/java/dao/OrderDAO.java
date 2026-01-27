@@ -26,8 +26,7 @@ public class OrderDAO {
                         rs.getInt("id"),
                         rs.getDouble("total_price"),
                         rs.getString("status"),
-                        rs.getDate("order_date")
-                );
+                        rs.getDate("order_date"));
                 list.add(o);
             }
         } catch (SQLException e) {
@@ -62,6 +61,7 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
     public void addOrder(Order order) {
         String sql = "INSERT INTO orders(total_price, status, order_date) VALUES (?,?,?,?)";
 
@@ -74,6 +74,7 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
     public void deleteOrder(int orderId) {
         String sql = "DELETE FROM orders WHERE id = ?";
 
@@ -84,6 +85,7 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
     public void deleteAllOrders() {
         String sql = "DELETE FROM orders";
 
@@ -93,6 +95,7 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
     public int insertAndReturnId(Order order) throws SQLException {
         String sql = "INSERT INTO orders( total_price, status, order_date) VALUES (?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -109,6 +112,5 @@ public class OrderDAO {
         }
         return 0;
     }
-
 
 }

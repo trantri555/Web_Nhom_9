@@ -16,10 +16,11 @@ public class ProductDAO extends BaseDao {
                                                      p.volume,
                                                      p.supplier_name,
                                                      p.quantity,
-                                                     pi.image_URL AS img, -- Lấy link ảnh từ bảng product_images
+                                                     COALESCE(pi_new.image_URL, pi_old.image_URL) AS img, -- Ưu tiên ảnh mới, fallback về ảnh cũ
                                                      p.description
                                                  FROM products p
-                                                 LEFT JOIN product_images pi ON p.image = pi.id
+                                                 LEFT JOIN product_images pi_old ON p.image = pi_old.id
+                                                 LEFT JOIN product_images pi_new ON p.id = pi_new.id_product
                                                  GROUP BY p.id
                 """;
 
@@ -57,15 +58,25 @@ public class ProductDAO extends BaseDao {
     }
 
     // Thêm sản phẩm
-    public void insert(Product p) {
+    public int insert(Product p) {
         String sql = """
                     INSERT INTO products
                     (product_name, price, volume, supplier_name, quantity, image, description)
-                    VALUES (:name, :price, :volume, :supplier, :quantity, :img, :description)
+                    VALUES (:name, :price, :volume, :supplier_name, :quantity, :img, :description)
                 """;
 
-        get().useHandle(handle -> handle.createUpdate(sql)
+        return get().withHandle(handle -> handle.createUpdate(sql)
                 .bindBean(p)
+                .executeAndReturnGeneratedKeys("id")
+                .mapTo(Integer.class)
+                .one());
+    }
+
+    public void insertImage(int productId, String imageUrl) {
+        String sql = "INSERT INTO product_images (id_product, image_URL) VALUES (:pid, :url)";
+        get().useHandle(handle -> handle.createUpdate(sql)
+                .bind("pid", productId)
+                .bind("url", imageUrl)
                 .execute());
     }
 
@@ -80,10 +91,11 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi_new.image_URL, pi_old.image_URL) AS img,
                         p.description
                     FROM products p
-                    LEFT JOIN product_images pi ON p.id = pi.id_product
+                    LEFT JOIN product_images pi_old ON p.image = pi_old.id
+                    LEFT JOIN product_images pi_new ON p.id = pi_new.id_product
                     GROUP BY p.id
                 """;
 
@@ -371,10 +383,11 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi_new.image_URL, pi_old.image_URL) AS img,
                         p.description
                     FROM products p
-                    LEFT JOIN product_images pi ON p.image = pi.id
+                    LEFT JOIN product_images pi_old ON p.image = pi_old.id
+                    LEFT JOIN product_images pi_new ON p.id = pi_new.id_product
                     GROUP BY p.id
                     LIMIT :offset, :limit
                 """;

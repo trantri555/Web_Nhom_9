@@ -104,8 +104,8 @@
                                 </ul>
                                 <a href="${pageContext.request.contextPath}/login"
                                     class="btn btn-warning rounded-pill ms-lg-3 fw-semibold shadow-sm">Đăng Nhập</a>
-                                <a href="${pageContext.request.contextPath}/order"
-                                    class="btn btn-warning rounded-pill ms-lg-3 fw-semibold shadow-sm">
+<a href="${pageContext.request.contextPath}/cart"
+                                    class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                                 </a>
                             </div>

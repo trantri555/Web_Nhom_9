@@ -27,7 +27,7 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-        String customerName = request.getParameter("customerName");
+        String customerName = request.getParameter("fullName");
         String paymentMethod = request.getParameter("paymentMethod");
 
         Connection conn = null;

@@ -4,11 +4,14 @@ import java.util.Date;
 
 public class Order {
     private int id;
-    private double totalPrice;
-    private String status;
+    private int id_user;
     private Date orderDate;
-    private String paymentMethod;
+    private String status;
     private String paymentStatus;
+    private double totalPrice;
+    private String paymentMethod;
+    private int id_voucher;
+
     public Order() {}
 
     public Order(int id, double totalPrice, String status, Date orderDate) {

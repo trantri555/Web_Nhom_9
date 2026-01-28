@@ -94,12 +94,12 @@ public class OrderDAO {
         }
     }
     public int insertAndReturnId(Order order) throws SQLException {
-        String sql = "INSERT INTO orders( total_price, status, order_date) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO orders( total_price, status, order_date) VALUES (?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        ps.setDouble(2, order.getTotalPrice());
-        ps.setString(3, order.getStatus());
-        ps.setDate(4, new java.sql.Date(order.getOrderDate().getTime()));
+        ps.setDouble(1, order.getTotalPrice());
+        ps.setString(2, order.getStatus());
+        ps.setDate(3, new java.sql.Date(order.getOrderDate().getTime()));
 
         ps.executeUpdate();
 

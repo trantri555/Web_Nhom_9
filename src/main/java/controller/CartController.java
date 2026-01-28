@@ -61,9 +61,14 @@ public class CartController extends HttpServlet {
         }
 
         session.setAttribute("cart", cart);
-
-        // quay lại trang giỏ hàng
-        response.sendRedirect(request.getHeader("referer"));
+// Kiểm tra nếu là yêu cầu AJAX thì chỉ trả về mã thành công
+        String xRequestedWith = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(xRequestedWith) || request.getHeader("accept").contains("application/json")) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            // Nếu vẫn có những form cũ chưa sửa thì dùng redirect như cũ
+            response.sendRedirect(request.getHeader("referer"));
+        }
     }
 
     @Override

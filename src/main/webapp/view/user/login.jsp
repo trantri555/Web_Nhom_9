@@ -128,6 +128,14 @@
                         </c:if>
 
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Mã xác thực OTP</label>
+                        <div class="input-group">
+                            <input type="text" name="otp" class="form-control" placeholder="Nhập mã 6 số" required>
+                            <button class="btn btn-outline-success" type="button" id="btnSendOTP">Gửi mã</button>
+                        </div>
+                        <small id="otpTimer" class="text-danger"></small>
+                    </div>
                     <button type="submit" class="btn btn-primary-custom w-100 fw-bold py-2">Đăng Ký</button>
                 </form>
                 <div class="text-center mt-3">
@@ -140,13 +148,12 @@
             <div class="tab-pane fade" id="forgot" role="tabpanel" aria-labelledby="forgot-tab">
                 <p class="text-center mb-4 text-muted">Vui lòng nhập email đã đăng ký của bạn. Chúng tôi sẽ gửi một liên
                     kết để đặt lại mật khẩu.</p>
-                <form action="/forgot-password" method="POST">
-                    <div class="mb-4">
-                        <label for="forgotEmail" class="form-label fw-semibold">Địa chỉ Email</label>
-                        <input type="email" class="form-control" id="forgotEmail" name="email" required
-                               placeholder="Nhập email của bạn"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary-custom w-100 fw-bold py-2">Gửi Yêu Cầu Đặt Lại</button>
+                <form id="forgotPasswordForm">
+                    <div class="mb-3">
+                        <label class="form-label">Nhập Email đã đăng ký</label>
+                        <input type="email" name="email" id="forgotEmail" class="form-control" required placeholder="name@example.com">
+                        <div id="forgotMsg" class="mt-2 small"></div> </div>
+                    <button type="submit" class="btn btn-success w-100" id="btnForgot">Gửi mật khẩu mới</button>
                 </form>
                 <div class="text-center mt-3">
                     <p><a href="#" class="text-success fw-bold text-decoration-none"
@@ -158,4 +165,71 @@
         </div>
     </div>
 </section>
+
 <%@include file="/view/user/include/footer.jsp" %>
+
+<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
+<script>
+    // Xử lý gửi OTP bằng AJAX để không bị load lại trang
+    document.getElementById('btnSendOTP').addEventListener('click', function() {
+        const email = document.querySelector('#registerForm input[name="email"]').value;
+        if(!email) {
+            alert("Vui lòng nhập email trước khi nhận OTP!");
+            return;
+        }
+
+        const btn = this;
+        btn.disabled = true;
+
+        fetch('${pageContext.request.contextPath}/send-otp?email=' + email)
+            .then(response => response.text())
+            .then(data => {
+                alert("Mã OTP đã được gửi đến email của bạn!");
+                let timeLeft = 60;
+                const timerDisplay = document.getElementById('otpTimer');
+                const interval = setInterval(() => {
+                    if(timeLeft <= 0) {
+                        clearInterval(interval);
+                        btn.disabled = false;
+                        timerDisplay.innerHTML = "Mã đã hết hạn, vui lòng gửi lại.";
+                    } else {
+                        timerDisplay.innerHTML = "Mã hiệu lực trong: " + timeLeft + "s";
+                    }
+                    timeLeft -= 1;
+                }, 1000);
+            });
+    });
+</script>
+<script>
+    document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Ngăn load lại trang
+
+        const email = document.getElementById('forgotEmail').value;
+        const msgDiv = document.getElementById('forgotMsg');
+        const btn = document.getElementById('btnForgot');
+
+        msgDiv.innerHTML = "Đang xử lý...";
+        btn.disabled = true;
+
+        // Gửi yêu cầu bằng Fetch thay vì submit form truyền thống
+        fetch('${pageContext.request.contextPath}/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'email=' + encodeURIComponent(email)
+        })
+            .then(response => response.text())
+            .then(data => {
+                if(data === "success") {
+                    msgDiv.className = "mt-2 small text-success";
+                    msgDiv.innerHTML = "Mật khẩu mới đã được gửi vào Email của bạn!";
+                } else if(data === "not_found") {
+                    msgDiv.className = "mt-2 small text-danger";
+                    msgDiv.innerHTML = "Email này không tồn tại trong hệ thống!";
+                } else {
+                    msgDiv.className = "mt-2 small text-danger";
+                    msgDiv.innerHTML = "Có lỗi xảy ra, vui lòng thử lại!";
+                }
+                btn.disabled = false;
+            });
+    });
+</script>

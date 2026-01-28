@@ -95,17 +95,22 @@
                                                         <input type="hidden" name="action" value="updateStatus" />
                                                         <input type="hidden" name="orderId" value="${o.id}" />
 
-                                                        <select name="status" onchange="this.form.submit()"
-                                                            class="form-select form-select-sm border-0 fw-bold
+                                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm border-0 fw-bold
                                                     ${o.status == 'Đã giao hàng' ? 'text-success bg-success-subtle' :
                                                       o.status == 'Đang giao hàng' ? 'text-primary bg-primary-subtle' :
-                                                      o.status == 'Đã hủy' ? 'text-danger bg-danger-subtle' : 'text-warning bg-warning-subtle'}" style="width: 160px;">
+                                                      o.status == 'Đã hủy' ? 'text-danger bg-danger-subtle' :
+                                                      o.status == 'Bị hoàn' ? 'text-danger bg-danger-subtle' :
+                                                      'text-warning bg-warning-subtle'}" style="width: 160px;">
                                                             <option value="Chờ xác nhận" ${o.status=='Chờ xác nhận'
                                                                 ? 'selected' : '' }>Chờ xác nhận</option>
+                                                            <option value="Đang xác nhận" ${o.status=='Đang xác nhận'
+                                                                ? 'selected' : '' }>Đang xác nhận</option>
                                                             <option value="Đang giao hàng" ${o.status=='Đang giao hàng'
                                                                 ? 'selected' : '' }>Đang giao hàng</option>
                                                             <option value="Đã giao hàng" ${o.status=='Đã giao hàng'
                                                                 ? 'selected' : '' }>Đã giao hàng</option>
+                                                            <option value="Bị hoàn" ${o.status=='Bị hoàn' ? 'selected'
+                                                                : '' }>Bị hoàn</option>
                                                             <option value="Đã hủy" ${o.status=='Đã hủy' ? 'selected'
                                                                 : '' }>Đã hủy</option>
                                                         </select>

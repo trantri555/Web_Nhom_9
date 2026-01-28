@@ -65,7 +65,8 @@ public class AddProductServlet extends HttpServlet {
             for (Part part : request.getParts()) {
                 if ("images".equals(part.getName()) && part.getSize() > 0) {
                     String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    if (fileName == null || fileName.isEmpty()) continue;
+                    if (fileName == null || fileName.isEmpty())
+                        continue;
 
                     String savedFileName = System.currentTimeMillis() + "_" + fileName;
 
@@ -73,10 +74,11 @@ public class AddProductServlet extends HttpServlet {
                     part.write(uploadPath + File.separator + savedFileName);
 
                     // 2. Save to Source Directory (Best Effort Persistence)
-                    String sourcePath = "D:\\web_nhom9\\src\\main\\webapp\\images\\product";
+                    String sourcePath = "D:\\antigravity_wnhom9\\mới\\web_nhom9\\src\\main\\webapp\\images\\product";
                     File sourceDir = new File(sourcePath);
 
-                    if (!sourceDir.exists()) sourceDir.mkdirs();
+                    if (!sourceDir.exists())
+                        sourceDir.mkdirs();
 
                     if (sourceDir.exists()) {
                         try {
@@ -146,7 +148,8 @@ public class AddProductServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             // Even if image update fails, the product is created.
-            // We might want to warn the user, but for now redirect with success (since product exists)
+            // We might want to warn the user, but for now redirect with success (since
+            // product exists)
             // or specific warning.
             response.sendRedirect(request.getContextPath() + "/admin/products?success=true&warning=image_error");
             return;

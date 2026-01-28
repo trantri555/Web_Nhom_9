@@ -20,16 +20,14 @@ public class DashboardServlet extends HttpServlet {
             int todayOrders = adminDAO.countOrdersToday();
             int weekOrders = adminDAO.countOrdersWeek();
             int monthOrders = adminDAO.countOrdersMonth();
-
-            // New stats
-            double totalRevenue = adminDAO.getTotalRevenue();
             int totalOrders = adminDAO.getTotalOrders();
+            double totalRevenue = adminDAO.getTotalRevenue();
 
             req.setAttribute("todayOrders", todayOrders);
             req.setAttribute("weekOrders", weekOrders);
             req.setAttribute("monthOrders", monthOrders);
-            req.setAttribute("totalRevenue", totalRevenue);
             req.setAttribute("totalOrders", totalOrders);
+            req.setAttribute("totalRevenue", totalRevenue);
 
             // 2. Dữ liệu biểu đồ doanh thu (7 ngày gần nhất)
             java.util.Map<java.sql.Date, Double> revenueMap = adminDAO.getRevenueLast7Days();

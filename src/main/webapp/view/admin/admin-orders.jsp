@@ -82,7 +82,13 @@
                                                         #DH${o.id}
                                                     </a>
                                                 </td>
-                                                <td>${o.customerName}</td>
+                                                <td>
+                                                    ${o.customerName}
+                                                    <c:if test="${o.userId > 0}">
+                                                        <br><small class="text-muted" style="font-size: 0.85em;">ID:
+                                                            ${o.userId}</small>
+                                                    </c:if>
+                                                </td>
                                                 <td>
                                                     <fmt:formatDate value="${o.orderDate}" pattern="dd/MM/yyyy HH:mm" />
                                                 </td>
@@ -95,7 +101,7 @@
                                                         <input type="hidden" name="action" value="updateStatus" />
                                                         <input type="hidden" name="orderId" value="${o.id}" />
 
-                                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm border-0 fw-bold
+                                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm border-0 fw-bold rounded-3
                                                     ${o.status == 'Đã giao hàng' ? 'text-success bg-success-subtle' :
                                                       o.status == 'Đang giao hàng' ? 'text-primary bg-primary-subtle' :
                                                       o.status == 'Đã hủy' ? 'text-danger bg-danger-subtle' :
@@ -122,8 +128,9 @@
                                                         onsubmit="return confirm('Xóa đơn hàng này?')" class="m-0">
                                                         <input type="hidden" name="action" value="delete" />
                                                         <input type="hidden" name="orderId" value="${o.id}" />
-                                                        <button class="btn btn-outline-danger btn-sm rounded-pill"
-                                                            title="Xóa">
+                                                        <button
+                                                            class="btn btn-outline-danger btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                                                            style="width: 32px; height: 32px;" title="Xóa">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </form>

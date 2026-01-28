@@ -16,8 +16,7 @@ public class ProductController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
 
         // 1. Lấy tham số lọc từ URL
-        String minPriceStr = request.getParameter("minPrice");
-        String maxPriceStr = request.getParameter("maxPrice");
+        String priceRange = request.getParameter("priceRange");
         String volumeStr = request.getParameter("volume");
         String supplier = request.getParameter("supplier");
         String sortBy = request.getParameter("sort");
@@ -38,18 +37,68 @@ public class ProductController extends HttpServlet {
         Double minPrice = null;
         Double maxPrice = null;
 
-        try {
-            if (minPriceStr != null && !minPriceStr.isEmpty())
-                minPrice = Double.parseDouble(minPriceStr);
-            if (maxPriceStr != null && !maxPriceStr.isEmpty())
-                maxPrice = Double.parseDouble(maxPriceStr);
-        } catch (NumberFormatException e) {
-            // Ignore invalid input
+        if (priceRange != null) {
+            switch (priceRange) {
+                case "0-50":
+                    maxPrice = 50000.0;
+                    break;
+                case "50-100":
+                    minPrice = 50000.0;
+                    maxPrice = 100000.0;
+                    break;
+                case "100-150":
+                    minPrice = 100000.0;
+                    maxPrice = 150000.0;
+                    break;
+                case "150-200":
+                    minPrice = 150000.0;
+                    maxPrice = 200000.0;
+                    break;
+                case "200-300":
+                    minPrice = 200000.0;
+                    maxPrice = 300000.0;
+                    break;
+                case "300-500":
+                    minPrice = 300000.0;
+                    maxPrice = 500000.0;
+                    break;
+                case "above500":
+                    minPrice = 500000.0;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Integer minVol = null;
+        Integer maxVol = null;
+
+        if (volumeStr != null) {
+            switch (volumeStr) {
+                case "100-250":
+                    minVol = 100;
+                    maxVol = 250;
+                    break;
+                case "250-500":
+                    minVol = 250;
+                    maxVol = 500;
+                    break;
+                case "500-1000":
+                    minVol = 500;
+                    maxVol = 1000;
+                    break;
+                case "above1000":
+                    minVol = 1000;
+                    break;
+            }
         }
 
         // 2. Gọi DAO để lấy danh sách đã lọc (có phân trang)
-        List<Product> list = dao.getFilteredProducts(minPrice, maxPrice, volumeStr, supplier, sortBy, offset, pageSize);
-        int totalProducts = dao.getTotalFilteredProducts(minPrice, maxPrice, volumeStr, supplier);
+        // Note: We need to update DAO methods to accept minVol/maxVol instead of single
+        // volume string
+        List<Product> list = dao.getFilteredProducts(minPrice, maxPrice, minVol, maxVol, supplier, sortBy, offset,
+                pageSize);
+        int totalProducts = dao.getTotalFilteredProducts(minPrice, maxPrice, minVol, maxVol, supplier);
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
         // 3. Lấy danh sách volume và supplier để hiển thị checkbox/select
@@ -66,8 +115,8 @@ public class ProductController extends HttpServlet {
         request.setAttribute("totalPages", totalPages);
 
         // Giữ lại giá trị filter để điền lại vào form
-        request.setAttribute("currentMinPrice", minPriceStr);
-        request.setAttribute("currentMaxPrice", maxPriceStr);
+        // Giữ lại giá trị filter để điền lại vào form
+        request.setAttribute("currentPriceRange", priceRange);
         request.setAttribute("currentVolume", volumeStr);
         request.setAttribute("currentSupplier", supplier);
         request.setAttribute("currentSort", sortBy);

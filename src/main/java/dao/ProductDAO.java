@@ -122,33 +122,31 @@ public class ProductDAO extends BaseDao {
                 .list());
     }
 
+    // getTopBestSeller: used in HOME page -> Filter hidden
     public List<Product> getTopBestSeller() {
-
         String sql = """
-            SELECT
-                p.id AS id,
-                p.product_name AS name,
-                p.price,
-                p.volume,
-                p.supplier_name,
-                p.quantity,
-                pi.image_URL AS img,
-                p.description,
-                SUM(oi.quantity) AS total_sold
-            FROM products p
-            JOIN orderitems oi ON p.id = oi.id_product
-            LEFT JOIN product_images pi ON p.id = pi.id_product
-            GROUP BY p.id, pi.image_URL
-            ORDER BY total_sold DESC
-            LIMIT 8
-            """;
+                    SELECT
+                        p.id AS id,
+                        p.product_name AS name,
+                        p.price,
+                        p.volume,
+                        p.supplier_name,
+                        p.quantity,
+                        COALESCE(pi.image_URL, p.image) AS img,
+                        p.description
+                    FROM products p
+                    LEFT JOIN product_images pi ON p.image = pi.id
+                    WHERE p.quantity >= 0
+                    ORDER BY RAND()
+                    LIMIT 8
+                """;
 
         return get().withHandle(h -> h.createQuery(sql)
                 .mapToBean(Product.class)
                 .list());
     }
 
-    // // Sản phẩm liên quan (Random 8 sản phẩm khác)
+    // getRelatedProducts: used in Product Detail -> Filter hidden
     public List<Product> getRelatedProducts(int currentId) {
         String sql = """
                     SELECT
@@ -190,7 +188,8 @@ public class ProductDAO extends BaseDao {
     }
 
     // Lọc sản phẩm
-    public List<Product> getFilteredProducts(Double minPrice, Double maxPrice, String volumeStr, String supplier,
+    public List<Product> getFilteredProducts(Double minPrice, Double maxPrice, Integer minVol, Integer maxVol,
+                                             String supplier,
                                              String sortBy, int offset, int limit) {
         StringBuilder sql = new StringBuilder("""
                     SELECT
@@ -217,14 +216,11 @@ public class ProductDAO extends BaseDao {
         // Filter hidden products for valid valid
         sql.append(" AND p.quantity >= 0");
 
-        Integer volume = null;
-        if (volumeStr != null && !volumeStr.isEmpty()) {
-            try {
-                volume = Integer.parseInt(volumeStr);
-                sql.append(" AND p.volume = :volume");
-            } catch (NumberFormatException e) {
-                // Ignore invalid volume
-            }
+        if (minVol != null) {
+            sql.append(" AND p.volume >= :minVol");
+        }
+        if (maxVol != null) {
+            sql.append(" AND p.volume <= :maxVol");
         }
 
         if (supplier != null && !supplier.isEmpty()) {
@@ -244,15 +240,16 @@ public class ProductDAO extends BaseDao {
 
         sql.append(" LIMIT :offset, :limit");
 
-        Integer finalVolume = volume;
         return get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
             if (minPrice != null)
                 query.bind("minPrice", minPrice);
             if (maxPrice != null)
                 query.bind("maxPrice", maxPrice);
-            if (finalVolume != null)
-                query.bind("volume", finalVolume);
+            if (minVol != null)
+                query.bind("minVol", minVol);
+            if (maxVol != null)
+                query.bind("maxVol", maxVol);
             if (supplier != null && !supplier.isEmpty())
                 query.bind("supplier", supplier);
             query.bind("offset", offset);
@@ -261,7 +258,8 @@ public class ProductDAO extends BaseDao {
         });
     }
 
-    public int getTotalFilteredProducts(Double minPrice, Double maxPrice, String volumeStr, String supplier) {
+    public int getTotalFilteredProducts(Double minPrice, Double maxPrice, Integer minVol, Integer maxVol,
+                                        String supplier) {
         StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products p WHERE 1=1 ");
         if (minPrice != null)
             sql.append(" AND p.price >= :minPrice");
@@ -270,26 +268,25 @@ public class ProductDAO extends BaseDao {
 
         sql.append(" AND p.quantity >= 0"); // Filter hidden
 
-        Integer volume = null;
-        if (volumeStr != null && !volumeStr.isEmpty()) {
-            try {
-                volume = Integer.parseInt(volumeStr);
-                sql.append(" AND p.volume = :volume");
-            } catch (NumberFormatException e) {
-            }
+        if (minVol != null) {
+            sql.append(" AND p.volume >= :minVol");
+        }
+        if (maxVol != null) {
+            sql.append(" AND p.volume <= :maxVol");
         }
         if (supplier != null && !supplier.isEmpty())
             sql.append(" AND p.supplier_name = :supplier");
 
-        Integer finalVolume = volume;
         return get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
             if (minPrice != null)
                 query.bind("minPrice", minPrice);
             if (maxPrice != null)
                 query.bind("maxPrice", maxPrice);
-            if (finalVolume != null)
-                query.bind("volume", finalVolume);
+            if (minVol != null)
+                query.bind("minVol", minVol);
+            if (maxVol != null)
+                query.bind("maxVol", maxVol);
             if (supplier != null && !supplier.isEmpty())
                 query.bind("supplier", supplier);
             return query.mapTo(Integer.class).one();

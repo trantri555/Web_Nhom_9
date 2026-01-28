@@ -20,25 +20,33 @@ public class ForgotPasswordServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         UserDAO dao = new UserDAO();
+        response.setContentType("text/plain");
 
         if (dao.isUserEmailExists(email)) {
-            // 1. Generate new password (simple random string)
-            String newPassword = UUID.randomUUID().toString().substring(0, 8);
+            // 1. Tạo mật khẩu mới ngẫu nhiên (8 ký tự)
+            String newPassword = java.util.UUID.randomUUID().toString().substring(0, 8);
 
-            // 2. Update DB
+            // 2. Cập nhật vào Database (Hàm updatePassword bạn đã có trong UserDAO)
             boolean isUpdated = dao.updatePassword(email, newPassword);
 
             if (isUpdated) {
-                // 3. Mock send email
-                System.out.println(">>> [MOCK EMAIL] Reset Password for " + email + ": " + newPassword);
-                request.setAttribute("success", "Mật khẩu mới đã được gửi vào email (Check Console Log)!");
+                // 3. Gửi email thực tế dùng MailUtil đã hoàn thiện ở bước trước
+                String subject = "Mật khẩu mới cho tài khoản Juicy";
+                String content = "Chào bạn, mật khẩu mới của bạn là: <b>" + newPassword + "</b><br>Vui lòng đăng nhập và đổi lại mật khẩu ngay.";
+
+                // Dùng hàm gửi mail bạn đã có (nên dùng bản sendEmail trả về boolean)
+                boolean mailSent = util.MailUtil.sendForgotPasswordMail(email, newPassword); // Hoặc MailUtil.sendEmail(...)
+
+                if (mailSent) {
+                    response.getWriter().write("success");
+                } else {
+                    response.getWriter().write("error_mail");
+                }
             } else {
-                request.setAttribute("error", "Lỗi hệ thống, vui lòng thử lại sau!");
+                response.getWriter().write("error_db");
             }
         } else {
-            request.setAttribute("error", "Email không tồn tại trong hệ thống!");
+            response.getWriter().write("not_found");
         }
-
-        request.getRequestDispatcher("/view/user/login.jsp").forward(request, response);
     }
 }

@@ -52,4 +52,12 @@ public class Cart implements Serializable {
     public boolean empty() {
         return data.isEmpty();
     }
+    public int getTotalItems() {
+        int total = 0;
+        // Giả sử giỏ hàng của bạn lưu trong một Map hoặc List tên là items
+        for (CartItem item : data.values()) {
+            total += item.getQuantity(); // Cộng dồn số lượng từng món
+        }
+        return total;
+    }
 }

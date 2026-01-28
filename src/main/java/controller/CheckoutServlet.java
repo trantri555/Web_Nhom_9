@@ -27,7 +27,7 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-        String customerName = request.getParameter("customerName");
+        String customerName = request.getParameter("fullName");
         String paymentMethod = request.getParameter("paymentMethod");
 
         Connection conn = null;
@@ -57,7 +57,7 @@ public class CheckoutServlet extends HttpServlet {
             int orderId = orderDAO.insertAndReturnId(order);
 
             // ===== 2. Tạo OrderItem =====
-            OrderItemDAO itemDAO = new OrderItemDAO(conn);
+            OrderItemDAO itemDAO = new OrderItemDAO();
 
             for (CartItem ci : cart.getAllItems()) {
                 OrderItem oi = new OrderItem();
@@ -65,7 +65,7 @@ public class CheckoutServlet extends HttpServlet {
                 oi.setProductId(ci.getProduct().getId());
                 oi.setQuantity(ci.getQuantity());
                 oi.setPriceAtTime(ci.getPrice());
-                itemDAO.insert(oi);
+                itemDAO.insertOrderItem(oi);
             }
 
             conn.commit(); //  OK

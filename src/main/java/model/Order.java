@@ -4,30 +4,21 @@ import java.util.Date;
 
 public class Order {
     private int id;
-    private double totalPrice;
-    private String status;
+    private int id_user;
     private Date orderDate;
-    private String paymentMethod;
+    private String status;
     private String paymentStatus;
-    private String customerName;
+    private double totalPrice;
+    private String paymentMethod;
+    private int id_voucher;
 
-    public Order() {
-    }
+    public Order() {}
 
     public Order(int id, double totalPrice, String status, Date orderDate) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.status = status;
         this.orderDate = orderDate;
-    }
-
-    // Getter & Setter
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
     public int getId() {
@@ -38,20 +29,12 @@ public class Order {
         this.id = id;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public int getId_user() {
+        return id_user;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public Date getOrderDate() {
@@ -62,12 +45,12 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPaymentStatus() {
@@ -76,5 +59,29 @@ public class Order {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getId_voucher() {
+        return id_voucher;
+    }
+
+    public void setId_voucher(int id_voucher) {
+        this.id_voucher = id_voucher;
     }
 }

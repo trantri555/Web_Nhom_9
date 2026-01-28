@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <jsp:include page="/view/user/include/header.jsp">
-    <jsp:param name="title" value="Trang Chủ"/>
-    <jsp:param name="activePage" value="products"/>
+    <jsp:param name="title" value="Trang Chủ" />
+    <jsp:param name="activePage" value="products" />
 </jsp:include>
 <style>
     .product-card {
@@ -196,22 +196,18 @@
                                 <h6 class="text-muted small">${p.volume}ml</h6>
                                 <h5 class="card-title fw-bold fs-6">${p.name}</h5>
                                 <p class="card-text text-danger fw-bold fs-5 my-2">
-                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/>.000đ
+                                    <fmt:formatNumber value="${p.price}" type="currency"
+                                                      currencySymbol="đ" maxFractionDigits="0"/>
                                 </p>
                                 <div class="mt-auto pt-3">
                                     <a href="${pageContext.request.contextPath}/product-detail?id=${p.id}"
                                        class="btn btn-sm btn-outline-success rounded-pill px-3">Chi
                                         tiết</a>
-                                    <form action="/cart" method="post">
-                                        <input type="hidden" name="action" value="add">
-                                        <input type="hidden" name="productId" value="${p.id}">
-                                        <input type="hidden" name="quantity" value="1">
-                                        <button type="submit"
-                                                class="btn btn-sm btn-primary-custom rounded-pill px-3">Thêm
-                                            vào giỏ
-                                        </button>
-                                    </form>
-
+                                    <button type="button"
+                                            class="btn btn-sm btn-primary-custom rounded-pill px-3 btn-add-to-cart"
+                                            data-id="${p.id}">
+                                        Thêm vào giỏ
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +252,7 @@
 </div>
 <%@include file="/view/user/include/footer.jsp" %>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            </body>
 
-</html>
+            </html>

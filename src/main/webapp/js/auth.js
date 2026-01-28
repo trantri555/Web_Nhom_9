@@ -22,3 +22,18 @@ export function handleLogout() {
         window.location.href = `/${contextPath}/logout`;
     }
 }
+//ktra flag lấy từ jsp cho viec hiện modal
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Kiểm tra xem trên trang có cái thẻ "đánh dấu" triggerModalFlag không
+    const flag = document.getElementById('triggerModalFlag');
+
+    if (flag && flag.value === 'true') {
+        // 2. Nếu có, tìm Modal và mở nó lên
+        const modalElement = document.getElementById('checkoutModal');
+
+        if (modalElement) {
+            const myModal = new bootstrap.Modal(modalElement);
+            myModal.show();
+        }
+    }
+});

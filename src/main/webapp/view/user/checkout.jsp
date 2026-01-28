@@ -20,7 +20,6 @@
                   method="post"
                   class="p-4 shadow rounded bg-white">
 
-
             <div class="mb-3">
                     <label class="form-label fw-semibold">Họ và tên</label>
                     <input type="text" name="fullName"

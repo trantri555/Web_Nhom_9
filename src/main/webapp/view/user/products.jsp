@@ -104,7 +104,7 @@
                                 </ul>
                                 <a href="${pageContext.request.contextPath}/login"
                                     class="btn btn-warning rounded-pill ms-lg-3 fw-semibold shadow-sm">Đăng Nhập</a>
-<a href="${pageContext.request.contextPath}/cart"
+                                <a href="${pageContext.request.contextPath}/cart"
                                     class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
                                     <i class="bi bi-cart me-1"></i> Giỏ Hàng
                                 </a>
@@ -229,8 +229,29 @@
                                         <c:forEach items="${productList}" var="p">
                                             <div class="col">
                                                 <div class="card product-card h-100 text-center">
-                                                    <img src="${p.img}" class="card-img-top" alt="${p.name}"
-                                                        onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'" />
+                                                    <div class="product-img-wrapper"
+                                                        style="height: 250px; overflow: hidden;">
+                                                        <c:choose>
+                                                            <c:when test="${p.img != null && p.img.contains('http')}">
+                                                                <img src="${p.img}" class="card-img-top h-100 w-100"
+                                                                    style="object-fit: cover;" alt="${p.name}"
+                                                                    onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'">
+                                                            </c:when>
+                                                            <c:when
+                                                                test="${p.img != null && (p.img.contains('/') || p.img.contains('\\\\'))}">
+                                                                <img src="${pageContext.request.contextPath}/${p.img}"
+                                                                    class="card-img-top h-100 w-100"
+                                                                    style="object-fit: cover;" alt="${p.name}"
+                                                                    onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'">
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <img src="${pageContext.request.contextPath}/images/product/${p.img}"
+                                                                    class="card-img-top h-100 w-100"
+                                                                    style="object-fit: cover;" alt="${p.name}"
+                                                                    onerror="this.src='${pageContext.request.contextPath}/images/logo/logo-juicy.png'">
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
 
                                                     <div class="card-body d-flex flex-column">
                                                         <h6 class="text-muted small">${p.volume}ml</h6>
@@ -247,7 +268,8 @@
                                                                 <input type="hidden" name="action" value="add">
                                                                 <input type="hidden" name="productId" value="${p.id}">
                                                                 <input type="hidden" name="quantity" value="1">
-                                                                <button type="submit" class="btn btn-sm btn-primary-custom rounded-pill px-3" >Thêm
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-primary-custom rounded-pill px-3">Thêm
                                                                     vào giỏ</button>
                                                             </form>
 

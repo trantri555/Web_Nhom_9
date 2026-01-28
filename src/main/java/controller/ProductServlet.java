@@ -20,33 +20,47 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        req.setAttribute("products", service.getListProduct());
+        String search = req.getParameter("search");
+        if (search != null && !search.trim().isEmpty()) {
+            req.setAttribute("products", service.searchByName(search));
+        } else {
+            req.setAttribute("products", service.getListProduct());
+        }
         req.getRequestDispatcher("/view/admin/admin-products.jsp").forward(req, resp);
     }
 
-    // @Override
-    // protected void doPost(HttpSaervletRequest req, HttpServletResponse resp)
-    // throws IOException {
-    //
-    // String action = req.getParameter("action");
-    //
-    // if ("add".equals(action)) {
-    // Product p = new Product();
-    // p.setName(req.getParameter("name"));
-    // p.setPrice(Double.parseDouble(req.getParameter("price")));
-    // p.setCategory(req.getParameter("category"));
-    // p.setQuantity(Integer.parseInt(req.getParameter("quantity")));
-    // p.setImg("placeholder.png");
-    //
-    // service.add(p);
-    // }
-    //
-    // if ("delete".equals(action)) {
-    // int id = Integer.parseInt(req.getParameter("id"));
-    // service.delete(id);
-    // }
-    //
-    // resp.sendRedirect(req.getContextPath() + "/admin/products");
-    // }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        String action = req.getParameter("action");
+        String idStr = req.getParameter("id");
+        int id = 0;
+        try {
+            if (idStr != null)
+                id = Integer.parseInt(idStr);
+        } catch (NumberFormatException e) {
+            // Ignore
+        }
+
+        if ("hidden".equals(action)) {
+            service.hideProduct(id);
+        } else if ("show".equals(action)) {
+            service.showProduct(id);
+        } else if ("update_quantity".equals(action)) {
+            String qtyStr = req.getParameter("quantity");
+            int quantity = 0;
+            try {
+                if (qtyStr != null)
+                    quantity = Integer.parseInt(qtyStr);
+                if (quantity < 0)
+                    quantity = 0; // Prevent negative stock
+            } catch (NumberFormatException e) {
+            }
+            service.updateQuantity(id, quantity);
+        }
+
+        // Redirect back to product list with success message
+        resp.sendRedirect(req.getContextPath() + "/admin/products?success=update");
+    }
 
 }

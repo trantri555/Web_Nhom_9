@@ -9,7 +9,10 @@ import model.Product;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @WebServlet("/add-product")
 @MultipartConfig(maxFileSize = 5 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
@@ -48,8 +51,7 @@ public class AddProductServlet extends HttpServlet {
             return;
         }
 
-        // 2. Prepare upload
-        // Change path to images/product to match frontend
+        // 2. Prepare upload logic
         String uploadPath = getServletContext().getRealPath("/images/product");
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists())
@@ -61,46 +63,72 @@ public class AddProductServlet extends HttpServlet {
         for (Part part : request.getParts()) {
             if ("images".equals(part.getName()) && part.getSize() > 0) {
                 String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                if (fileName == null || fileName.isEmpty()) continue;
+
                 String savedFileName = System.currentTimeMillis() + "_" + fileName;
+
+                // 1. Save to Runtime Directory (Immediate View)
                 part.write(uploadPath + File.separator + savedFileName);
+
+                // 2. Save to Source Directory (Best Effort Persistence)
+                // Hardcoded path based on project structure
+                String sourcePath = "d:\\antigravity_wnhom9\\web_nhom9\\src\\main\\webapp\\images\\product";
+                File sourceDir = new File(sourcePath);
+
+                if (!sourceDir.exists()) sourceDir.mkdirs();
+
+                if (sourceDir.exists()) {
+                    try {
+                        Path sourceFile = Paths.get(sourcePath, savedFileName);
+                        Path runtimeFile = Paths.get(uploadPath, savedFileName);
+                        Files.copy(runtimeFile, sourceFile, StandardCopyOption.REPLACE_EXISTING);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 savedFileNames.add(savedFileName);
             }
         }
 
+        // 3. Fallback to URL if no files uploaded
         if (savedFileNames.isEmpty()) {
-            // Fallback for singular "image" if someone didn't update JSP
-            Part part = request.getPart("image");
-            if (part != null && part.getSize() > 0) {
-                String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                String savedFileName = System.currentTimeMillis() + "_" + fileName;
-                part.write(uploadPath + File.separator + savedFileName);
-                savedFileNames.add(savedFileName);
+            String imageUrl = request.getParameter("image_url");
+            if (imageUrl != null && !imageUrl.trim().isEmpty()) {
+                // Use URL directly
+                savedFileNames.add(imageUrl.trim());
             }
         }
 
+        // 4. Final validation check
         if (savedFileNames.isEmpty()) {
-            response.sendRedirect("admin-product.jsp?error=no_image");
+            response.sendRedirect("admin-products?error=no_image");
             return;
         }
 
-        // 3. Set Product
+        // 5. Set Product
         Product p = new Product();
         p.setName(name);
         p.setPrice(price);
         p.setQuantity(quantity);
-        // Use the first image as the main thumbnail
-        p.setImg(savedFileNames.get(0));
+        p.setImg(""); // Will update with ID later
         p.setDescription(description);
         p.setSupplier_name(supplier);
         p.setVolume(volume);
 
-        // 4. Insert DB
+        // 6. Insert Product to DB
         ProductDAO dao = new ProductDAO();
         int newProductId = dao.insert(p);
 
-        // 5. Insert extra images
+        // 7. Insert Images and update Main Product Image
+        boolean first = true;
         for (String img : savedFileNames) {
-            dao.insertImage(newProductId, img);
+            int imageId = dao.insertImage(newProductId, img);
+            if (first) {
+                // Update product to point to the first image's ID
+                dao.updateProductImage(newProductId, String.valueOf(imageId));
+                first = false;
+            }
         }
 
         response.sendRedirect(request.getContextPath() + "/admin/products?success=add");

@@ -9,19 +9,18 @@ public class ProductDAO extends BaseDao {
     // Lấy tất cả sản phẩm (cho trang Products)
     public List<Product> getAll() {
         String sql = """
-                            SELECT
-                                                     p.id AS id,
-                                                     p.product_name AS name,
-                                                     p.price,
-                                                     p.volume,
-                                                     p.supplier_name,
-                                                     p.quantity,
-                                                     COALESCE(pi_new.image_URL, pi_old.image_URL) AS img, -- Ưu tiên ảnh mới, fallback về ảnh cũ
-                                                     p.description
-                                                 FROM products p
-                                                 LEFT JOIN product_images pi_old ON p.image = pi_old.id
-                                                 LEFT JOIN product_images pi_new ON p.id = pi_new.id_product
-                                                 GROUP BY p.id
+                    SELECT
+                        p.id AS id,
+                        p.product_name AS name,
+                        p.price,
+                        p.volume,
+                        p.supplier_name,
+                        p.quantity,
+                        COALESCE(pi.image_URL, p.image) AS img,
+                        p.description
+                    FROM products p
+                    LEFT JOIN product_images pi ON p.image = pi.id
+                    GROUP BY p.id
                 """;
 
         return jdbi.withHandle(handle -> handle.createQuery(sql)
@@ -43,10 +42,10 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi.image_URL, p.image) AS img,
                         p.description
                     FROM products p
-                    JOIN product_images pi ON p.image = pi.id
+                    LEFT JOIN product_images pi ON p.image = pi.id
                     WHERE p.id = :id
                 """;
 
@@ -72,11 +71,21 @@ public class ProductDAO extends BaseDao {
                 .one());
     }
 
-    public void insertImage(int productId, String imageUrl) {
+    public int insertImage(int productId, String imageUrl) {
         String sql = "INSERT INTO product_images (id_product, image_URL) VALUES (:pid, :url)";
-        get().useHandle(handle -> handle.createUpdate(sql)
+        return get().withHandle(handle -> handle.createUpdate(sql)
                 .bind("pid", productId)
                 .bind("url", imageUrl)
+                .executeAndReturnGeneratedKeys("id")
+                .mapTo(Integer.class)
+                .one());
+    }
+
+    public void updateProductImage(int productId, String imageRef) {
+        String sql = "UPDATE products SET image = :img WHERE id = :pid";
+        get().useHandle(handle -> handle.createUpdate(sql)
+                .bind("pid", productId)
+                .bind("img", imageRef)
                 .execute());
     }
 
@@ -91,11 +100,10 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        COALESCE(pi_new.image_URL, pi_old.image_URL) AS img,
+                        COALESCE(pi.image_URL, p.image) AS img,
                         p.description
                     FROM products p
-                    LEFT JOIN product_images pi_old ON p.image = pi_old.id
-                    LEFT JOIN product_images pi_new ON p.id = pi_new.id_product
+                    LEFT JOIN product_images pi ON p.image = pi.id
                     GROUP BY p.id
                 """;
 
@@ -114,51 +122,23 @@ public class ProductDAO extends BaseDao {
                 .list());
     }
 
-    // // Xóa sản phẩm
-    // public void delete(int id) {
-    // get().useHandle(handle ->
-    // handle.createUpdate("DELETE FROM Product WHERE id_product = :id")
-    // .bind("id", id)
-    // .execute()
-    // );
-    // }
-    //
-    // // Cập nhật sản phẩm
-    // public void update(Product p) {
-    // String sql = """
-    // UPDATE Product SET
-    // product_name = :name,
-    // price = :price,
-    // volume = :volume,
-    // supplier_name= :supplier,
-    // quantity = :quantity,
-    // image = :img,
-    // description = :description
-    // WHERE id_product = :id
-    // """;
-    //
-    // get().useHandle(handle ->
-    // handle.createUpdate(sql)
-    // .bindBean(p)
-    // .execute()
-    // );
-    // }
+    // getTopBestSeller: used in HOME page -> Filter hidden
     public List<Product> getTopBestSeller() {
-
         String sql = """
-                SELECT
-                    p.id AS id,
-                    p.product_name AS name,
-                    p.price,
-                    p.volume,
-                    p.supplier_name,
-                    p.quantity,
-                    pi.image_URL AS img,
-                    p.description
-                FROM products p
-                LEFT JOIN product_images pi ON p.image = pi.id
-                ORDER BY RAND()
-                LIMIT 8
+                    SELECT
+                        p.id AS id,
+                        p.product_name AS name,
+                        p.price,
+                        p.volume,
+                        p.supplier_name,
+                        p.quantity,
+                        COALESCE(pi.image_URL, p.image) AS img,
+                        p.description
+                    FROM products p
+                    LEFT JOIN product_images pi ON p.image = pi.id
+                    WHERE p.quantity >= 0
+                    ORDER BY RAND()
+                    LIMIT 8
                 """;
 
         return get().withHandle(h -> h.createQuery(sql)
@@ -166,7 +146,7 @@ public class ProductDAO extends BaseDao {
                 .list());
     }
 
-    // // Sản phẩm liên quan (Random 8 sản phẩm khác)
+    // getRelatedProducts: used in Product Detail -> Filter hidden
     public List<Product> getRelatedProducts(int currentId) {
         String sql = """
                     SELECT
@@ -176,11 +156,11 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi.image_URL, p.image) AS img,
                         p.description
                     FROM products p
                     LEFT JOIN product_images pi ON p.image = pi.id
-                    WHERE p.id != :id
+                    WHERE p.id != :id AND p.quantity >= 0
                     ORDER BY RAND()
                     LIMIT 8
                 """;
@@ -218,7 +198,7 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi.image_URL, p.image) AS img,
                         p.description
                     FROM products p
                     LEFT JOIN product_images pi ON p.image = pi.id
@@ -231,6 +211,10 @@ public class ProductDAO extends BaseDao {
         if (maxPrice != null) {
             sql.append(" AND p.price <= :maxPrice");
         }
+
+        // Filter hidden products for valid valid
+        sql.append(" AND p.quantity >= 0");
+
         Integer volume = null;
         if (volumeStr != null && !volumeStr.isEmpty()) {
             try {
@@ -253,7 +237,7 @@ public class ProductDAO extends BaseDao {
         } else if ("nameAsc".equals(sortBy)) {
             sql.append(" ORDER BY p.product_name ASC");
         } else {
-            sql.append(" ORDER BY p.id ASC"); // Default sort for stable pagination
+            sql.append(" ORDER BY p.id DESC"); // Default sort: Newest first
         }
 
         sql.append(" LIMIT :offset, :limit");
@@ -281,6 +265,8 @@ public class ProductDAO extends BaseDao {
             sql.append(" AND p.price >= :minPrice");
         if (maxPrice != null)
             sql.append(" AND p.price <= :maxPrice");
+
+        sql.append(" AND p.quantity >= 0"); // Filter hidden
 
         Integer volume = null;
         if (volumeStr != null && !volumeStr.isEmpty()) {
@@ -318,11 +304,11 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi.image_URL, p.image) AS img,
                         p.description
                     FROM products p
                     LEFT JOIN product_images pi ON p.image = pi.id
-                    WHERE p.product_name LIKE :keyword
+                    WHERE p.product_name LIKE :keyword AND p.quantity >= 0
                 """;
         return get().withHandle(handle -> handle.createQuery(sql)
                 .bind("keyword", "%" + keyword + "%")
@@ -340,11 +326,11 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        pi.image_URL AS img,
+                        COALESCE(pi.image_URL, p.image) AS img,
                         p.description
                     FROM products p
                     LEFT JOIN product_images pi ON p.image = pi.id
-                    WHERE 1=1
+                    WHERE p.quantity >= 0
                 """);
 
         if (supplier != null && !supplier.trim().isEmpty()) {
@@ -366,9 +352,27 @@ public class ProductDAO extends BaseDao {
         });
     }
 
+    // --- ADMIN ACTION: Hide/Show Product ---
+    public void updateStatus(int id, int status) {
+        // status = -1 (Hidden), status >= 0 (Visible)
+        String sql = "UPDATE products SET quantity = :status WHERE id = :id";
+        get().useHandle(handle -> handle.createUpdate(sql)
+                .bind("id", id)
+                .bind("status", status)
+                .execute());
+    }
+
+    public void updateQuantity(int id, int quantity) {
+        String sql = "UPDATE products SET quantity = :qty WHERE id = :id";
+        get().useHandle(handle -> handle.createUpdate(sql)
+                .bind("id", id)
+                .bind("qty", quantity)
+                .execute());
+    }
+
     // --- PHÂN TRANG ---
     public int getTotalProducts() {
-        String sql = "SELECT COUNT(*) FROM products";
+        String sql = "SELECT COUNT(*) FROM products WHERE quantity >= 0";
         return get().withHandle(handle -> handle.createQuery(sql)
                 .mapTo(Integer.class)
                 .one());
@@ -383,12 +387,16 @@ public class ProductDAO extends BaseDao {
                         p.volume,
                         p.supplier_name,
                         p.quantity,
-                        COALESCE(pi_new.image_URL, pi_old.image_URL) AS img,
+                        CASE
+                            WHEN p.image LIKE '%.%' THEN p.image
+                            ELSE pi.image_URL
+                        END AS img,
                         p.description
                     FROM products p
-                    LEFT JOIN product_images pi_old ON p.image = pi_old.id
-                    LEFT JOIN product_images pi_new ON p.id = pi_new.id_product
+                    LEFT JOIN product_images pi ON p.image = pi.id
+                    WHERE p.quantity >= 0
                     GROUP BY p.id
+                    ORDER BY p.id DESC
                     LIMIT :offset, :limit
                 """;
         return get().withHandle(handle -> handle.createQuery(sql)

@@ -115,7 +115,25 @@
                     <div class="row mt-5">
                         <div class="col-md-8">
                             <div class="shadow p-4 bg-white rounded">
-                                <h5 class="mb-3">Biểu đồ doanh thu</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">Biểu đồ doanh thu</h5>
+                                    <div class="d-flex gap-2">
+                                        <select id="chartFilter" class="form-select form-select-sm"
+                                            style="width: auto;">
+                                            <option value="1day">Hôm nay</option>
+                                            <option value="7days" selected>7 ngày qua</option>
+                                            <option value="30days">30 ngày qua</option>
+                                            <option value="year">Năm nay</option>
+                                            <option value="custom">Tùy chọn...</option>
+                                        </select>
+                                        <div id="customDateRange" class="d-flex gap-2"
+                                            style="display: none !important;">
+                                            <input type="date" id="startDate" class="form-control form-control-sm">
+                                            <input type="date" id="endDate" class="form-control form-control-sm">
+                                            <button id="btnFilter" class="btn btn-sm btn-primary">Lọc</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style="height: 350px;">
                                     <canvas id="revenueChart"></canvas>
                                 </div>
@@ -148,7 +166,8 @@
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script>
-                    // Dữ liệu từ Servlet được inject vào đây
+                    const contextPath = '${pageContext.request.contextPath}';
+                    // Dữ liệu từ Servlet được inject vào đây (fallback initial data)
                     window.revenueLabels = ${ revenueLabels };
                     window.revenueData = ${ revenueData };
                 </script>

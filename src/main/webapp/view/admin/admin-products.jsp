@@ -31,13 +31,13 @@
                             <div class="collapse navbar-collapse show">
                                 <ul class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link active fw-semibold"
+                                        <a class="nav-link fw-semibold"
                                             href="${pageContext.request.contextPath}/admin/dashboard">
                                             Dashboard
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link fw-semibold"
+                                        <a class="nav-link active fw-semibold"
                                             href="${pageContext.request.contextPath}/admin/products">
                                             Sản phẩm
                                         </a>
@@ -246,6 +246,11 @@
                                             <input type="number" name="quantity" class="form-control" placeholder="0"
                                                 required>
                                         </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label fw-semibold text-secondary">Nhà Cung Cấp</label>
+                                            <input type="text" name="supplier_name" class="form-control"
+                                                placeholder="Nhập tên nhà cung cấp..." required>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -266,8 +271,15 @@
 
                                     <div class="mb-4">
                                         <label class="form-label fw-semibold text-secondary">Upload ảnh từ máy</label>
-                                        <input type="file" name="images" class="form-control" accept="image/*" multiple>
+                                        <input type="file" id="imageInput" name="images" class="form-control"
+                                            accept="image/*">
                                         <div class="form-text">Hỗ trợ định dạng: .jpg, .png. Kích thước tối đa 5MB.
+                                        </div>
+
+                                        <!-- Image Preview Container -->
+                                        <div class="mt-3 text-center">
+                                            <img id="previewImage" src="#" alt="Preview"
+                                                style="display:none; max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                                         </div>
 
                                         <c:if test="${param.error == 'no_image'}">
@@ -280,9 +292,8 @@
 
                                     <div class="d-flex justify-content-end gap-2 pt-3 border-top">
                                         <button type="button" class="btn btn-light px-4 border"
-                                            data-bs-dismiss="modal">Hủy
-                                            bỏ</button>
-                                        <button type="submit" class="btn btn-premium px-4">
+                                            data-bs-dismiss="modal">Hủy bỏ</button>
+                                        <button type="submit" class="btn btn-premium px-4" id="btnSaveProduct">
                                             <i class="bi bi-check-lg me-1"></i> Lưu Sản Phẩm
                                         </button>
                                     </div>
@@ -340,6 +351,66 @@
                 </footer>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script type="module" src="js/init.js"></script>
+
+                <script>
+                    // 1. Preview Image Logic
+                    const input = document.getElementById("imageInput");
+                    const preview = document.getElementById("previewImage");
+
+                    if (input) {
+                        input.addEventListener("change", () => {
+                            const file = input.files[0];
+                            if (!file) {
+                                preview.style.display = "none";
+                                return;
+                            }
+
+                            const reader = new FileReader();
+                            reader.onload = e => {
+                                preview.src = e.target.result;
+                                preview.style.display = "block";
+                            };
+                            reader.readAsDataURL(file);
+                        });
+                    }
+
+                    // 2. Ajax Submit Logic
+                    const form = document.querySelector("#addProductModal form");
+                    if (form) {
+                        form.addEventListener("submit", async function (e) {
+                            e.preventDefault();
+
+                            const btn = document.getElementById("btnSaveProduct");
+                            const originalText = btn.innerHTML;
+                            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...';
+                            btn.disabled = true;
+
+                            const formData = new FormData(form);
+
+                            try {
+                                const response = await fetch(form.action, {
+                                    method: 'POST',
+                                    body: formData
+                                });
+
+                                const result = await response.json();
+
+                                if (result.success) {
+                                    alert("🎉 Lưu sản phẩm thành công!");
+                                    window.location.reload(); // Reload to show new product
+                                } else {
+                                    alert("❌ Có lỗi xảy ra: " + (result.message || "Không xác định"));
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                                alert("❌ Lỗi kết nối đến server!");
+                            } finally {
+                                btn.innerHTML = originalText;
+                                btn.disabled = false;
+                            }
+                        });
+                    }
+                </script>
             </body>
 
             </html>

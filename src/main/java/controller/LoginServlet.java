@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // 1. Kiểm tra nếu đã có Session rồi thì không cần check Cookie nữa
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("auth") != null) {
             User u = (User) session.getAttribute("auth");
             if (u.getRole() == 1) {

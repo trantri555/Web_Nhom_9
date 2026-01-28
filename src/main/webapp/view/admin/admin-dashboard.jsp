@@ -61,6 +61,25 @@
 
                 <!-- TỔNG QUAN -->
                 <div class="container my-5">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="p-4 shadow rounded bg-white text-center border-start border-5 border-success">
+                                <h6 class="text-uppercase text-muted">Tổng doanh thu toàn thời gian</h6>
+                                <h2 class="text-success fw-bold display-6">
+                                    <fmt:formatNumber value="${totalRevenue}" type="currency" currencySymbol="₫" />
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-4 shadow rounded bg-white text-center border-start border-5 border-primary">
+                                <h6 class="text-uppercase text-muted">Tổng số đơn hàng</h6>
+                                <h2 class="text-primary fw-bold display-6">
+                                    ${totalOrders}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row g-4">
 
                         <div class="col-md-4">

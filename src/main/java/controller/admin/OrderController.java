@@ -23,7 +23,7 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        User user = (session != null) ? (User) session.getAttribute("user") : null;
+        User user = (session != null) ? (User) session.getAttribute("auth") : null;
 
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
@@ -49,12 +49,14 @@ public class OrderController extends HttpServlet {
     }
 
     // ================== XỬ LÝ HÀNH ĐỘNG ==================
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession(false);
-        User user = (session != null) ? (User) session.getAttribute("user") : null;
+        User user = (session != null) ? (User) session.getAttribute("auth") : null;
 
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");

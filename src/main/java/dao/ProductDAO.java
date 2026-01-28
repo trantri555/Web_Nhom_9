@@ -124,12 +124,24 @@ public class ProductDAO extends BaseDao {
 
     public List<Product> getTopBestSeller() {
 
-        String sql = "SELECT p.product_name AS name, SUM(oi.quantity) as total_sold " +
-                "FROM orderitems oi " +
-                "JOIN products p ON oi.id_product = p.id " +
-                "GROUP BY p.id, p.product_name " +
-                "ORDER BY total_sold DESC " +
-                "LIMIT 8";
+        String sql = """
+            SELECT
+                p.id AS id,
+                p.product_name AS name,
+                p.price,
+                p.volume,
+                p.supplier_name,
+                p.quantity,
+                pi.image_URL AS img,
+                p.description,
+                SUM(oi.quantity) AS total_sold
+            FROM products p
+            JOIN orderitems oi ON p.id = oi.id_product
+            LEFT JOIN product_images pi ON p.id = pi.id_product
+            GROUP BY p.id, pi.image_URL
+            ORDER BY total_sold DESC
+            LIMIT 8
+            """;
 
         return get().withHandle(h -> h.createQuery(sql)
                 .mapToBean(Product.class)

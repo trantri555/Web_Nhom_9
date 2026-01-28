@@ -9,7 +9,8 @@ import util.DBContext;
 public class UserDAO {
     // Check login: Join account and user tables
     public User login(String emailOrUsername, String password) {
-        String query = "SELECT a.id, a.username, a.password, a.role, u.name, u.email " +
+        // 1. Cập nhật Query: Lấy thêm u.phone và u.address
+        String query = "SELECT a.id, a.username, a.password, a.role, u.name, u.email, u.phone, u.address " +
                 "FROM account a LEFT JOIN user u ON a.id = u.id_account " +
                 "WHERE (a.username = :user OR u.email = :user) AND a.password = :pass";
 
@@ -22,6 +23,8 @@ public class UserDAO {
                         rs.getString("password"),
                         rs.getString("name"),
                         rs.getString("email"),
+                        rs.getString("phone"),    // Thêm phone vào đây
+                        rs.getString("address"),  // Thêm address vào đây
                         "admin".equalsIgnoreCase(rs.getString("role")) ? 1 : 0))
                 .findFirst()
                 .orElse(null));
@@ -84,6 +87,31 @@ public class UserDAO {
             int rows = handle.createUpdate("UPDATE account SET password = :pass WHERE id = :id")
                     .bind("pass", newPassword)
                     .bind("id", accountId)
+                    .execute();
+
+            return rows > 0;
+        });
+    }
+
+    public boolean updateProfile(User user) {
+        return DBContext.getJdbi().inTransaction(handle -> {
+            // 1. Cập nhật bảng account (đổi username)
+            handle.createUpdate("UPDATE account SET username = :user WHERE id = :id")
+                    .bind("user", user.getUsername())
+                    .bind("id", user.getId())
+                    .execute();
+
+            // 2. Cập nhật bảng user (name, email, phone, address)
+            String queryUser = "UPDATE user SET name = :name, email = :email, " +
+                    "phone = :phone, address = :address " +
+                    "WHERE id_account = :id";
+
+            int rows = handle.createUpdate(queryUser)
+                    .bind("name", user.getFullName())
+                    .bind("email", user.getEmail())
+                    .bind("phone", user.getPhone())
+                    .bind("address", user.getAddress())
+                    .bind("id", user.getId())
                     .execute();
 
             return rows > 0;

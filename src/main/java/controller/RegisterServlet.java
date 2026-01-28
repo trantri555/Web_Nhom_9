@@ -27,7 +27,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         String fullName = request.getParameter("fullName");
-        String userOtp = request.getParameter("otp"); // Lấy mã OTP người dùng nhập
+        String userOtp = request.getParameter("otp");
 
         Map<String, String> errors = new HashMap<>();
         HttpSession session = request.getSession();

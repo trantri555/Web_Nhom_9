@@ -172,7 +172,7 @@
 <script>
     // Xử lý gửi OTP bằng AJAX để không bị load lại trang
     document.getElementById('btnSendOTP').addEventListener('click', function() {
-        const email = document.querySelector('input[name="email"]').value;
+        const email = document.querySelector('#registerForm input[name="email"]').value;
         if(!email) {
             alert("Vui lòng nhập email trước khi nhận OTP!");
             return;

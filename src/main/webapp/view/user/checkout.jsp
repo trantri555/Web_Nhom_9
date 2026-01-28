@@ -1,14 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Thanh Toán</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
+<jsp:include page="/view/user/include/header.jsp">
+    <jsp:param name="title" value="Trang Chủ" />
+    <jsp:param name="activePage" value="home" />
+</jsp:include>
 <body>
 
 <div class="container my-5">
@@ -118,6 +114,4 @@
 
     </div>
 </div>
-
-</body>
-</html>
+<%@include file="/view/user/include/footer.jsp" %>

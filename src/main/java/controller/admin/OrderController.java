@@ -83,7 +83,7 @@ public class OrderController extends HttpServlet {
                 order.setStatus("Chờ xác nhận");
                 order.setOrderDate(new Date());
 
-                orderDAO.addOrder(order);
+                orderDAO.insertOrder(order);
                 break;
 
             // 🔄 CẬP NHẬT TRẠNG THÁI
@@ -99,7 +99,7 @@ public class OrderController extends HttpServlet {
                 orderDAO.deleteOrder(deleteId);
                 break;
 
-            // 🔥 XÓA TOÀN BỘ ĐƠN
+            //  XÓA TOÀN BỘ ĐƠN
             case "deleteAll":
                 orderDAO.deleteAllOrders();
                 break;

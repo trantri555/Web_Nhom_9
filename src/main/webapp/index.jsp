@@ -5,6 +5,7 @@
     <jsp:param name="title" value="Trang Chủ" />
     <jsp:param name="activePage" value="home" />
 </jsp:include>
+
 <!--Thêm thanh tìm kiếm vào dưới phần header của website-->
 <section class="bg-light py-4 border-bottom">
     <div class="container">
@@ -108,9 +109,10 @@
                                 <a href="${pageContext.request.contextPath}/product-detail?id=${p.id}"
                                    class="btn btn-sm btn-outline-success rounded-pill px-3">Chi
                                     tiết</a>
-                                <button
-                                        class="btn btn-sm btn-primary-custom rounded-pill px-3">Thêm
-                                    vào giỏ
+                                <button type="button"
+                                        class="btn btn-sm btn-primary-custom rounded-pill px-3 btn-add-to-cart"
+                                        data-id="${p.id}">
+                                    Thêm vào giỏ
                                 </button>
                             </div>
                         </div>
@@ -198,5 +200,23 @@
             </div>
         </div>
     </div>
-</section>
+    <c:if test="${not empty sessionScope.orderSuccess}">
+    <script>
+        // Hàm này đảm bảo mọi thứ (kể cả thư viện bên ngoài) đã load xong 100%
+        window.onload = function() {
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Đặt hàng thành công!',
+                    text: '${sessionScope.orderSuccess}',
+                    icon: 'success',
+                    confirmButtonColor: '#198754'
+                });
+            } else {
+                // Phương án dự phòng nếu CDN lỗi
+                alert("${sessionScope.orderSuccess}");
+            }
+        };
+    </script>
+        <c:remove var="orderSuccess" scope="session" />
+    </c:if>
 <%@include file="/view/user/include/footer.jsp" %>

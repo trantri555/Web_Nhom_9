@@ -191,10 +191,13 @@
                         </button>
                     </c:when>
                     <c:otherwise>
-                        <a href="${pageContext.request.contextPath}/order"
-                           class="btn btn-success w-100 mt-4 fw-semibold rounded-pill">
-                            <i class="bi bi-credit-card me-1"></i> Thanh Toán Ngay
-                        </a>
+                        <form action="${pageContext.request.contextPath}/order" method="post">
+                            <input type="hidden" name="action" value="prepare">
+                            <button type="submit" class="btn btn-success w-100 mt-4 fw-semibold rounded-pill">
+                                <i class="bi bi-credit-card me-1"></i> Thanh Toán Ngay
+                            </button>
+                        </form>
+
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -209,7 +212,8 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <form action="${pageContext.request.contextPath}/ABC" method="post">
+                    <form action="${pageContext.request.contextPath}/order" method="post">
+                        <input type="hidden" name="action" value="confirm">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Họ và tên người nhận</label>
                             <input type="text" name="receiverName" class="form-control"

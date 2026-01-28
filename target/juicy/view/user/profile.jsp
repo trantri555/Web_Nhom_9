@@ -23,6 +23,13 @@
                     </div>
                 </c:if>
 
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-bold mb-0">Hồ sơ cá nhân</h3>
+                    <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-danger btn-sm fw-bold">
+                        <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+                    </a>
+                </div>
+
                 <ul class="nav nav-tabs mb-4" id="profileTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link ${activeTab != 'password' ? 'active' : ''}" id="info-tab"
@@ -72,12 +79,9 @@
                             </div>
 
                             <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" name="action" value="updateProfile" class="btn btn-primary fw-bold px-4">
+                                <button type="submit" name="action" value="updateProfile" class="btn btn-primary-custom w-100 fw-bold py-2">
                                     Cập nhật thông tin
                                 </button>
-                                <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-danger fw-bold">
-                                    Đăng xuất
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -100,7 +104,7 @@
                                 <input type="password" name="confirmPassword" class="form-control" required
                                        placeholder="Nhập lại mật khẩu mới">
                             </div>
-                            <button type="submit" name="action" value="changePassword" class="btn btn-warning w-100 fw-bold">
+                            <button type="submit" name="action" value="changePassword" class="btn btn-primary-custom w-100 fw-bold py-2">
                                 Xác nhận đổi mật khẩu
                             </button>
                         </form>

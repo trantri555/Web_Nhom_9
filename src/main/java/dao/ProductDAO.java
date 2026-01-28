@@ -102,51 +102,25 @@ public class ProductDAO extends BaseDao {
                 .list());
     }
 
-    // // Xóa sản phẩm
-    // public void delete(int id) {
-    // get().useHandle(handle ->
-    // handle.createUpdate("DELETE FROM Product WHERE id_product = :id")
-    // .bind("id", id)
-    // .execute()
-    // );
-    // }
-    //
-    // // Cập nhật sản phẩm
-    // public void update(Product p) {
-    // String sql = """
-    // UPDATE Product SET
-    // product_name = :name,
-    // price = :price,
-    // volume = :volume,
-    // supplier_name= :supplier,
-    // quantity = :quantity,
-    // image = :img,
-    // description = :description
-    // WHERE id_product = :id
-    // """;
-    //
-    // get().useHandle(handle ->
-    // handle.createUpdate(sql)
-    // .bindBean(p)
-    // .execute()
-    // );
-    // }
     public List<Product> getTopBestSeller() {
 
         String sql = """
                 SELECT
-                    p.id AS id,
-                    p.product_name AS name,
-                    p.price,
-                    p.volume,
-                    p.supplier_name,
-                    p.quantity,
-                    pi.image_URL AS img,
-                    p.description
-                FROM products p
-                LEFT JOIN product_images pi ON p.image = pi.id
-                ORDER BY RAND()
-                LIMIT 8
+                                p.id AS id,
+                                p.product_name AS name,
+                                p.price,
+                                p.volume,
+                                p.supplier_name,
+                                p.quantity,
+                                pi.image_URL AS img,
+                                p.description,
+                                COALESCE(SUM(oi.quantity), 0) AS total_sold
+                            FROM products p
+                            LEFT JOIN product_images pi ON p.id = pi.id_product AND pi.img_default = '1'
+                            LEFT JOIN orderitems oi ON p.id = oi.id_product
+                            GROUP BY p.id, pi.image_URL
+                            ORDER BY total_sold DESC
+                            LIMIT 8
                 """;
 
         return get().withHandle(h -> h.createQuery(sql)
@@ -384,5 +358,4 @@ public class ProductDAO extends BaseDao {
                 .mapToBean(Product.class)
                 .list());
     }
-
 }

@@ -373,43 +373,6 @@
                             reader.readAsDataURL(file);
                         });
                     }
-
-                    // 2. Ajax Submit Logic
-                    const form = document.querySelector("#addProductModal form");
-                    if (form) {
-                        form.addEventListener("submit", async function (e) {
-                            e.preventDefault();
-
-                            const btn = document.getElementById("btnSaveProduct");
-                            const originalText = btn.innerHTML;
-                            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...';
-                            btn.disabled = true;
-
-                            const formData = new FormData(form);
-
-                            try {
-                                const response = await fetch(form.action, {
-                                    method: 'POST',
-                                    body: formData
-                                });
-
-                                const result = await response.json();
-
-                                if (result.success) {
-                                    alert("🎉 Lưu sản phẩm thành công!");
-                                    window.location.reload(); // Reload to show new product
-                                } else {
-                                    alert("❌ Có lỗi xảy ra: " + (result.message || "Không xác định"));
-                                }
-                            } catch (error) {
-                                console.error('Error:', error);
-                                alert("❌ Lỗi kết nối đến server!");
-                            } finally {
-                                btn.innerHTML = originalText;
-                                btn.disabled = false;
-                            }
-                        });
-                    }
                 </script>
             </body>
 

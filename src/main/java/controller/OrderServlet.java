@@ -102,7 +102,7 @@ public class OrderServlet extends HttpServlet {
                     session.removeAttribute("cart");
                     session.removeAttribute("voucher");
                     session.removeAttribute("orderFlag");
-                    response.sendRedirect(request.getContextPath() + "/index.jsp");
+                    response.sendRedirect(request.getContextPath() + "/home");
                 } else {
                     conn.rollback(); // Lỗi thì trả lại trạng thái cũ
                     response.sendRedirect(request.getContextPath() + "/cart?error=save_failed");

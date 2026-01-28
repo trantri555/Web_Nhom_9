@@ -61,6 +61,24 @@ public class ProductService {
         return list;
     }
 
+    // --- ADMIN: Hide/Show ---
+    public void hideProduct(int id) {
+        // -1: Hidden status
+        pdao.updateStatus(id, -1);
+    }
+
+    public void showProduct(int id) {
+        // 0: Default In-Stock status (or should we restore actual quantity?
+        // For now resetting to 0 (contact for stock) or just >0 is safer than random
+        // number.
+        // Let's set to 0. Admin can update real quantity later.
+        pdao.updateStatus(id, 0);
+    }
+
+    public void updateQuantity(int id, int quantity) {
+        pdao.updateQuantity(id, quantity);
+    }
+
     //
     // // Thêm sản phẩm (CHUYỂN QUA DAO)
     // public void add(Product p) {
@@ -80,6 +98,7 @@ public class ProductService {
         // return productDAO.getTop3BestSeller();
         // }
     }
+
     // --- PHÂN TRANG ---
     public int getTotalProducts() {
         return pdao.getTotalProducts();
@@ -94,4 +113,3 @@ public class ProductService {
         return list;
     }
 }
-

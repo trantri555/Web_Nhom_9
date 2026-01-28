@@ -111,4 +111,26 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+    public model.ShippingInfo getShippingInfoByOrderId(int orderId) {
+        String sql = "SELECT * FROM shippinginfo WHERE id_order = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    model.ShippingInfo info = new model.ShippingInfo();
+                    info.setId(rs.getInt("id"));
+                    info.setOrderId(rs.getInt("id_order"));
+                    info.setReceiverName(rs.getString("receiver_name"));
+                    info.setReceiverPhone(rs.getString("receiver_phone"));
+                    info.setAddress(rs.getString("address"));
+                    info.setShippingFee(rs.getDouble("shipping_fee"));
+                    info.setNote(rs.getString("note"));
+                    return info;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -1,132 +1,68 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/logo/logo-juicy.png"
-          sizes="32x32">
-    <title>Juicy - Nước Ép Tươi Ngon & Healthy</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product.css">
-    <style>
-        .product-card {
-            transition: transform 0.3s;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-        }
+<jsp:include page="/view/user/include/header.jsp">
+    <jsp:param name="title" value="Trang Chủ" />
+    <jsp:param name="activePage" value="products" />
+</jsp:include>
+<style>
+    .product-card {
+        transition: transform 0.3s;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+    }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
 
-        .btn-primary-custom {
-            background-color: #28a745;
-            color: white;
-            border: none;
-        }
+    .btn-primary-custom {
+        background-color: #28a745;
+        color: white;
+        border: none;
+    }
 
-        .card-img-top {
-            height: 220px;
-            object-fit: contain;
-            background-color: #fff;
-            padding: 10px;
-        }
+    .card-img-top {
+        height: 220px;
+        object-fit: contain;
+        background-color: #fff;
+        padding: 10px;
+    }
 
-        /* --- PHÂN TRANG CIRCULAR --- */
-        .pagination-custom .page-item {
-            margin: 0 5px;
-        }
+    /* --- PHÂN TRANG CIRCULAR --- */
+    .pagination-custom .page-item {
+        margin: 0 5px;
+    }
 
-        .pagination-custom .page-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50% !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #dee2e6;
-            color: #495057;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
+    .pagination-custom .page-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #dee2e6;
+        color: #495057;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
 
-        .pagination-custom .page-item.active .page-link {
-            background-color: #0d3d28;
-            /* Dark green matching request */
-            border-color: #0d3d28;
-            color: white;
-            box-shadow: 0 4px 8px rgba(13, 61, 40, 0.3);
-        }
+    .pagination-custom .page-item.active .page-link {
+        background-color: #0d3d28;
+        /* Dark green matching request */
+        border-color: #0d3d28;
+        color: white;
+        box-shadow: 0 4px 8px rgba(13, 61, 40, 0.3);
+    }
 
-        .pagination-custom .page-link:hover:not(.active) {
-            background-color: #f8f9fa;
-            border-color: #0d3d28;
-            color: #0d3d28;
-        }
-    </style>
-</head>
-
-<body>
-
-<header class="sticky-top shadow-sm">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand fw-bold text-success fs-3"
-               href="${pageContext.request.contextPath}/">
-                <img src="${pageContext.request.contextPath}/images/logo/logo-juicy.png"
-                     alt="Juicy Logo" height="40" class="me-2">
-                JUICY
-            </a>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="${pageContext.request.contextPath}/home">Trang
-                        Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link active fw-semibold"
-                                            href="${pageContext.request.contextPath}/product">Sản phẩm</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold"
-                                            href="${pageContext.request.contextPath}/about">Giới thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold"
-                                            href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
-                </ul>
-                <c:choose>
-                    <c:when test="${not empty sessionScope.auth}">
-                        <div id="userInfoContainer">
-                            <a href="${pageContext.request.contextPath}/profile"
-                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                                Thông Tin</a>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div id="loginButtonContainer">
-                            <a href="${pageContext.request.contextPath}/login"
-                               class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                                Đăng Nhập</a>
-                        </div>
-
-                    </c:otherwise>
-                </c:choose>
-
-                <a href="${pageContext.request.contextPath}/order"
-                   class="btn btn-warning rounded-pill ms-lg-3 my-2 my-lg-0 fw-semibold shadow-sm">
-                    <i class="bi bi-cart me-1"></i> Giỏ Hàng
-                </a>
-            </div>
-        </div>
-    </nav>
-</header>
-
+    .pagination-custom .page-link:hover:not(.active) {
+        background-color: #f8f9fa;
+        border-color: #0d3d28;
+        color: #0d3d28;
+    }
+</style>
 <section class="bg-light py-4 border-bottom">
     <div class="container">
         <div class="row justify-content-center">
@@ -295,34 +231,4 @@
         </div>
     </div>
 </div>
-
-<footer class="bg-dark text-white pt-5 pb-4">
-    <div class="container text-center text-md-start">
-        <div class="row">
-            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 fw-bold text-success">JUICY</h5>
-                <p>Mang đến nguồn dinh dưỡng từ thiên nhiên, tốt cho sức khỏe.</p>
-            </div>
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                <h5 class="text-uppercase mb-4 fw-bold text-success">Liên Hệ</h5>
-                <p><i class="bi bi-geo-alt-fill me-2"></i> Thủ Đức, TP. Hồ Chí Minh</p>
-                <p><i class="bi bi-telephone-fill me-2"></i> 0347 270 120</p>
-            </div>
-            <div class="col-md-3 mb-4 mt-3">
-                <h5 class="text-uppercase fw-bold text-success">Theo Dõi</h5>
-                <a href="#" class="text-white me-3 fs-4"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-3 fs-4"><i class="bi bi-instagram"></i></a>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12 text-center pt-3 border-top border-secondary">
-                <p>© 2026 Juicy. All Rights Reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="${pageContext.request.contextPath}/js/init.js"></script>
-
-</body>
-</html>
+<%@include file="/view/user/include/footer.jsp" %>

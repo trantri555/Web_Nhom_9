@@ -3,6 +3,7 @@ package controller.admin;
 import dao.OrderDAO;
 import model.Order;
 import model.User;
+import util.DBContext;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -16,52 +17,54 @@ import java.util.List;
 @WebServlet("/admin/manage-orders")
 public class OrderController extends HttpServlet {
 
-    private OrderDAO orderDAO;
-
-    @Override
-    public void init() {
-        Connection conn = (Connection) getServletContext().getAttribute("DBConnection");
-        orderDAO = new OrderDAO(conn);
-    }
-
     // ================== HIỂN THỊ DANH SÁCH ĐƠN ==================
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("../login");
+        User user = (session != null) ? (User) session.getAttribute("auth") : null;
+
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        User user = (User) session.getAttribute("user");
-        if (!"ADMIN".equals(user.getRole())) {
-            response.sendError(403);
+        if (user.getRole() != 1) { // 1 is ADMIN
+            response.sendRedirect(request.getContextPath() + "/view/user/403.jsp");
             return;
         }
 
-        List<Order> orders = orderDAO.getAllOrders();
-        request.setAttribute("orders", orders);
+        try (Connection conn = DBContext.getConnection()) {
+            OrderDAO orderDAO = new OrderDAO(conn);
+            List<Order> orders = orderDAO.getAllOrders();
+            request.setAttribute("orders", orders);
 
-        request.getRequestDispatcher("/view/admin/admin-orders.jsp")
-                .forward(request, response);
+            request.getRequestDispatcher("/view/admin/admin-orders.jsp")
+                    .forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(500, "Database Error");
+        }
     }
 
     // ================== XỬ LÝ HÀNH ĐỘNG ==================
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("../login");
+        User user = (session != null) ? (User) session.getAttribute("auth") : null;
+
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        User user = (User) session.getAttribute("user");
-        if (!"ADMIN".equals(user.getRole())) {
-            response.sendError(403);
+        if (user.getRole() != 1) {
+            response.sendRedirect(request.getContextPath() + "/view/user/403.jsp");
             return;
         }
 
@@ -71,38 +74,39 @@ public class OrderController extends HttpServlet {
             return;
         }
 
-        switch (action) {
+        try (Connection conn = DBContext.getConnection()) {
+            OrderDAO orderDAO = new OrderDAO(conn);
 
-            // ➕ THÊM ĐƠN (ít dùng – chủ yếu test)
-            case "add":
-                String customerName = request.getParameter("customerName");
-                double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
+            switch (action) {
+                // ➕ THÊM ĐƠN
+                case "add":
+                    // String customerName = request.getParameter("customerName");
+                    // double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
+                    // Order order = new Order();
+                    // ...
+                    // orderDAO.addOrder(order);
+                    break;
 
-                Order order = new Order();
-                order.setTotalPrice(totalPrice);
-                order.setStatus("Chờ xác nhận");
-                order.setOrderDate(new Date());
+                // 🔄 CẬP NHẬT TRẠNG THÁI
+                case "updateStatus":
+                    int orderId = Integer.parseInt(request.getParameter("orderId"));
+                    String status = request.getParameter("status");
+                    orderDAO.updateStatus(orderId, status);
+                    break;
 
-                orderDAO.addOrder(order);
-                break;
+                // ❌ XÓA 1 ĐƠN
+                case "delete":
+                    int deleteId = Integer.parseInt(request.getParameter("orderId"));
+                    orderDAO.deleteOrder(deleteId);
+                    break;
 
-            // 🔄 CẬP NHẬT TRẠNG THÁI
-            case "updateStatus":
-                int orderId = Integer.parseInt(request.getParameter("orderId"));
-                String status = request.getParameter("status");
-                orderDAO.updateStatus(orderId, status);
-                break;
-
-            // ❌ XÓA 1 ĐƠN
-            case "delete":
-                int deleteId = Integer.parseInt(request.getParameter("orderId"));
-                orderDAO.deleteOrder(deleteId);
-                break;
-
-            // 🔥 XÓA TOÀN BỘ ĐƠN
-            case "deleteAll":
-                orderDAO.deleteAllOrders();
-                break;
+                // 🔥 XÓA TOÀN BỘ ĐƠN
+                case "deleteAll":
+                    orderDAO.deleteAllOrders();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         response.sendRedirect("manage-orders");

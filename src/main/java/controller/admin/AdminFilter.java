@@ -21,10 +21,14 @@ public class AdminFilter implements Filter {
         model.User user = (session != null) ? (model.User) session.getAttribute("auth") : null;
 
         // 2. Kiểm tra: Nếu chưa đăng nhập HOẶC không phải là Admin (role != 1)
-        if (user == null || user.getRole() != 1) {
-            // Chuyển hướng về trang login hoặc forward sang 403
-            // Ở đây tôi dùng redirect về login để an toàn
+        // 2. Kiểm tra:
+        if (user == null) {
+            // Chưa đăng nhập -> Redirect về login
             response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        } else if (user.getRole() != 1) {
+            // Đã đăng nhập nhưng không phải admin -> Forward sang 403
+            request.getRequestDispatcher("/view/user/403.jsp").forward(request, response);
             return;
         }
 

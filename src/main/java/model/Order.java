@@ -9,7 +9,10 @@ public class Order {
     private Date orderDate;
     private String paymentMethod;
     private String paymentStatus;
-    public Order() {}
+    private String customerName;
+
+    public Order() {
+    }
 
     public Order(int id, double totalPrice, String status, Date orderDate) {
         this.id = id;
@@ -19,17 +22,45 @@ public class Order {
     }
 
     // Getter & Setter
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public String getCustomerName() {
+        return customerName;
+    }
 
-    public double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public int getId() {
+        return id;
+    }
 
-    public Date getOrderDate() { return orderDate; }
-    public void setOrderDate(Date orderDate) { this.orderDate = orderDate; }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
     public String getPaymentMethod() {
         return paymentMethod;

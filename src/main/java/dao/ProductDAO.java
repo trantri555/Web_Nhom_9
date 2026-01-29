@@ -125,21 +125,23 @@ public class ProductDAO extends BaseDao {
     // getTopBestSeller: used in HOME page -> Filter hidden
     public List<Product> getTopBestSeller() {
         String sql = """
-                    SELECT
-                        p.id AS id,
-                        p.product_name AS name,
-                        p.price,
-                        p.volume,
-                        p.supplier_name,
-                        p.quantity,
-                        COALESCE(pi.image_URL, p.image) AS img,
-                        p.description
-                    FROM products p
-                    LEFT JOIN product_images pi ON p.image = pi.id
-                    WHERE p.quantity >= 0
-                    ORDER BY RAND()
-                    LIMIT 8
-                """;
+            SELECT
+                p.id AS id,
+                p.product_name AS name,
+                p.price,
+                p.volume,
+                p.supplier_name,
+                p.quantity,
+                pi.image_URL AS img,
+                p.description,
+                SUM(oi.quantity) AS total_sold
+            FROM products p
+            JOIN orderitems oi ON p.id = oi.id_product
+            LEFT JOIN product_images pi ON p.id = pi.id_product
+            GROUP BY p.id, pi.image_URL
+            ORDER BY total_sold DESC
+            LIMIT 8
+            """;
 
         return get().withHandle(h -> h.createQuery(sql)
                 .mapToBean(Product.class)

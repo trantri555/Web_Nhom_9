@@ -13,8 +13,6 @@
 
     <properties>
         <sonar.organization>trantri5555</sonar.organization>
-    </properties>
-    <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +27,7 @@
             <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- JSP + JSTL -->
 
         <!-- JSP + JSTL -->
         <dependency>
